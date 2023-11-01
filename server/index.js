@@ -12,7 +12,9 @@ app.use(express.json()); // JSON 형태의 요청 body를 파싱하기 위해 ex
 app.use(cors()); //cors 미들웨어 등록
 
 app.get("/", (req, res) => {
-  res.send("어서오세요 여러분의 서버에~ 모두 만나서 반가워요 ㅎㅎㅎㅎㅎ");
+  res.send(
+    "어서오세요 여러분의 서버에~ 모두 만나서 반가워요 ㅎㅎㅎㅎㅎ user개발 완료!"
+  );
 });
 
 const port = process.env.PORT || 5000;
