@@ -3,14 +3,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv"); //.env파일 관리 모듈
 dotenv.config({ path: ".env.local" }); //.env.local로 기본 경로 설정
-
+const categoryRoute = require("./Routes/categoryRoutes");
 //express app 생성
 const app = express();
 
 // middleware functions
 app.use(express.json()); // JSON 형태의 요청 body를 파싱하기 위해 express.json() 미들웨어를 사용
 app.use(cors()); //cors 미들웨어 등록
-
+app.use("/category", categoryRoute);
 app.get("/", (req, res) => {
   res.send("어서오세요 여러분의 서버에~");
 });
@@ -25,7 +25,10 @@ app.listen(port, (req, res) => {
 
 //DB 연결
 mongoose
-  .connect(uri)
+  .connect(uri, {
+    useNewURLParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("MongoDB connection established");
   })
