@@ -5,8 +5,7 @@ dotenv.config({ path: ".env.local" }); //.env.local로 기본 경로 설정
 
 // express 는 함수이므로, 반환값을 변수에 저장한다.
 var app = express();
-app.use(express.static('./src/pages/Main'))
-app.use(express.static('./src/components'))
+
 // 3000 포트로 서버 오픈
 const port = process.env.PORT || 4000;
 
@@ -15,24 +14,19 @@ app.listen(port, function () {
 });
 
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/src/pages/Main/index.html");
+  res.send("<h1>hi friend!</h1>");
 });
 
 // request 와 response 라는 인자를 줘서 콜백 함수를 만든다.
 // localhost:3000 브라우저에 res.sendFile() 내부의 파일이 띄워진다.
 
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/src/main/index.html");
+  res.sendFile(__dirname + "/public/index.html");
 });
 
 // localhost:3000/main 브라우저에 res.sendFile() 내부의 파일이 띄워진다.
 app.get("/index", function (req, res) {
   res.sendFile(__dirname + "/public/index.html");
-});
-
-
-app.get("/signIn", function (req, res) {
-  res.sendFile(__dirname + "/src/pages/SignIn/signIn.html");
 });
 
 app.use(express.static("public"));
