@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./payment.css">
-  <link rel="stylesheet" href="/client/src/components/navbar.css">
-</head>
-<body>
-  <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charSet="utf-8"/>
@@ -16,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>결제 위젯</title>
 
-  <script src="https://kit.fontawesome.com/29cf9aada0.js" crossorigin="anonymous"></script>
   <script src="https://js.tosspayments.com/v1/payment-widget"></script>
   <link rel="stylesheet" href="/client/src/css/reset.css">
   <link rel="stylesheet" href="./payment.css">
@@ -33,44 +22,11 @@
   <!-- footer -->
   <footer></footer>
 
-  <script>
-    const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 상점을 특정하는 키
-    const customerKey = 'YbX2HuSlsC9uVJW6NMRMj' // 결제 고객을 특정하는 키
-    const amount = 15_000 // 결제 금액
-    const couponAmount = 5_000 // 할인 쿠폰 금액
-  
-    /*결제위젯 영역 렌더링*/
-    const paymentWidget = PaymentWidget(clientKey, customerKey) // 회원 결제
-    // const paymentWidget = PaymentWidget(clientKey, PaymentWidget.ANONYMOUS) // 비회원 결제
-    paymentMethods = paymentWidget.renderPaymentMethods('#payment-method', amount)
-    
-    /*약관 영역 렌더링*/
-    const paymentAgreement = paymentWidget.renderAgreement('#agreement')
-    
-    /*결제창 열기*/
-    document.querySelector("#payment-button").addEventListener("click",()=>{
-      paymentWidget.requestPayment({
-        orderId: 'AD8aZDpbzXs4EQa-UkIX6',
-        orderName: '스킨케어',
-        successUrl: 'http://localhost:8080/success',
-        failUrl: 'http://localhost:8080/fail',
-        customerEmail: 'customer123@gmail.com', 
-        customerName: '김토스'
-        }).catch(function (error) {
-            if (error.code === 'USER_CANCEL') {
-            // 결제 고객이 결제창을 닫았을 때 에러 처리
-            } if (error.code === 'INVALID_CARD_COMPANY') {
-              // 유효하지 않은 카드 코드에 대한 에러 처리
-            }
-        })  
-    })
-  
-  </script>
-  
-    <script src="/client/src/js/adressApi.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="./payment.js"></script>
-    <script src="../../components/navbar.js"></script>
+  <script src="./payment_widget.js"></script>
+  <script src="/client/src/js/adressApi.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="./payment.js"></script>
+  <script src="../../components/navbar.js"></script>
 
 </body>
 </html>

@@ -7,33 +7,27 @@ function signUpLink() {
   window.location.href = link;
 }
 
-//회원가입 폼
+//아이디 비번 찾기 폼
 const signIn = document.querySelector(".signIn");
-
-const signIn_date = {
-  email: "",
-  password: "",
-  phone: "",
-};
 
 signIn.innerHTML = ` 
 <form method="" action="">
     <div class="containerLogin">
       <div class="signInForm">
-        <h2>아이디 찾기</h2>
+        <h3>아이디 찾기</h3>
         <input type="text" placeholder="이름을 입력해주세요."><br>
-        <input type="text" oninput="oninputPhone(this)" maxlength="11" id="phonNumber" id="phonNumber" placeholder="전화번호를 입력해주세요."><br>
+        <input type="text" oninput="oninputPhone(this)" maxlength="11" id="phonNumber" id="phonNumber" placeholder="전화번호를 입력해주세요"><br>
         <button id="login-btn">아이디 찾기</button><br>
         <button id="login-btn">로그인</button>
       </div>
-
+      
       <div class="signUpForm">
-        <h3>임시 비밀번호 발급</h3>
-        <input type="email" id="email" placeholder="이메일을 입력해주세요." >
-        <p id="email-message"></p>
-        <input type="text" oninput="oninputPhone(this)" maxlength="11" id="phonNumber" placeholder="전화번호를 입력해주세요." id="phonNumber">
-        <button id="login-btn">임시 비밀번호 발급</button><br>
-        <button id="login-btn">로그인</button>
+        <h3>비밀번호 찾기</h3>
+        <input id="email" type="email"  placeholder="이메일을 입력해주세요.">
+        <p class="msg" id="email-message"></p>
+          <input type="text" oninput="oninputPhone(this)" maxlength="11" id="phonNumber" id="phonNumber" placeholder="전화번호를 입력해주세요."><br>
+          <button id="login-btn">비밀번호 찾기</button><br>
+          <button id="login-btn">로그인</button>
       </div>
     </div>
     <div style="clear: both;"></div>

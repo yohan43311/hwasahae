@@ -16,9 +16,9 @@ signIn.innerHTML = `
       <div class="signInForm">
         <h3>회원 로그인</h3>
         <input type="email" id="email" placeholder="MEMBER ID">
-        <p id="email-message"></p>
+        <p class="msg" id="email-message"></p>
         <input type="password" placeholder="PASSWORD" id="pwd">
-        <p id="pw-message"></p>
+        <p id="pw-message" class="msg"></p>
         <button id="login-btn">LOG-IN</button><br>
         <input type="checkbox">보안접속
       </div>

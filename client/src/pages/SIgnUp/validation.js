@@ -26,7 +26,9 @@ function validateEmail() {
   let emailVal = email.value;
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-  if (!emailRegex.test(emailVal)) {
+  if (emailVal === "") {
+    email_message.textContent = ""; //값이 비어있을 경우 공백으로 두기
+  } else if (!emailRegex.test(emailVal)) {
     email_message.textContent = "올바른 이메일 주소 형식이 아닙니다!";
     email_message.style.color = "red";
   } else {
@@ -34,17 +36,20 @@ function validateEmail() {
     email_message.style.color = "green";
   }
 }
+
 email.addEventListener("input", validateEmail);
 
 /**
  * 비밀번호
  */
 function validatePassword() {
-  let password = pwd.value;
-  const regex =
+  let pwdVal = pwd.value;
+  const pwRegex =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
-  if (!regex.test(password)) {
+  if (pwdVal === "") {
+    validationMessage.textContent = "";
+  } else if (!pwRegex.test(pwdVal)) {
     validationMessage.textContent =
       "8글자 이상, 영문, 숫자, 특수문자 사용해주세요!";
     validationMessage.style.color = "red";
@@ -62,7 +67,9 @@ function validateRePassword() {
   let password = pwd.value;
   let rePassword = rePwd.value;
 
-  if (password === rePassword) {
+  if (rePassword === "") {
+    confirmPw_message.textContent = "";
+  } else if (password === rePassword) {
     confirmPw_message.textContent = "비밀번호가 일치합니다!";
     confirmPw_message.style.color = "green";
   } else {

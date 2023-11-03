@@ -18,7 +18,7 @@ signUp.innerHTML = `
     <div>
       <label for="email" class="detail_title">이메일</label>
       <input class="form-input" type="email" id="email" placeholder="email@naver.com">
-      <p id="email-message"></p>
+      <p class="msg" id="email-message"></p>
     </div>
   </div>
 
@@ -27,15 +27,16 @@ signUp.innerHTML = `
     <div>
       <label for="pwd" class="detail_title">비빌번호</label>
       <input class="form-input" type="password" id="pwd">
-      <p id="pw-message"></p>
+      <p class="msg" id="pw-message"></p>
     </div>
   </div>
 
+  <!-- 비밀번호 확인 -->
   <div class="w-100">
     <div>
       <label for="rePwd" class="detail_title">비밀번호 확인</label>
       <input class="form-input" type="password" id="rePwd">
-      <p id="confirmPw-message"></p>
+      <p class="msg" id="confirmPw-message"></p>
     </div>
   </div>
 
@@ -78,7 +79,36 @@ signUp.innerHTML = `
   </div>
 
   <div>
-    <button type="submit" class="btn" onsubmit="return submit()" id="submit">회원가입</button>
+    <button type="submit" class="btn" id="submit">회원가입</button>
   </div>
 </form>
 </div>`;
+
+//회원가입 버튼을 눌렀을 때의 동작
+document.getElementById("submit").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const name = document.querySelector("#name").value;
+  const email = document.querySelector("#email").value;
+  const pwd = document.querySelector("#pwd").value;
+  const rePwd = document.querySelector("#rePwd").value;
+  const phonNumber = document.querySelector("#phonNumber").value;
+  const postcode = document.querySelector("#sample4_postcode").value;
+  const roadAddress = document.querySelector("#sample4_roadAddress").value;
+  const jibunAddress = document.querySelector("#sample4_jibunAddress").value;
+  const detailAddress = document.querySelector("#sample4_detailAddress").value;
+  const extraAddress = document.querySelector("#sample4_extraAddress").value;
+  const birth_year = document.querySelector("#birth-year").value;
+  const birth_month = document.querySelector("#birth-month").value;
+  const birth_day = document.querySelector("#birth-day").value;
+
+  if (!email) {
+    return alert("이메일 형식이 맞지 않습니다!");
+  }
+
+  if (!(pwd === rePwd)) {
+    return alert("비밀번호가 일치하지 않습니다.");
+  }
+
+  //회원가입 api 요청
+});
