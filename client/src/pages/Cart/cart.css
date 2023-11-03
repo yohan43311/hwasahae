@@ -1,0 +1,65 @@
+form{
+  display: flex;
+  justify-content: center;
+  margin: 50px 0 50px 0;
+}
+
+table {
+  width: 100%;
+  margin: 15px 0 15px 0;
+  text-align: center;
+}
+
+th, td {
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+th{
+  border-top: 2px solid black;
+}
+
+
+.box{
+  padding: 10px;
+}
+
+.title { 
+  margin-bottom: 15px;
+  font-size: 24px; 
+  font-weight: 600;
+  color: #4e5968;
+}
+
+/* 전체 상품 가격 */
+#totalPrice {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 10px;
+  background: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.totalPayment-table, #totalPrice{
+  text-align: center;
+}
+
+.minus, .plus{
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  font-size: 13px;
+}
+
+.deleteBtn{
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}

@@ -1,0 +1,97 @@
+table {
+  width: 100%;
+  margin: 15px 0 15px 0;
+}
+
+
+th, td {
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+th{
+  border-top: 2px solid black;
+}
+
+.box{
+  margin: 10px 0 0px 10px;
+  padding: 10px;
+  width: 80%;
+}
+
+.title { 
+  margin-bottom: 15px;
+  font-size: 24px; 
+  font-weight: 600;
+  color: #4e5968;
+}
+
+button{
+  cursor: pointer;
+}
+
+/* 전체적인 결제폼 */
+#payment-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0 50px 0;
+}
+
+/* 주문 리스트 */
+#orderTable {
+  text-align: center;
+}
+
+
+/* 주문자 테이블 */
+#customerTable input{
+  width: 50%;
+  height: 30px;
+  padding: 6px;
+  margin: 5px;
+  border: 1px solid rgb(213, 213, 213);
+  border-radius:10px;
+  font-size: 15px;
+}
+
+/* 전체 상품 가격 */
+#totalPrice {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 10px;
+  background: #f2f2f2;
+  padding: 20px;
+}
+
+
+.totalPayment-table, #totalPrice{
+  text-align: center;
+}
+
+
+/* 결제 버튼 */
+.btnBox{
+  width: 100%;
+  margin: 0 auto;
+}
+
+.btn{
+  padding:20px; 
+  background-color:rgb(213, 213, 213);
+  font-weight: bolder; 
+  border-radius:12px; 
+  font-size: 25px; 
+  border:none; 
+  margin:30px 10px 30px
+}
+
+.cancelBtn, .paymentBtn{
+  float: left;
+  width: 30%;
+}
+
+.btnBox{
+  display: flex;
+  justify-content: center;
+}

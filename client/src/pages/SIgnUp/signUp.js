@@ -1,136 +1,84 @@
-//name
-const name = document.querySelector("#name");
+//로그인 폼
+const signUp = document.querySelector(".signUp");
+signUp.innerHTML = `    
+<form action="" method="">
+<div class="form-white">
+  <h1 class="title">회원정보 입력</h1>
 
-//email
-const email = document.querySelector("#email");
-const email_message = document.querySelector("#email-message");
+  <!-- 이름 -->
+  <div class="w-100">
+    <div>
+      <label for="name" class="detail_title">이름</label>
+      <input class="form-input" type="text" id="name">
+    </div>
+  </div>
 
-//password
-const pwd = document.querySelector("#pwd");
-const validationMessage = document.querySelector("#pw-message");
-const rePwd = document.querySelector("#rePwd");
-const confirmPw_message = document.querySelector("#confirmPw-message");
+  <!-- 이메일 -->
+  <div class="w-100">
+    <div>
+      <label for="email" class="detail_title">이메일</label>
+      <input class="form-input" type="email" id="email" placeholder="email@naver.com">
+      <p id="email-message"></p>
+    </div>
+  </div>
 
-//birth
-const birthYearEl = document.querySelector("#birth-year");
-const birthMontEl = document.querySelector("#birth-month");
-const birthDayEl = document.querySelector("#birth-day");
+  <!-- 비밀번호 -->
+  <div class="w-100">
+    <div>
+      <label for="pwd" class="detail_title">비빌번호</label>
+      <input class="form-input" type="password" id="pwd">
+      <p id="pw-message"></p>
+    </div>
+  </div>
 
-//회원가입 버튼
-const submit = document.querySelector(".send");
+  <div class="w-100">
+    <div>
+      <label for="rePwd" class="detail_title">비밀번호 확인</label>
+      <input class="form-input" type="password" id="rePwd">
+      <p id="confirmPw-message"></p>
+    </div>
+  </div>
 
-/**
- * 이메일
- */
-function validateEmail() {
-  let emailVal = email.value;
-  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  <!--휴대폰 번호-->
+  <div class="w-100">
+    <div>
+      <label for="rePwd" class="detail_title">휴대폰 번호</label>
+      <input type="text" class="form-input" oninput="oninputPhone(this)" maxlength="11" id="phonNumber">
+    </div>
+  </div>
 
-  if (!emailRegex.test(emailVal)) {
-    email_message.textContent = "올바른 이메일 주소 형식이 아닙니다!";
-    email_message.style.color = "red";
-  } else {
-    email_message.textContent = "유효한 이메일 주소입니다!";
-    email_message.style.color = "green";
-  }
-}
-email.addEventListener("input", validateEmail);
+  <!-- 주소 -->
+  <div class="w-100">
+    <div>
+      <label for="address" class="detail_title">주소</label>
+      <div>
+        <input type="text" id="sample4_postcode" placeholder="우편번호">
+        <input type="button" class="btn" id="addressBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+        <input type="text" class="address-input" id="sample4_roadAddress" placeholder="도로명주소">
+        <input type="text" class="address-input" id="sample4_jibunAddress" placeholder="지번주소">
+        <span id="guide" style="color:#999;display:none"></span>
+        <input type="text" class="address-input" id="sample4_detailAddress" placeholder="상세주소">
+        <input type="text" class="address-input" id="sample4_extraAddress" placeholder="참고항목">
+      </div>
+    </div>
+  </div>
 
-/**
- * 비밀번호
- */
-function validatePassword() {
-  let password = pwd.value;
-  const regex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  <!-- 생년월일 -->
+  <div class="info" id="info__birth">
+    <p class="birth_content detail_title">생년월일</p>
+    <select class="box" id="birth-year">
+      <option disabled selected>출생 연도</option>
+    </select>
+    <select class="box" id="birth-month">
+      <option disabled selected>월</option>
+    </select>
+    <select class="box" id="birth-day">
+      <option disabled selected>일</option>
+    </select>
+  </div>
 
-  if (!regex.test(password)) {
-    validationMessage.textContent =
-      "8글자 이상, 영문, 숫자, 특수문자 사용해주세요!";
-    validationMessage.style.color = "red";
-  } else {
-    validationMessage.textContent = "비밀번호가 안전합니다!";
-    validationMessage.style.color = "green";
-  }
-}
-pwd.addEventListener("input", validatePassword);
-
-/**
- * 비밀번호 확인
- */
-function validateRePassword() {
-  let password = pwd.value;
-  let rePassword = rePwd.value;
-
-  if (password === rePassword) {
-    confirmPw_message.textContent = "비밀번호가 일치합니다!";
-    confirmPw_message.style.color = "green";
-  } else {
-    confirmPw_message.textContent = "비밀번호가 일치하지 않습니다!";
-    confirmPw_message.style.color = "red";
-  }
-}
-rePwd.addEventListener("input", validateRePassword);
-
-/**
- * 폰 번호
- */
-function oninputPhone(target) {
-  target.value = target.value
-    .replace(/[^0-9]/g, "")
-    .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{4})([0-9]{4})/g, "$1-$2-$3");
-}
-
-/**
- * Birth 출생연도
- */
-//year
-isYearOptionExisted = false;
-birthYearEl.addEventListener("focus", function () {
-  if (!isYearOptionExisted) {
-    isYearOptionExisted = true;
-    for (var i = 1940; i <= 2023; i++) {
-      const YearOption = document.createElement("option");
-      YearOption.setAttribute("value", i);
-      YearOption.innerText = i;
-
-      this.appendChild(YearOption);
-    }
-  }
-});
-
-//month
-isMonthOptionExisted = false;
-birthMontEl.addEventListener("focus", function () {
-  if (!isMonthOptionExisted) {
-    isMonthOptionExisted = true;
-    for (var i = 1; i <= 12; i++) {
-      const DayOption = document.createElement("option");
-      DayOption.setAttribute("value", i);
-      DayOption.innerText = i;
-
-      this.appendChild(DayOption);
-    }
-  }
-});
-
-//day
-isDayOptionExisted = false;
-birthDayEl.addEventListener("focus", function () {
-  if (!isDayOptionExisted) {
-    isDayOptionExisted = true;
-    for (var i = 1; i <= 31; i++) {
-      // option element 생성
-      const DayOption = document.createElement("option");
-      DayOption.setAttribute("value", i);
-      DayOption.innerText = i;
-      // birthYearEl의 자식 요소로 추가
-      this.appendChild(DayOption);
-    }
-  }
-});
-
-/**
- * 회원가입 버튼
- */
-window.onload = function () {};
+  <div>
+    <button type="submit" class="btn" onsubmit="return submit()" id="submit">회원가입</button>
+  </div>
+</form>
+</div>`;
