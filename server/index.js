@@ -21,7 +21,9 @@ app.use("/user", authJWT, userRoute);
 app.use("/category", categoryRoute);
 
 app.get("/", (req, res) => {
-  res.send("어서오세요 여러분의 서버에~");
+  res.send(
+    "어서오세요 여러분의 서버에~ 모두 만나서 반가워요 ㅎㅎㅎㅎㅎ user개발 완료!"
+  );
 });
 
 //오류로그 미들웨어
@@ -47,7 +49,7 @@ mongoose
     console.log("MongoDB connection established");
   })
   .catch((error) => {
-    console.log("MongoDB connection failed : ", error.message);
+    console.log("MongoDB connection failed!!! : ", error.message);
   });
 
 //DB 커넥션 관리 이벤트 :: 연결 확인 log
