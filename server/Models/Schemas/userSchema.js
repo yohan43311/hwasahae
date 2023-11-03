@@ -32,6 +32,8 @@ const userSchema = new Schema(
       default: "구매자",
     },
 
+    refreshToken: { type: String, required: true },
+
     // 구매자 ref
     order: [{ type: Schema.Types.ObjectId, ref: "Order" }],
 
