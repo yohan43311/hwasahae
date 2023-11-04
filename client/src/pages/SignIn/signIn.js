@@ -2,12 +2,7 @@ const login_Btn = document.querySelector("#login-btn");
 const joinUs_Btn = document.querySelector("#joinUs-btn");
 const IdPW_Btn = document.querySelector("#findIdPw-btn");
 
-function signUpLink() {
-  link = "/pages/SignUp/signUp.html";
-  window.location.href = link;
-}
-
-//회원가입 폼
+//로그인 폼
 const signIn = document.querySelector(".signIn");
 
 signIn.innerHTML = ` 
@@ -56,5 +51,9 @@ document.getElementById("login-btn").addEventListener("click", (e) => {
     return alert("이메일, 비번을 입력하지 않으셨습니다!");
   }
 
+  function signUpLink() {
+    link = "/pages/SignUp/signUp.html";
+    window.location.href = link;
+  }
   //로그인 api 요청
 });

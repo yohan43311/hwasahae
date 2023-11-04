@@ -1,4 +1,4 @@
-//로그인 폼
+//회원가입 폼
 const signUp = document.querySelector(".signUp");
 signUp.innerHTML = `    
 <form action="" method="">
@@ -79,7 +79,7 @@ signUp.innerHTML = `
   </div>
 
   <div>
-    <button type="submit" class="btn" id="submit">회원가입</button>
+    <button type="submit" class="btn openModalButton" id="submit">회원가입</button>
   </div>
 </form>
 </div>`;
@@ -88,19 +88,19 @@ signUp.innerHTML = `
 document.getElementById("submit").addEventListener("click", (e) => {
   e.preventDefault();
 
-  const name = document.querySelector("#name").value;
+  // const name = document.querySelector("#name").value;
+  // const phonNumber = document.querySelector("#phonNumber").value;
+  // const postcode = document.querySelector("#sample4_postcode").value;
+  // const roadAddress = document.querySelector("#sample4_roadAddress").value;
+  // const jibunAddress = document.querySelector("#sample4_jibunAddress").value;
+  // const detailAddress = document.querySelector("#sample4_detailAddress").value;
+  // const extraAddress = document.querySelector("#sample4_extraAddress").value;
+  // const birth_year = document.querySelector("#birth-year").value;
+  // const birth_month = document.querySelector("#birth-month").value;
+  // const birth_day = document.querySelector("#birth-day").value;
   const email = document.querySelector("#email").value;
   const pwd = document.querySelector("#pwd").value;
   const rePwd = document.querySelector("#rePwd").value;
-  const phonNumber = document.querySelector("#phonNumber").value;
-  const postcode = document.querySelector("#sample4_postcode").value;
-  const roadAddress = document.querySelector("#sample4_roadAddress").value;
-  const jibunAddress = document.querySelector("#sample4_jibunAddress").value;
-  const detailAddress = document.querySelector("#sample4_detailAddress").value;
-  const extraAddress = document.querySelector("#sample4_extraAddress").value;
-  const birth_year = document.querySelector("#birth-year").value;
-  const birth_month = document.querySelector("#birth-month").value;
-  const birth_day = document.querySelector("#birth-day").value;
 
   if (!email) {
     return alert("이메일 형식이 맞지 않습니다!");

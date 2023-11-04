@@ -5,27 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>결제 위젯</title>
-  <script src="https://js.tosspayments.com/v1/payment-widget"></script>
+  <!-- js -->
+  <script defer src="https://js.tosspayments.com/v1/payment-widget"></script>
+  <script defer src="./payment_widget.js"></script>
+  <script defer src="/client/src/js/adressApi.js"></script>
+  <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script defer src="./payment.js"></script>
+  <script defer src="../../components/navbar.js"></script>
+  <!-- css -->
   <link rel="stylesheet" href="/client/src/css/reset.css">
   <link rel="stylesheet" href="./payment.css">
   <link rel="stylesheet" href="/client/src/components/navbar.css">
 </head>
 <body>
-
   <!-- header -->
   <header class="header"></header>
-
   <!-- payment -->
   <main class="payment"></main>
-
   <!-- footer -->
   <footer></footer>
-
-  <script src="./payment_widget.js"></script>
-  <script src="/client/src/js/adressApi.js"></script>
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script src="./payment.js"></script>
-  <script src="../../components/navbar.js"></script>
-
 </body>
 </html>

@@ -28,13 +28,15 @@ function validateEmail() {
 
   if (emailVal === "") {
     email_message.textContent = ""; //값이 비어있을 경우 공백으로 두기
-  } else if (!emailRegex.test(emailVal)) {
+    return;
+  }
+  if (!emailRegex.test(emailVal)) {
     email_message.textContent = "올바른 이메일 주소 형식이 아닙니다!";
     email_message.style.color = "red";
-  } else {
-    email_message.textContent = "유효한 이메일 주소입니다!";
-    email_message.style.color = "green";
+    return;
   }
+  email_message.textContent = "유효한 이메일 주소입니다!";
+  email_message.style.color = "green";
 }
 
 email.addEventListener("input", validateEmail);
@@ -48,15 +50,18 @@ function validatePassword() {
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
   if (pwdVal === "") {
-    validationMessage.textContent = "";
-  } else if (!pwRegex.test(pwdVal)) {
+    validationMessage.textContent = ""; //값이 비어있을 경우 공백으로 두기
+    return;
+  }
+
+  if (!pwRegex.test(pwdVal)) {
     validationMessage.textContent =
       "8글자 이상, 영문, 숫자, 특수문자 사용해주세요!";
     validationMessage.style.color = "red";
-  } else {
-    validationMessage.textContent = "비밀번호가 안전합니다!";
-    validationMessage.style.color = "green";
+    return;
   }
+  validationMessage.textContent = "비밀번호가 안전합니다!";
+  validationMessage.style.color = "green";
 }
 pwd.addEventListener("input", validatePassword);
 
@@ -68,8 +73,10 @@ function validateRePassword() {
   let rePassword = rePwd.value;
 
   if (rePassword === "") {
-    confirmPw_message.textContent = "";
-  } else if (password === rePassword) {
+    confirmPw_message.textContent = ""; //값이 비어있을 경우 공백으로 두기
+  }
+
+  if (password === rePassword) {
     confirmPw_message.textContent = "비밀번호가 일치합니다!";
     confirmPw_message.style.color = "green";
   } else {
@@ -136,7 +143,3 @@ birthDayEl.addEventListener("focus", function () {
     }
   }
 });
-
-/**
- * 회원가입 버튼
- */

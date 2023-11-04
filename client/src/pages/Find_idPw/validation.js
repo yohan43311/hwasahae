@@ -11,13 +11,15 @@ function validateEmail() {
 
   if (emailVal === "") {
     email_message.textContent = ""; //값이 비어있을 경우 공백으로 두기
-  } else if (!emailRegex.test(emailVal)) {
+    return;
+  }
+  if (!emailRegex.test(emailVal)) {
     email_message.textContent = "올바른 이메일 주소 형식이 아닙니다!";
     email_message.style.color = "red";
-  } else {
-    email_message.textContent = "유효한 이메일 주소입니다!";
-    email_message.style.color = "green";
+    return;
   }
+  email_message.textContent = "유효한 이메일 주소입니다!";
+  email_message.style.color = "green";
 }
 
 email.addEventListener("input", validateEmail);
