@@ -13,57 +13,43 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   });
-  
-  // 템플릿 정의
+
+//상품 템플릿화
+function createProductTemplate(imageSrc, title, price) {
   const productTemplate = `
-    <div class="tb-center">
-      <div class="box">
-        <div class="thumb salebox">
-          <a href="">
-            <img class="MS_prod_img_m" src="{{imageSrc}}" alt="{{productName}}">
-          </a>
+    <div class="product">
+      <div class="product-image">
+        <a href="">
+          <img src="${imageSrc}" alt="상품 섬네일">
+        </a>
+      </div>
+      <div class="product-info">
+        <div class="product-title">${title}</div>
+        <div class="product-price">
+          <span>${price}</span>
         </div>
-        <ul class="info">
-          <li class="dsc">{{productName}}</li>
-          <li class="pdt12">
-            <span class="consumer">{{consumerPrice}}원</span>
-            <span class="price">{{price}}원</span>
-          </li>
-        </ul>
       </div>
     </div>
   `;
-  
-  const products = [
-    {
-      imageSrc: "./img/shopimages/1.jpg",
-      productName: "동백 브라이트닝 광채쿠션",
-      consumerPrice: "24,000",
-      price: "24,000",
-    },
-    {
-      imageSrc: "./img/shopimages/2.jpg",
-      productName: "NEW 비타민C 화이트닝 2종 세트상품",
-      consumerPrice: "106,000",
-      price: "24,000",
-    },
-  ];
-  
-  const productContainer = document.querySelector(".items");
-  
-  // 상품 데이터를 반복하여 템플릿을 적용하고 웹 페이지에 추가
-  products.forEach((product) => {
-    const productHTML = productTemplate
-      .replace("{{imageSrc}}", product.imageSrc)
-      .replace("{{productName}}", product.productName)
-      .replace("{{consumerPrice}}", product.consumerPrice)
-      .replace("{{price}}", product.price);
-  
-    // 새로운 상품 행을 생성하고 템플릿을 추가
-    const newRow = document.createElement("tr");
-    newRow.innerHTML = productHTML;
-  
-    // 웹 페이지에 상품 추가
-    productContainer.appendChild(newRow);
-  });
-  
+  return productTemplate;
+}
+
+//동적상품추가
+const productContainer = document.querySelector('.product-container');
+
+//상품 데이터 배열
+const products = [
+  { imageSrc: './img/shopimages/1.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
+  { imageSrc: './img/shopimages/2.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
+  { imageSrc: './img/shopimages/3.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
+  { imageSrc: './img/shopimages/4.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
+  { imageSrc: './img/shopimages/5.jpg', title: '동백 브라이트닝 광채쿠션', price: '42,000원' },
+  // 다른 상품들 추가
+];
+
+// 반복해서 상품을 추가
+products.forEach((productData) => {
+  const productElement = createProductTemplate(productData.imageSrc, productData.title, productData.price);
+  productContainer.innerHTML += productElement;
+});
+
