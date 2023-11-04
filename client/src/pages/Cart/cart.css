@@ -63,3 +63,8 @@ th{
   padding: 10px;
   cursor: pointer;
 }
+
+.item_su{
+  border: none;
+  text-align: center;
+}
