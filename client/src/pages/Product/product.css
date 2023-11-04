@@ -75,14 +75,7 @@ img{
     font-size: 18px;
     border: 1px solid #ccc;
     text-decoration: none;
-    /* display: inline-block; */
-    /* vertical-align: middle; */
 }
-
-/* .sel {
-    background-color: #e3ead2;
-    border: 1px solid #e3ead2; 
-} */
 
 /*js에서 넘어오는 id 적용안됨*/
 .active {
