@@ -14,45 +14,33 @@ const createAcessToken = (user) => {
   return jwt.sign(payload, secret, { expiresIn: "1h" });
 };
 
-//accessToken 검증
-const verifyAccesstoken = (token) => {
-  let decoded = null;
+//token 검증
+const verifyToken = (token) => {
   try {
-    decoded = jwt.verify(token, secret);
-    return {
-      result: "ok",
-      decoded,
-    };
-  } catch (err) {
-    return {
-      result: "fail",
-      message: err.message,
-    };
+    return jwt.verify(token, secret);
+  } catch (error) {
+    return false;
   }
 };
 
 //refreshToken 발급
-const createRefreshToken = () => {
-  return jwt.sign({}, secret, { expiresIn: "14d" });
+const createRefreshToken = (user) => {
+  return jwt.sign({ id: user._id }, secret, { expiresIn: "14d" });
 };
 
 //refreshToken 검증
-const verifyRefreshtoken = async (token, userId) => {
-  const user = await User.findOne({ _id: userId });
-  if (user.refreshToken === token) {
-    try {
-      jwt.verify(token, secret);
-      return true;
-    } catch (err) {
-      return false;
-    }
+const verifyRefreshtoken = async (token, refreshDecodedUser) => {
+  const user = await User.findById(refreshDecodedUser?.id);
+  try {
+    if (user?.refreshToken === token) return { result: true, user };
+  } catch (error) {
+    return { result: false };
   }
-  return false;
 };
 
 module.exports = {
   createAcessToken,
-  verifyAccesstoken,
+  verifyToken,
   createRefreshToken,
   verifyRefreshtoken,
 };
