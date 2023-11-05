@@ -33,15 +33,13 @@ button{
   cursor: pointer;
 }
 
-/* 전체적인 폼 */
-#payment-form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 /* 주문 리스트 */
 #orderTable {
+  text-align: center;
+}
+
+#productTable{
   text-align: center;
 }
 
@@ -86,9 +84,13 @@ button{
   background-color: rgba(128, 128, 128, 0.399);
 }
 
-/* 결제 방법 */
+
+/* 전체적인 결제폼 */
 #payment-form{
   z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 전체 상품 가격 */
@@ -109,7 +111,7 @@ button{
   text-align: center;
 }
 
-#item_total{
+.item_total{
   font-size: 20px;
   font-weight: bolder;
 }
@@ -117,20 +119,19 @@ button{
 
 /* 결제 버튼 */
 .btnBox{
-  width: 100%;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .btn{
-  width: 200px;
-  height: 70px;
-  padding:10px; 
+  padding:20px; 
   background: #F0F0F0;
   font-weight: bolder; 
   border-radius:12px; 
-  font-size: 17px; 
+  font-size: 25px; 
   border:none; 
-  margin:0px 5px 80px 0;
+  margin:30px 10px 30px
 }
 
 .btn:hover{
@@ -140,11 +141,7 @@ button{
 
 .cancelBtn, .paymentBtn{
   float: left;
-}
-
-.btnBox{
-  display: flex;
-  justify-content: center;
+  width: 30%;
 }
 
 .minus, .plus{
@@ -166,4 +163,5 @@ button{
 .item_many{
   border: none;
   text-align: center;
+  width: 50px;
 }
