@@ -10,8 +10,8 @@ const userSchema = new Schema(
     email: { type: String, trim: true, required: true, unique: true },
 
     // 비밀번호
-    // 영문, 숫자, 특수문자 조합으로 이루어진 8~15자의 문자열
-    password: { type: String, minlength: 8, maxlength: 15, required: true },
+    // 영문대문자, 영문소문자, 숫자, 특수문자 조합으로 이루어진 8~15자의 문자열
+    password: { type: String, minlength: 8, required: true },
 
     //우편번호
     zipcode: { type: String, required: false },
@@ -32,7 +32,7 @@ const userSchema = new Schema(
       default: "구매자",
     },
 
-    refreshToken: { type: String, required: true },
+    refreshToken: { type: String, required: false },
 
     // 구매자 ref
     order: [{ type: Schema.Types.ObjectId, ref: "Order" }],
