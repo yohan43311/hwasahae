@@ -24,7 +24,7 @@ const authJWT = async (req, res, next) => {
     // 토큰 검증이 성공적으로 완료되면 토큰에 담긴 값을 이후 request handler에서도 사용할수 있도록 임시 저장소인 res.locals에 등록
     // 이렇게 등록을 해놓으면 이후의 crud에서도 토큰에 담긴 유저 정보를 사용할 수 있다.
     res.locals.userInfo = accessDecodedUser;
-    next();
+    return next();
   }
 
   // accessToken검증에 실패하거나 만료되었다면 refreshToken 확인
@@ -66,7 +66,7 @@ const authJWT = async (req, res, next) => {
     const newAccessToken = createAcessToken(user);
     res.cookie("accessToken", newAccessToken);
     res.locals.userInfo = user;
-    next();
+    return next();
   }
 };
 

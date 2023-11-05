@@ -86,7 +86,7 @@ class UserService {
   }
 
   //특정 유저 정보 조회
-  async GetUserById(userInfo) {
+  async FindById(userInfo) {
     const user = await User.findById(userInfo?.id);
 
     if (!user) {
@@ -105,6 +105,101 @@ class UserService {
       role: user?.role,
       order: user?.order,
       product: user?.product,
+    };
+  }
+
+  //특정 유저 정보 수정
+  async UpdateById(userInfo, data) {
+    const user = await User.findOne({ email: data?.email });
+
+    if (user) {
+      const error = new Error("이미 존재하는 이메일 정보입니다.");
+      error.status = 400;
+      throw error;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userInfo?.id,
+      {
+        name: data?.name,
+        email: data?.email,
+        zipcode: data?.zipcode,
+        address: data?.address,
+        detailAddress: data?.detailAddress,
+      },
+      { new: true } //db 업데이트한 정보 return 받기
+    );
+
+    return {
+      id: updatedUser?._id,
+      name: updatedUser?.name,
+      email: updatedUser?.email,
+      zipcode: updatedUser?.zipcode,
+      address: updatedUser?.address,
+      detailAddress: updatedUser?.detailAddress,
+      role: updatedUser?.role,
+      order: updatedUser?.order,
+      product: updatedUser?.product,
+    };
+  }
+
+  //특정 유저 정보 삭제
+  async DeleteById(userInfo) {
+    //DB에서 유저정보 찾기
+    const user = await User.findOne({ _id: userInfo?.id, deletedAt: null });
+
+    if (!user) {
+      const error = new Error("존재하지 않는 유저정보입니다.");
+      error.status = 400;
+      throw error;
+    }
+
+    const deletedUser = await User.findByIdAndUpdate(
+      userInfo?.id,
+      {
+        deletedAt: new Date(),
+      },
+      { new: true } //db 업데이트한 정보 return 받기
+    );
+
+    return {
+      deletedAt: deletedUser?.deletedAt,
+    };
+  }
+
+  //모든 유저 정보 불러오기
+  async FindAll(userInfo, page = 1) {
+    if (userInfo?.role !== "관리자") {
+      const error = new Error("관리자 권한이 아닙니다.");
+      error.status = 403;
+      throw error;
+    }
+
+    //pagination
+    const perPage = 3;
+    page = Number(page);
+
+    const [totalCount, users] = await Promise.all([
+      User.countDocuments({ deletedAt: null }),
+      User.find({ deletedAt: null })
+        .sort({ createdAt: -1 }) //Sort by createdAt DESC
+        .skip(perPage * (page - 1))
+        .limit(perPage),
+    ]);
+
+    const totalPage = Math.ceil(totalCount / perPage);
+
+    //쿼리스트링으로 접속할 경우 page가 totalPage보다 클 경우 totalPage로 변경
+    if (page > totalPage) {
+      page = totalPage;
+    }
+
+    return {
+      users,
+      page,
+      perPage,
+      totalPage,
+      totalCount,
     };
   }
 }

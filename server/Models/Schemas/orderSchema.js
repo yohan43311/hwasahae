@@ -45,7 +45,7 @@ const orderSchema = new Schema(
   },
   {
     // 주문 날짜
-    timestamp: true,
+    timestamps: true,
   }
 );
 

@@ -25,9 +25,43 @@ const loginUser = asyncHandler(async (req, res) => {
 
 //특정 유저 정보 조회
 const getUserInfo = asyncHandler(async (req, res) => {
-  const user = await UserServiceInstance.GetUserById(res.locals.userInfo);
+  const user = await UserServiceInstance.FindById(res.locals.userInfo);
 
   res.status(200).json(user);
 });
 
-module.exports = { registerUser, loginUser, getUserInfo };
+//특정 유저 정보 수정
+const updateUserInfo = asyncHandler(async (req, res) => {
+  const user = await UserServiceInstance.UpdateById(
+    res.locals.userInfo,
+    req.body
+  );
+
+  res.status(200).json(user);
+});
+
+//특정 유저 정보 삭제
+const removeUserInfo = asyncHandler(async (req, res) => {
+  const user = await UserServiceInstance.DeleteById(res.locals.userInfo);
+
+  res.status(200).json(user);
+});
+
+//모든 유저 정보 가져오기
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await UserServiceInstance.FindAll(
+    res.locals.userInfo,
+    req.query.page
+  );
+
+  res.status(200).json(users);
+});
+
+module.exports = {
+  registerUser,
+  loginUser,
+  getUserInfo,
+  updateUserInfo,
+  removeUserInfo,
+  getUsers,
+};

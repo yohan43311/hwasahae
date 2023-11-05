@@ -42,7 +42,7 @@ const userSchema = new Schema(
   },
   {
     // 생성 날짜
-    timestamp: true,
+    timestamps: true,
   }
 );
 
