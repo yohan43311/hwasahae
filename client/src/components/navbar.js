@@ -11,7 +11,7 @@
         ];
         // 메뉴 아이템을 생성하는 함수
         const menu_li = () => {
-            const menuItems = menu.map(item => `<li><a href="${item.link}">${item.text}</a></li>`);
+            const menuItems = menu.map(item => `<li><a href="${item.link}" onclick="route()">${item.text}</a></li>`);
             return menuItems.join(''); // 배열을 문자열로 결합하여 반환
         };
 
