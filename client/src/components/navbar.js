@@ -64,7 +64,7 @@
     //메인로고 넣기
     const main_log = document.querySelector('.main_top_logo')
     const mainImg = new Image();
-    mainImg.src = 'http://skincure.co.kr/design/skincure/0759ansome/top_logo.gif';
+    mainImg.src = '../../components/img/top_logo.png';
     main_log.appendChild(mainImg)
 
     main_log.addEventListener('click', () => {
@@ -73,7 +73,7 @@
     //서치 돋보기 버튼
     const search_btn = document.querySelector('.search_btn');
     const search_btn_img = new Image();
-    search_btn_img.src = 'http://skincure.co.kr/design/skincure/0759ansome/btn_search.png';
+    search_btn_img.src = '../../components/img/btn_search.png';
     search_btn.appendChild(search_btn_img)
 
     search_btn.addEventListener('click', () => {
@@ -83,7 +83,7 @@
     //사람 아이콘
     const top_myp = document.querySelector('.top_myp');
     const mypImg = new Image();
-    mypImg.src = 'http://skincure.co.kr/design/skincure/0759ansome/btn_mypage2.gif'
+    mypImg.src = '../../components/img/btn_mypage2.png'
     top_myp.appendChild(mypImg)
 
     top_myp.addEventListener('click', () => {
@@ -93,7 +93,7 @@
     //카트 아이콘
     const top_cart = document.querySelector('.top_cart');
     const cartImg = new Image();
-    cartImg.src = 'http://skincure.co.kr/design/skincure/0759ansome/btn_cart2.gif'
+    cartImg.src = '../../components/img/btn_cart2.png'
     top_cart.appendChild(cartImg)
 
     top_cart.addEventListener('click', () => {
