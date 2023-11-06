@@ -194,8 +194,21 @@ class UserService {
       page = totalPage;
     }
 
+    //유저정보 필터링하기
+    const filterdUsers = JSON.parse(JSON.stringify(users)).map((user) => ({
+      id: user?._id,
+      name: user?.name,
+      email: user?.email,
+      zipcode: user?.zipcode,
+      address: user?.address,
+      detailAddress: user?.detailAddress,
+      role: user?.role,
+      order: user?.order,
+      product: user?.product,
+    }));
+
     return {
-      users,
+      filterdUsers,
       page,
       perPage,
       totalPage,

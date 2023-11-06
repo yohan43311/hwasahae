@@ -8,7 +8,6 @@ const categoryRoute = require("./Routes/categoryRoutes");
 const userRoute = require("./Routes/userRoutes");
 const logHandler = require("./utils/logHandler");
 const errorHandler = require("./utils/errorHandler");
-const authJWT = require("./utils/authJWT");
 //express app 생성
 const app = express();
 
