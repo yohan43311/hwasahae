@@ -1,9 +1,10 @@
 const { Category } = require("../Models");
+
 const asyncHandler = require("../utils/asyncHandler");
 
 // 카테고리 생성/등록
 const createCategory = asyncHandler(async (req, res) => {
-  const name = req.params.name;
+  const { name } = req.body;
   const newCategory = new Category({ name });
   const result = await newCategory.save();
   res.status(200).json(result);
@@ -14,4 +15,5 @@ const getCategory = asyncHandler(async (req, res) => {
   const result = await Category.find({});
   res.status(200).json(result);
 });
+
 module.exports = { createCategory, getCategory };

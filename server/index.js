@@ -8,6 +8,8 @@ const categoryRoute = require("./Routes/categoryRoutes");
 const userRoute = require("./Routes/userRoutes");
 const logHandler = require("./utils/logHandler");
 const errorHandler = require("./utils/errorHandler");
+const productRoute = require("./Routes/productRoutes");
+const orderRoute = require("./Routes/orderRoutes");
 //express app 생성
 const app = express();
 
@@ -18,6 +20,8 @@ app.use(cors()); //cors 미들웨어 등록
 
 app.use("/", userRoute);
 app.use("/category", categoryRoute);
+app.use("/products", productRoute);
+app.use("/orders", orderRoute);
 
 app.get("/", (req, res) => {
   res.send(

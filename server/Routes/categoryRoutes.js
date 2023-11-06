@@ -5,8 +5,8 @@ const {
 } = require("../Controllers/categoryController");
 
 const router = express.Router();
-
-router.post("/:name", createCategory);
+// 카테고리
+router.post("/:categoryId", createCategory);
 router.get("/", getCategory);
 
 module.exports = router;
