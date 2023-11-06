@@ -6,7 +6,7 @@ const {
 
 const router = express.Router();
 // 카테고리
-router.post("/:name", createCategory);
+router.post("/:categoryId", createCategory);
 router.get("/", getCategory);
 
 module.exports = router;

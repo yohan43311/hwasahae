@@ -26,28 +26,23 @@ const createProduct = asyncHandler(async (req, res) => {
   const result = await newProduct.save();
   res.status(200).json(result);
 });
-// 상품 목록 조회
-// deletedAt 필드의 값이 null이 아닌 경우 찾음
+// 모든 상품 목록 조회
 const listProducts = asyncHandler(async (req, res) => {
-  let query = {};
-  if (req.query.deleted === "true") {
-    query.deletedAt = { $ne: null };
-  }
-  const products = await Product.find(query).populate("category").exec();
-  res.status(200).json(products);
+  const products = await Product.find({}); // 모든 상품을 조회합니다.
+  res.status(200).json(products); // 조회된 상품들을 JSON 형태로 반환합니다.
 });
 // 특정 상품 목록 조회
 const detailProducts = asyncHandler(async (req, res) => {
-  const productId = req.params._id;
+  const { productId } = req.params;
   const product = await Product.findById(productId);
   res.status(200).json(product);
 });
 // 상품 정보 수정
 const modifyProducts = asyncHandler(async (req, res) => {
-  const { _id } = req.params;
+  const { productId } = req.params;
   const { name, images, description, price, maker } = req.body;
   const modiProduct = await Product.findOneAndUpdate(
-    { _id },
+    { _id: productId },
     { name, images, description, price, maker },
     { new: true }
   );
@@ -55,10 +50,10 @@ const modifyProducts = asyncHandler(async (req, res) => {
 });
 // 상품 삭제 (유저측)
 const deleteProducts = asyncHandler(async (req, res) => {
-  const _id = req.params._id;
+  const { productId } = req.params;
   const currentDate = new Date();
   const delProduct = await Product.findOneAndUpdate(
-    { _id: _id },
+    { _id: productId },
     { deletedAt: currentDate },
     { new: true }
   );
