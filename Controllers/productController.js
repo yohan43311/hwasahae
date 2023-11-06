@@ -1,68 +1,42 @@
-const { Product } = require("../Models");
-const { Category } = require("../Models");
+const ProductService = require("../Services/ProductService");
 const asyncHandler = require("../utils/asyncHandler");
 
+const ProductServiceInstance = new ProductService();
 // 상품 생성/등록
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, images, description, price, maker, category } = req.body;
-
-  // 카테고리가 이미 존재하는지 확인
-  let categoryDoc = await Category.findOne({ name: category });
-
-  // 존재하지 않으면 에러 반환
-  if (!categoryDoc) {
-    return res
-      .status(400)
-      .json({ error: "해당 카테고리가 존재하지 않습니다." });
-  }
-  const newProduct = new Product({
-    name,
-    images,
-    description,
-    price,
-    maker,
-    category: categoryDoc.name,
-  });
-  const result = await newProduct.save();
-  res.status(200).json(result);
+  const product = await ProductServiceInstance.createProduct(req.body);
+  res.status(200).json(product);
 });
 // 모든 상품 목록 조회
 const listProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}); // 모든 상품을 조회합니다.
+  const products = await ProductServiceInstance.listProducts();
   res.status(200).json(products); // 조회된 상품들을 JSON 형태로 반환합니다.
 });
 // 특정 상품 목록 조회
 const detailProducts = asyncHandler(async (req, res) => {
-  const { productId } = req.params;
-  const product = await Product.findById(productId);
+  const product = await ProductServiceInstance.detailProduct(
+    req.params.productId
+  );
   res.status(200).json(product);
 });
 // 상품 정보 수정
 const modifyProducts = asyncHandler(async (req, res) => {
   const { productId } = req.params;
-  const { name, images, description, price, maker } = req.body;
-  const modiProduct = await Product.findOneAndUpdate(
-    { _id: productId },
-    { name, images, description, price, maker },
-    { new: true }
+  const updateData = req.body; // 수정할 정보를 담은 객체
+  const updatedProduct = await ProductServiceInstance.modifyProduct(
+    productId,
+    updateData
   );
-  res.json(modiProduct);
+  res.status(200).json(updatedProduct);
 });
 // 상품 삭제 (유저측)
 const deleteProducts = asyncHandler(async (req, res) => {
   const { productId } = req.params;
-  const currentDate = new Date();
-  const delProduct = await Product.findOneAndUpdate(
-    { _id: productId },
-    { deletedAt: currentDate },
-    { new: true }
-  );
-
-  if (delProduct) {
-    res.json({ message: "상품이 성공적으로 삭제되었습니다." });
-  } else {
-    res.json({ message: "상품 삭제에 실패하였습니다." });
-  }
+  const deletedProduct = await ProductServiceInstance.deleteProduct(productId);
+  res.json({
+    message: "상품이 성공적으로 삭제되었습니다.",
+    product: deletedProduct,
+  });
 });
 
 module.exports = {
