@@ -5,7 +5,7 @@ const {
 } = require("../utils/jwt");
 const asyncHandler = require("../utils/asyncHandler");
 
-const authJWT = asyncHandler(async (req, res, next) => {
+const authJWT = asyncHandler(async (req, res) => {
   const accessToken = req.cookies.accessToken; //쿠키에서 엑세스토큰 획득
   const refreshToken = req.cookies.refreshToken; //쿠키에서 리프레시토큰 획득
 

@@ -20,6 +20,8 @@ const loginUser = asyncHandler(async (req, res) => {
     httpOnly: true, //  자바스크립트로 브라우저의 쿠키에 접근하는 것을 막기 위한 옵션
   });
 
+  delete user.accessToken;
+  delete user.refreshToken;
   res.status(200).json(user);
 });
 

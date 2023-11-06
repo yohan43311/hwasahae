@@ -16,7 +16,6 @@ app.use(express.json()); // JSON 형태의 요청 body를 파싱하기 위해 ex
 app.use(cookieParser());
 app.use(cors()); //cors 미들웨어 등록
 
-// app.use("/user", authJWT, userRoute);
 app.use("/", userRoute);
 app.use("/category", categoryRoute);
 
