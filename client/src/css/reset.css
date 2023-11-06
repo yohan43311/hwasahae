@@ -39,5 +39,9 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+<<<<<<< HEAD
 }
 li{list-style:none}
+=======
+}
+>>>>>>> 9102a30233d0a1dd54d67a475c2ed0b7d21dc8f8

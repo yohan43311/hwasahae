@@ -8,11 +8,25 @@
     <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="./mypage.css">
     <link rel="stylesheet" type="text/css" href="../../components/navbar.css">
+    <!-- <link rel="stylesheet" href="./mypage.js"> -->
+    <script src="./mypage.js" defer></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
     <header class="header"></header>
+    <!-- 모달 -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p class="font-semibold">정말 탈퇴하시겠습니까?</p>
+            <div class="modal-buttons">
+                <button id="confirmYes">Yes</button>
+                <button id="confirmNo">No</button>
+            </div>
+        </div>
+    </div>
+
     <div id="mypage">
         <h2 class="mypage-tit">MY PAGE</h2>
         <div class="info">
@@ -23,7 +37,7 @@
                     </p>
                     <ul>
                         <li><a href="../SIgnUp/signUp.html">회원정보변경</a></li>
-                        <li><a href="withdraw.html">회원정보탈퇴</a></li>
+                        <li><a href="withdraw.html">회원탈퇴</a></li>
                     </ul>
                 </div>
             </div>
@@ -71,7 +85,8 @@
         </div>
     </div>
     <footer></footer>
-    <script src="../../components/navbar.js"></script> 
-    
+    <script src="../../components/navbar.js"></script>
+
 </body>
+
 </html>
