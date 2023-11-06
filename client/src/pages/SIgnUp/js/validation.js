@@ -17,7 +17,7 @@ const birthMontEl = document.querySelector("#birth-month");
 const birthDayEl = document.querySelector("#birth-day");
 
 //회원가입 버튼
-const submit = document.querySelector(".send");
+const submit = document.querySelector("#submit");
 
 /**
  * 이메일
@@ -26,32 +26,42 @@ function validateEmail() {
   let emailVal = email.value;
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
+  if (emailVal === "") {
+    email_message.textContent = ""; //값이 비어있을 경우 공백으로 두기
+    return;
+  }
   if (!emailRegex.test(emailVal)) {
     email_message.textContent = "올바른 이메일 주소 형식이 아닙니다!";
     email_message.style.color = "red";
-  } else {
-    email_message.textContent = "유효한 이메일 주소입니다!";
-    email_message.style.color = "green";
+    return;
   }
+  email_message.textContent = "유효한 이메일 주소입니다!";
+  email_message.style.color = "green";
 }
+
 email.addEventListener("input", validateEmail);
 
 /**
  * 비밀번호
  */
 function validatePassword() {
-  let password = pwd.value;
-  const regex =
+  let pwdVal = pwd.value;
+  const pwRegex =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
-  if (!regex.test(password)) {
+  if (pwdVal === "") {
+    validationMessage.textContent = ""; //값이 비어있을 경우 공백으로 두기
+    return;
+  }
+
+  if (!pwRegex.test(pwdVal)) {
     validationMessage.textContent =
       "8글자 이상, 영문, 숫자, 특수문자 사용해주세요!";
     validationMessage.style.color = "red";
-  } else {
-    validationMessage.textContent = "비밀번호가 안전합니다!";
-    validationMessage.style.color = "green";
+    return;
   }
+  validationMessage.textContent = "비밀번호가 안전합니다!";
+  validationMessage.style.color = "green";
 }
 pwd.addEventListener("input", validatePassword);
 
@@ -61,6 +71,10 @@ pwd.addEventListener("input", validatePassword);
 function validateRePassword() {
   let password = pwd.value;
   let rePassword = rePwd.value;
+
+  if (rePassword === "") {
+    confirmPw_message.textContent = ""; //값이 비어있을 경우 공백으로 두기
+  }
 
   if (password === rePassword) {
     confirmPw_message.textContent = "비밀번호가 일치합니다!";
@@ -89,7 +103,7 @@ isYearOptionExisted = false;
 birthYearEl.addEventListener("focus", function () {
   if (!isYearOptionExisted) {
     isYearOptionExisted = true;
-    for (var i = 1940; i <= 2023; i++) {
+    for (let i = 1940; i <= 2023; i++) {
       const YearOption = document.createElement("option");
       YearOption.setAttribute("value", i);
       YearOption.innerText = i;
@@ -104,7 +118,7 @@ isMonthOptionExisted = false;
 birthMontEl.addEventListener("focus", function () {
   if (!isMonthOptionExisted) {
     isMonthOptionExisted = true;
-    for (var i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 12; i++) {
       const DayOption = document.createElement("option");
       DayOption.setAttribute("value", i);
       DayOption.innerText = i;
@@ -119,7 +133,7 @@ isDayOptionExisted = false;
 birthDayEl.addEventListener("focus", function () {
   if (!isDayOptionExisted) {
     isDayOptionExisted = true;
-    for (var i = 1; i <= 31; i++) {
+    for (let i = 1; i <= 31; i++) {
       // option element 생성
       const DayOption = document.createElement("option");
       DayOption.setAttribute("value", i);
@@ -129,8 +143,3 @@ birthDayEl.addEventListener("focus", function () {
     }
   }
 });
-
-/**
- * 회원가입 버튼
- */
-window.onload = function () {};

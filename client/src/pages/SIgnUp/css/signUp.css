@@ -1,3 +1,7 @@
+main{
+  margin-top: 150px;
+}
+
 .form-background{
   padding: 30px;
 }
@@ -18,6 +22,20 @@
   border-radius:10px;
 }
 
+.address-input{
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid rgb(213, 213, 213);
+  border-radius:10px;
+}
+
+form{
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 50px 0;;
+}
+
 .w-50{
   width: 50%;
   float: left;
@@ -30,17 +48,18 @@
 }
 
 button{
-  width: 320px;
+  width: 100%;
   height: 60px;
+  padding: 10px;
+  text-align: center;
   font-size: 15px;
-  line-height: 58px;
   border-radius: 20px;
-  margin: 5px;
+  margin-top: 30px;
   border: none;
   cursor: pointer;
 }
 
-button:hover{
+.btn:hover{
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.441);
   background-color: rgba(128, 128, 128, 0.399);
 }
@@ -49,9 +68,20 @@ label{
   margin-bottom: 3px;
 }
 
+.title { 
+  margin-bottom: 40px;
+  font-size: 30px; 
+  font-weight: 600;
+  color: #4e5968;
+}
+
 .birth_content{
   margin-left: 10px;
   margin-bottom: 3px;
+}
+
+input, select{
+  margin-top: 12px;
 }
 
 
@@ -93,11 +123,10 @@ label{
 }
 
 /* address */
-#adressBtn{
-  width: 320px;
+#addressBtn{
+  width: 100%;
   height: 60px;
   font-size: 15px;
-  line-height: 58px;
   border-radius: 20px;
   margin: 5px;
   border: none;
@@ -128,4 +157,7 @@ label{
   font-size: 15px;
   border: 1px solid rgb(213, 213, 213);
   border-radius:10px;
+}
+.msg{
+  margin-top: 10px;
 }
