@@ -110,13 +110,13 @@ class UserService {
 
   //특정 유저 정보 수정
   async UpdateById(userInfo, data) {
-    const user = await User.findOne({ email: data?.email });
+    // const user = await User.findOne({ email: data?.email });
 
-    if (user) {
-      const error = new Error("이미 존재하는 이메일 정보입니다.");
-      error.status = 400;
-      throw error;
-    }
+    // if (user) {
+    //   const error = new Error("이미 존재하는 이메일 정보입니다.");
+    //   error.status = 400;
+    //   throw error;
+    // }
 
     const updatedUser = await User.findByIdAndUpdate(
       userInfo?.id,
@@ -149,6 +149,7 @@ class UserService {
     const user = await User.findOne({ _id: userInfo?.id, deletedAt: null });
 
     if (!user) {
+      //throw new BadRequestError("~~"); -> custom error 만들어보기(바로 파악 가능)
       const error = new Error("존재하지 않는 유저정보입니다.");
       error.status = 400;
       throw error;
@@ -176,6 +177,8 @@ class UserService {
     }
 
     //pagination
+    //offset 방식(책갈피 방식) - db의 모든 데이터를 조회할 수도 있음..
+    //cursor 방식 ()
     const perPage = 3;
     page = Number(page);
 
@@ -208,7 +211,7 @@ class UserService {
     }));
 
     return {
-      filterdUsers,
+      users: filterdUsers,
       page,
       perPage,
       totalPage,

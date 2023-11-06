@@ -15,11 +15,14 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const user = await UserServiceInstance.SignIn(req.body, res);
 
+  //서비스단에서 수정하기(피드백) - dto(data transfer object)
   res.cookie("accessToken", user?.accessToken);
   res.cookie("refreshToken", user?.refreshToken, {
     httpOnly: true, //  자바스크립트로 브라우저의 쿠키에 접근하는 것을 막기 위한 옵션
   });
 
+  //dto class 생성 후 관리하기..!
+  //비즈니스 로직 철저히 분리 가능
   delete user.accessToken;
   delete user.refreshToken;
   res.status(200).json(user);
