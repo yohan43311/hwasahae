@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>공지사항</title>
+
+</head>
+
+<body>
+
+    <!-- //게시판 리스트 -->
+    <div class="bbs-tit">
+        <h3>공지사항</h3>
+    </br>
+        <!-- 게시판 목록 -->
+        <div class="bbs-table-list">
+            <table summary="No, content,Name,Data,Hits">
+                <colgroup>
+                    <col width="70" />
+                    <col width="35" />
+                    <col width="*" />
+                    <col width="110" />
+                    <col width="110" />
+                    <col width="75" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <div class="tb-center">NO.</div>
+                        </th>
+                        <th scope="col">
+                            <div class="tb-center">&nbsp;</div>
+                        </th>
+                        <th scope="col">
+                            <div class="tb-center">CONTENT</div>
+                        </th>
+                        <th scope="col">
+                            <div class="tb-center">NAME</div>
+                        </th>
+                        <th scope="col">
+                            <div class="tb-center">DATE</div>
+                        </th>
+                        <th scope="col">
+                            <div class="tb-center">HITS</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- .공지사항 리스트 시작 -->
+                    <tr>
+                        <td>
+                            <div class="tb-center"><img src="/images/d3/modern_simple/common/icon_box_arrow.gif" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tb-left"><img src="/board/images/neo_notice.gif" /> </div>
+                        </td>
+                        <td>
+                            <div class="tb-left">
+                                <img src="/" />
+                                <a href=""
+                                    class="tb-bold">[공지] 홈페이지 오픈 기념 구매 이벤트 안내!!</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tb-center">
+                                <img src="/board/images/neo_adminimg.gif" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tb-center">2023.10.31</div>
+                        </td>
+                        <td>
+                            <div class="tb-center">8</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="tb-center"><img src="/images/d3/modern_simple/common/icon_box_arrow.gif" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tb-left"><img src="/board/images/neo_notice.gif" /> </div>
+                        </td>
+                        <td>
+                            <div class="tb-left">
+                                <img src="/board/images/neo_head.gif" />
+                                <a href=""
+                                    class="tb-bold">[공지] 홈페이지 오픈 기념 후기 이벤트 안내!!</a>
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tb-center">
+                                <img src="/board/images/neo_adminimg.gif" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tb-center">2023.10.31</div>
+                        </td>
+                        <td>
+                            <div class="tb-center">8</div>
+                        </td>
+                        <!--. 공지사항 리스트 끝! -->
+
+                </tbody>
+            </table>
+        </div>
+        <!-- //게시판 목록 -->
+
+        <!-- 하단 페이징 & 버튼 -->
+        <div class="bbs-btm">
+            <div class="bbs-link"><a href="javascript:;alert('해당 게시판은 글쓰기,수정,삭제가 금지된 게시판입니다.');"
+                    class="CSSbuttonWhite">WRITE</a></div>
+            <div class="bbs-paging">
+                <div class="paging">
+                    <a href="/board/board.html?code=skincure&page=1&board_cate=#board_list_target" class="now">1</a>
+                </div>
+            </div>
+        </div>
+        <!-- //하단 페이징 & 버튼 -->
+    </div><!-- .page-body -->
+    <hr />
+    <script src="notice.js"></script>
+</body>
+
+</html>
