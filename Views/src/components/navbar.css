@@ -190,3 +190,5 @@ nav li a:hover{
 .ft_sec03 .copyright {font-size:11px; color:#5a5a5a; text-align:left; padding-top:15px; letter-spacing:0.5px;}
 .ft_sec03 .escrow {position:absolute; top:10px; right:0;}
 .ft_sec03 .bt_inner{display: flex;flex-direction: column;}
+
+a {color:#fff; text-decoration: none; outline: none}

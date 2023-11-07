@@ -1,3 +1,9 @@
+    
+
+
+    
+    
+    
     const header = document.querySelector('.header');
 
     //카트 숫자넘버 그려지기전에 넣어둬야 작동한다.
@@ -21,7 +27,7 @@
     <div class="header_section">
         <div>
             <ul>
-                <li class="main_login_btn">로그인</li>
+                <li class="main_login_btn"><a href="/login">로그인</a></li>
                 <li class="main_user_join">회원가입</li>
             </ul>
         </div>
