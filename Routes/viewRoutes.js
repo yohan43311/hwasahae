@@ -8,7 +8,6 @@ router.use("/", express.static("Views/src"));
 
 //route setting
 router.use("/", express.static("Views/src/pages/Main"));
-router.use("/register", express.static("Views/src/pages/SignUp/signUp.html"));
 router.use("/item", express.static("Views/src/pages/itemPage"));
 
 router.use("/login", express.static("Views/src/pages/SignIn")); //로그인

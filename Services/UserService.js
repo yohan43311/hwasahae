@@ -1,9 +1,39 @@
 const { User } = require("../Models");
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
 const { createAcessToken, createRefreshToken } = require("../utils/jwt");
 
 class UserService {
   constructor() {}
+
+  //이메일 전송하기
+  async SendEmail(email) {
+    const transport = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "dada4202@gmail.com",
+        pass: process.env.Google_APP_KEY,
+      },
+    });
+
+    const authNo = Math.random().toString(36).slice(2);
+    const message = {
+      from: "dada4202@gmail.com",
+      to: email,
+      subject: "화사해 인증번호",
+      text: authNo,
+    };
+
+    transport.sendMail(message, (err, info) => {
+      if (err) {
+        const error = new Error(err);
+        error.status = 400;
+        throw error;
+      }
+      console.log("info : ", info);
+    });
+    return authNo;
+  }
 
   //회원가입
   async Singup(userDTO) {
@@ -110,10 +140,19 @@ class UserService {
 
   //특정 유저 정보 수정
   async UpdateById(userInfo, data) {
-    const user = await User.findOne({ email: data?.email });
+    const { email } = userInfo;
+    const { name, password, zipcode, address, detailAddress } = data;
 
-    if (user) {
-      const error = new Error("이미 존재하는 이메일 정보입니다.");
+    //DB에서 유저정보 찾기
+    const user = await User.findOne({ email, deletedAt: null });
+    //입력한 비밀번호와 DB의 비밀번호 같은지 비교
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    //만약 유저정보가 없거나 비밀번호가 동일하지 않다면
+    if (!user || !isValidPassword) {
+      const error = new Error(
+        "유저가 존재하지 않거나 비밀번호가 맞지 않습니다."
+      );
       error.status = 400;
       throw error;
     }
@@ -121,11 +160,10 @@ class UserService {
     const updatedUser = await User.findByIdAndUpdate(
       userInfo?.id,
       {
-        name: data?.name,
-        email: data?.email,
-        zipcode: data?.zipcode,
-        address: data?.address,
-        detailAddress: data?.detailAddress,
+        name,
+        zipcode,
+        address,
+        detailAddress,
       },
       { new: true } //db 업데이트한 정보 return 받기
     );
@@ -144,12 +182,19 @@ class UserService {
   }
 
   //특정 유저 정보 삭제
-  async DeleteById(userInfo) {
+  async DeleteById(userInfo, password) {
     //DB에서 유저정보 찾기
     const user = await User.findOne({ _id: userInfo?.id, deletedAt: null });
 
-    if (!user) {
-      const error = new Error("존재하지 않는 유저정보입니다.");
+    //입력한 비밀번호와 DB의 비밀번호 같은지 비교
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    //throw new BadRequestError("~~"); -> custom error 만들어보기(바로 파악 가능)
+    //만약 유저정보가 없거나 비밀번호가 동일하지 않다면
+    if (!user || !isValidPassword) {
+      const error = new Error(
+        "유저가 존재하지 않거나 비밀번호가 맞지 않습니다."
+      );
       error.status = 400;
       throw error;
     }
@@ -167,7 +212,7 @@ class UserService {
     };
   }
 
-  //모든 유저 정보 불러오기
+  //모든 유저 정보 불러오기(관리자)
   async FindAll(userInfo, page = 1) {
     if (userInfo?.role !== "관리자") {
       const error = new Error("관리자 권한이 아닙니다.");
@@ -176,6 +221,8 @@ class UserService {
     }
 
     //pagination
+    //offset 방식(책갈피 방식) - db의 모든 데이터를 조회할 수도 있음..
+    //cursor 방식 ()
     const perPage = 3;
     page = Number(page);
 
@@ -208,7 +255,7 @@ class UserService {
     }));
 
     return {
-      filterdUsers,
+      users: filterdUsers,
       page,
       perPage,
       totalPage,

@@ -21,14 +21,14 @@ const userRegisterValidator = () => {
   return [
     body("email")
       .notEmpty()
-      .withMessage("필수 입력 사항입니다.")
+      .withMessage("이메일은 필수 입력 사항입니다.")
       .trim()
       .isEmail()
       .withMessage("이메일 형식이 맞지 않습니다."),
-    body("name").notEmpty().withMessage("필수 입력 사항입니다.").trim(),
+    body("name").notEmpty().withMessage("이름은 필수 입력 사항입니다.").trim(),
     body("password")
       .notEmpty()
-      .withMessage("필수 입력 사항입니다.")
+      .withMessage("비밀번호는 필수 입력 사항입니다.")
       .trim()
       .isStrongPassword()
       .withMessage("비밀번호 형식에 맞지 않습니다."),
@@ -40,17 +40,32 @@ const userLoginValidator = () => {
   return [
     body("email")
       .notEmpty()
-      .withMessage("필수 입력 사항입니다.")
+      .withMessage("이메일은 필수 입력 사항입니다.")
       .trim()
       .isEmail()
       .withMessage("이메일 형식이 맞지 않습니다."),
     body("password")
       .notEmpty()
-      .withMessage("필수 입력 사항입니다.")
+      .withMessage("비밀번호는 필수 입력 사항입니다.")
       .trim()
       .isStrongPassword()
       .withMessage("비밀번호 형식에 맞지 않습니다."),
   ];
 };
 
-module.exports = { validate, userRegisterValidator, userLoginValidator };
+//이메일 유효성 검사
+const userEmailValidator = () => {
+  return body("email")
+    .notEmpty()
+    .withMessage("이메일은 필수 입력 사항입니다.")
+    .trim()
+    .isEmail()
+    .withMessage("이메일 형식이 맞지 않습니다.");
+};
+
+module.exports = {
+  validate,
+  userRegisterValidator,
+  userLoginValidator,
+  userEmailValidator,
+};
