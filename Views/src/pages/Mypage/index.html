@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="./mypage.css">
+    <link rel="stylesheet" type="text/css" href="../../components/navbar.css">
+    <!-- <link rel="stylesheet" href="./mypage.js"> -->
+    <script src="./mypage.js" defer></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <header class="header"></header>
+    <!-- 모달 -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p class="font-semibold">정말 탈퇴하시겠습니까?</p>
+            <div class="modal-buttons">
+                <button id="confirmYes">Yes</button>
+                <button id="confirmNo">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mypage">
+        <h2 class="mypage-tit">MY PAGE</h2>
+        <div class="info">
+            <div class="user">
+                <div class="user-info">
+                    <p class="member">
+                        홍길동님
+                    </p>
+                    <ul>
+                        <li><a href="../SIgnUp/signUp.html">회원정보변경</a></li>
+                        <li><a href="withdraw.html">회원탈퇴</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="order">
+            <h3>최근 주문 정보</h3>
+            <div class="tbl mt-3">
+                <table summary="주문일자, 상품명, 결제금액, 주문상세">
+                    <caption class="hidden">최근 주문 정보 목록</caption>
+                    <colgroup>
+                        <col width="150">
+                        <col width="830">
+                        <col width="140">
+                        <col width="140">
+                        <col width="140">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="tb-center">DATE</div>
+                            </th>
+                            <th>
+                                <div class="tb-center">PRODUCT</div>
+                            </th>
+                            <th>
+                                <div class="tb-center">COST</div>
+                            </th>
+                            <th>
+                                <div class="tb-center">DETAIL</div>
+                            </th>
+                            <th>
+                                <div class="tb-center">CANCLE</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5">
+                                <div class="tb-center">주문 내역이 없습니다.</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="../../components/navbar.js"></script>
+
+</body>
+
+</html>
