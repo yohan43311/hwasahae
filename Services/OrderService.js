@@ -3,7 +3,32 @@ const { Order } = require("../Models");
 class OrderService {
   constructor() {}
 
-  // 주문 생성 메소드
+  // 주문 조회 메소드 (관리자)
+  async listOrderAdmin() {
+    const orders = await Order.find({});
+    return orders;
+  }
+  // 주문 수정 메소드 (관리자)
+  async updateOrderAdmin(orderId, newStatus) {
+    const order = await Order.findById(orderId);
+    if (!order) {
+      throw new Error("주문을 찾을 수 없습니다.");
+    }
+
+    order.status = newStatus;
+    await order.save();
+    return order;
+  }
+  // 주문 취소 메소드 (관리자)
+  async deleteOrderAdmin(orderId) {
+    const result = await Order.deleteOne({ _id: orderId });
+    if (result.deletedCount === 0) {
+      throw new Error("주문을 찾을 수 없습니다.");
+    }
+    return result;
+  }
+
+  // 주문 추가 메소드 (유저)
   async createOrder(orderDTO) {
     const { userId, receiver, orderedItems, deliveryFee, status } = orderDTO;
     // totalPrice 계산: 각 상품의 가격과 수량을 곱한 후 총합에 배송비를 더합니다.
@@ -30,7 +55,15 @@ class OrderService {
     return populatedOrder;
   }
 
-  // 주문 취소 메소드
+  // 모든 주문 조회 메소드 (유저)
+  async listOrder() {
+    const orders = await Order.find({})
+      .populate("userId") // 주문한 사용자의 정보를 가져옵니다.
+      .populate("orderedItems.product"); // 주문에 포함된 각 상품의 상세 정보를 가져옵니다.
+    return orders; // 조회된 상품들을 반환합니다.
+  }
+
+  // 주문 취소 메소드 (유저)
   async deleteOrder(orderId) {
     const order = await Order.findById(orderId);
 
@@ -52,7 +85,7 @@ class OrderService {
     return result;
   }
 
-  // 주문 업데이트 메소드
+  // 주문 수정 메소드 (유저)
   async updateOrderStatus(orderId, newStatus) {
     const order = await this.findOrderById(orderId);
 
@@ -67,28 +100,6 @@ class OrderService {
 
     order.status = newStatus;
     await order.save();
-    return order;
-  }
-
-  async cancelOrder(orderId) {
-    const order = await this.findOrderById(orderId);
-
-    if (!order) {
-      throw new Error("주문을 찾을 수 없습니다.");
-    }
-
-    // 주문 상태가 '배송 준비중'이 아니면 취소 불가
-    if (order.status !== "배송 준비중") {
-      throw new Error("주문 취소가 불가능한 상태입니다.");
-    }
-
-    order.deletedAt = new Date(); // 주문 취소 표시
-    await order.save();
-    return order;
-  }
-
-  async findOrderById(orderId) {
-    const order = await Order.findById(orderId);
     return order;
   }
 }

@@ -3,9 +3,10 @@ const { Product, Category } = require("../Models");
 class ProductService {
   constructor() {}
 
-  // 상품 생성 메소드
-  async createProduct(productDTO) {
-    const { name, images, description, price, maker, category } = productDTO;
+  // 상품 추가 메소드 (관리자)
+  async createProduct(productDTO, file) {
+    const { name, description, price, maker, category } = productDTO;
+    const image = file.path; // 업로드된 이미지의 경로
 
     // 카테고리가 이미 존재하는지 확인
     let categoryDoc = await Category.findOne({ name: category });
@@ -20,7 +21,7 @@ class ProductService {
     // 새 상품 문서 생성
     const newProduct = new Product({
       name,
-      images,
+      images: [image], // 이미지 경로를 배열로 저장
       description,
       price,
       maker,
@@ -29,32 +30,10 @@ class ProductService {
 
     // 상품 저장
     const savedProduct = await newProduct.save();
-
     return savedProduct;
   }
 
-  // 모든 상품 목록 조회 메소드
-  async listProducts() {
-    const products = await Product.find({}).populate("category"); // 카테고리 정보를 포함하여 모든 상품을 조회합니다.
-    return products; // 조회된 상품들을 반환합니다.
-  }
-
-  // 모든 상품 목록 조회 메소드
-  async listProducts() {
-    const products = await Product.find({}).populate("category"); // 카테고리 정보를 포함하여 모든 상품을 조회합니다.
-    return products; // 조회된 상품들을 반환합니다.
-  }
-
-  // 특정 상품 목록 조회 메소드
-  async detailProduct(productId) {
-    const product = await Product.findById(productId).populate("category"); // 특정 상품을 조회합니다.
-    if (!product) {
-      throw new Error("해당 상품을 찾을 수 없습니다.");
-    }
-    return product; // 조회된 상품을 반환합니다.
-  }
-
-  // 상품 정보 수정 메소드
+  // 상품 정보 수정 메소드 (관리자)
   async modifyProduct(productId, updateData) {
     const updatedProduct = await Product.findOneAndUpdate(
       { _id: productId },
@@ -67,7 +46,7 @@ class ProductService {
     return updatedProduct;
   }
 
-  // 상품 정보 삭제 메소드
+  // 상품 정보 삭제 메소드 (관리자)
   async deleteProduct(productId) {
     const productExists = await Product.findById(productId);
     if (!productExists) {
@@ -85,6 +64,21 @@ class ProductService {
       throw new Error("상품 삭제 처리 중 오류가 발생했습니다.");
     }
     return delProduct;
+  }
+
+  // 모든 상품 목록 조회 메소드 (유저)
+  async listProducts() {
+    const products = await Product.find({}).populate("category"); // 카테고리 정보를 포함하여 모든 상품을 조회합니다.
+    return products; // 조회된 상품들을 반환합니다.
+  }
+
+  // 특정 상품 목록 조회 메소드 (유저)
+  async detailProduct(productId) {
+    const product = await Product.findById(productId).populate("category"); // 특정 상품을 조회합니다.
+    if (!product) {
+      throw new Error("해당 상품을 찾을 수 없습니다.");
+    }
+    return product; // 조회된 상품을 반환합니다.
   }
 }
 module.exports = ProductService;
