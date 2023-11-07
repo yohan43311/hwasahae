@@ -53,4 +53,19 @@ const userLoginValidator = () => {
   ];
 };
 
-module.exports = { validate, userRegisterValidator, userLoginValidator };
+//이메일 유효성 검사
+const userEmailValidator = () => {
+  return body("email")
+    .notEmpty()
+    .withMessage("이메일은 필수 입력 사항입니다.")
+    .trim()
+    .isEmail()
+    .withMessage("이메일 형식이 맞지 않습니다.");
+};
+
+module.exports = {
+  validate,
+  userRegisterValidator,
+  userLoginValidator,
+  userEmailValidator,
+};

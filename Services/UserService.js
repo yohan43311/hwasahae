@@ -1,9 +1,39 @@
 const { User } = require("../Models");
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
 const { createAcessToken, createRefreshToken } = require("../utils/jwt");
 
 class UserService {
   constructor() {}
+
+  //이메일 전송하기
+  async SendEmail(email) {
+    const transport = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "dada4202@gmail.com",
+        pass: process.env.Google_APP_KEY,
+      },
+    });
+
+    const authNo = Math.random().toString(36).slice(2);
+    const message = {
+      from: "dada4202@gmail.com",
+      to: email,
+      subject: "화사해 인증번호",
+      text: authNo,
+    };
+
+    transport.sendMail(message, (err, info) => {
+      if (err) {
+        const error = new Error(err);
+        error.status = 400;
+        throw error;
+      }
+      console.log("info : ", info);
+    });
+    return authNo;
+  }
 
   //회원가입
   async Singup(userDTO) {
@@ -182,7 +212,7 @@ class UserService {
     };
   }
 
-  //모든 유저 정보 불러오기
+  //모든 유저 정보 불러오기(관리자)
   async FindAll(userInfo, page = 1) {
     if (userInfo?.role !== "관리자") {
       const error = new Error("관리자 권한이 아닙니다.");

@@ -75,6 +75,12 @@ const getUsers = asyncHandler(async (req, res) => {
   res.status(200).json(users);
 });
 
+// 이메일 인증번호 보내기
+const getAuthNo = asyncHandler(async (req, res) => {
+  const result = await UserServiceInstance.SendEmail(req.body.email);
+  res.status(200).json(result);
+});
+
 module.exports = {
   registerUser,
   loginUser,
@@ -83,4 +89,5 @@ module.exports = {
   updateUserInfo,
   removeUserInfo,
   getUsers,
+  getAuthNo,
 };
