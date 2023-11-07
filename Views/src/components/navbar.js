@@ -1,3 +1,4 @@
+    
     const header = document.querySelector('.header');
 
     //카트 숫자넘버 그려지기전에 넣어둬야 작동한다.
@@ -5,8 +6,8 @@
 
         // 네비 메뉴
         const menu = [
-            { text: "상 품", link: "/products" },
-            { text: "주문 하기", link: "/itemset" },
+            { text: "상 품", link: "/" },
+            { text: "주문 하기", link: "/cart" },
             //{ text: "고객 센터", link: "/customer-service" }
         ];
         // 메뉴 아이템을 생성하는 함수
@@ -21,8 +22,8 @@
     <div class="header_section">
         <div>
             <ul>
-                <li class="main_login_btn">로그인</li>
-                <li class="main_user_join">회원가입</li>
+                <li class="main_login_btn"><a href="/login">로그인</a></li>
+                <li class="main_user_join"><a href="/register">회원가입</a></li>
             </ul>
         </div>
         <div class="main_top_logo"></div>
@@ -50,21 +51,12 @@
     </nav>
     `;
 
-    // 로그인 / 회원가입 클릭 이벤트 링크연결.
-    const login_link = document.querySelector('.main_login_btn');
-    const main_user_join = document.querySelector('.main_user_join')
 
-    login_link.addEventListener('click', () => {
-        window.location.href = '/main.html'; //추후 룅크변경
-    });
-    main_user_join.addEventListener('click', () => {
-        window.location.href = '/main.html'; //추후 룅크변경
-    });
 
     //메인로고 넣기
     const main_log = document.querySelector('.main_top_logo')
     const mainImg = new Image();
-    mainImg.src = '../../components/img/top_logo.png';
+    mainImg.src = 'http://skincure.co.kr/design/skincure/0759ansome/top_logo.gif';
     main_log.appendChild(mainImg)
 
     main_log.addEventListener('click', () => {
@@ -73,7 +65,7 @@
     //서치 돋보기 버튼
     const search_btn = document.querySelector('.search_btn');
     const search_btn_img = new Image();
-    search_btn_img.src = '../../components/img/btn_search.png';
+    search_btn_img.src = 'http://skincure.co.kr/design/skincure/0759ansome/btn_search.png';
     search_btn.appendChild(search_btn_img)
 
     search_btn.addEventListener('click', () => {
@@ -83,21 +75,21 @@
     //사람 아이콘
     const top_myp = document.querySelector('.top_myp');
     const mypImg = new Image();
-    mypImg.src = '../../components/img/btn_mypage2.png'
+    mypImg.src = 'http://skincure.co.kr/design/skincure/0759ansome/btn_mypage2.gif'
     top_myp.appendChild(mypImg)
 
     top_myp.addEventListener('click', () => {
-        window.location.href = '/index.html'; //추후 룅크변경
+        window.location.href = '/mypage'; //추후 룅크변경
     });
 
     //카트 아이콘
     const top_cart = document.querySelector('.top_cart');
     const cartImg = new Image();
-    cartImg.src = '../../components/img/btn_cart2.png'
+    cartImg.src = 'http://skincure.co.kr/design/skincure/0759ansome/btn_cart2.gif'
     top_cart.appendChild(cartImg)
 
     top_cart.addEventListener('click', () => {
-        window.location.href = '/index.html'; //추후 룅크변경
+        window.location.href = '/cart'; //추후 룅크변경
     });
 
 
