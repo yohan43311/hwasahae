@@ -102,5 +102,9 @@ class OrderService {
     await order.save();
     return order;
   }
+  async findOrderById(orderId) {
+    const order = await Order.findById(orderId);
+    return order;
+  }
 }
 module.exports = OrderService;
