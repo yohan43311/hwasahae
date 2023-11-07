@@ -1,5 +1,5 @@
 main{
-  margin-top: 150px;
+  margin-top: 50px;
 }
 
 .form-background{
@@ -160,4 +160,8 @@ input, select{
 }
 .msg{
   margin-top: 10px;
+}
+
+a:visited{
+  color: rgb(0, 0, 0);
 }

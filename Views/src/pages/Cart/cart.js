@@ -52,8 +52,8 @@ cart.innerHTML = `
   </div>
 </form>
   <div class="btnBox">
-    <button class="btn order">주문하기</button>
-    <button class="btn shopping">계속 쇼핑하기</button>
+    <button class="btn order"><a href="/payment">주문하기</a></button>
+    <button class="btn shopping"><a href="/">계속 쇼핑하기<a></button>
     <button class="btn cartDelete">장바구니 비우기</button>
   </div>
   <div style="clear: both;"></div>`;
@@ -116,9 +116,13 @@ function deleteRow(button) {
 
 //장바구니 비우기
 const cartDelete = document.querySelector(".cartDelete");
-cartDelete.addEventListener("click", () => {
+function cartDelRow() {
   const tbody = document.querySelector("table tbody");
   tbody.parentNode.removeChild(tbody);
+}
+cartDelete.addEventListener("click", (e) => {
+  e.preventDefault();
+  cartDelRow();
 });
 
 //주문하기
