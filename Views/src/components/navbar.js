@@ -6,7 +6,7 @@
 
         // 네비 메뉴
         const menu = [
-            { text: "상 품", link: "/" },
+            { text: "상 품", link: "/products" },
             { text: "주문 하기", link: "/cart" },
             //{ text: "고객 센터", link: "/customer-service" }
         ];
