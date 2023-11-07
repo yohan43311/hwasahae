@@ -167,7 +167,7 @@ payment.innerHTML = `
 </div>
 </form>
   <div class="btnBox">
-    <button class="btn cancelBtn">주문취소</button>
+    <button class="btn cancelBtn"><a href="/cart">주문취소</a></button>
     <button class="btn paymentBtn">결제하기</button>
   </div>
   <div style="clear: both;"></div>
@@ -250,6 +250,32 @@ function getCheckboxValue() {
 info_checkBox.addEventListener("change", () => {
   getCheckboxValue();
 });
+
+const registerResponse = async () => {
+  const API_URL = "http://localhost:3000/login";
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      email: "dodo@naver.com",
+      password: "Test1234!",
+    }),
+  };
+
+  try {
+    const res = await fetch(API_URL, requestOptions);
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log("error");
+  }
+};
+
+registerResponse();
 
 //취소 및 결제 버튼
 // const cancelBtn = document.querySelector(".cancelBtn");

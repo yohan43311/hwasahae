@@ -24,12 +24,12 @@ signIn.innerHTML = `
           아직 회원이 아니신가요?<br>
           회원가입을 하시면 다양한 혜택을 편리하게 이용하실 수 있습니다.
         </p>
-        <button id="joinUs-btn" onclick="signUpLink()">회원가입</button><br>
+        <button id="joinUs-btn" onclick="signUpLink()"><a href="/register">회원가입</a></button><br>
         <p class="explain">
           아이디 혹은 비밀번호를 잊으셨나요?<br>
           간단한 정보를 입력 후 잃어버린 정보를 찾으실 수 있습니다.
         </p>
-        <button id="findIdPw-btn">아이디/비번 찾기</button><br>
+        <button id="findIdPw-btn"><a href="/find">아이디/비번 찾기</a></button><br>
       </div>
     </div>
     <div style="clear: both;"></div>
@@ -40,20 +40,46 @@ signIn.innerHTML = `
     <button>네이버 로그인</button>
   </div>`;
 
+const registerResponse = async () => {
+  const API_URL = "http://localhost:3000/login";
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      email: "dodo@naver.com",
+      password: "Test1234!",
+    }),
+  };
+
+  try {
+    const res = await fetch(API_URL, requestOptions);
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log("error");
+  }
+};
+
+registerResponse();
+
 //로그인 버튼을 눌렀을 때의 동작
-document.getElementById("login-btn").addEventListener("click", (e) => {
-  e.preventDefault();
+// document.getElementById("login-btn").addEventListener("click", (e) => {
+//   e.preventDefault();
 
-  const email = document.querySelector("#email").value;
-  const pwd = document.querySelector("#pwd").value;
+//   const email = document.querySelector("#email").value;
+//   const pwd = document.querySelector("#pwd").value;
 
-  if (!email && !pwd) {
-    return alert("이메일, 비번을 입력하지 않으셨습니다!");
-  }
+//   if (!email && !pwd) {
+//     return alert("이메일, 비번을 입력하지 않으셨습니다!");
+//   }
 
-  function signUpLink() {
-    link = "/pages/SignUp/signUp.html";
-    window.location.href = link;
-  }
-  //로그인 api 요청
-});
+//   function signUpLink() {
+//     link = "/pages/SignUp/signUp.html";
+//     window.location.href = link;
+//   }
+//   //로그인 api 요청
+// });
