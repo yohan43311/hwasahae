@@ -36,7 +36,7 @@
                     </fieldset>
                 </form>
             </li>
-            <li class="top_myp"></li>
+            <li class="top_myp"><a href="/pages/Mypage/index.html"></li>
             <li class="top_cart">
             <span id="user_basket_quantity" class="user_basket_quantity">${cart_num}</span>
             </li>

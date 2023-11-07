@@ -9,7 +9,9 @@ router.use("/", express.static("Views/src"));
 
 //route setting
 router.use("/", express.static("Views/src/pages/Main"));
-router.use("/login", express.static("Views/src/pages/SignIn/signIn.html"));
-router.use("/register", express.static("Views/src/pages/SignUp/signUp.html"));
+router.use("/login", express.static("Views/src/pages/SignIn/"));
+router.use("/register", express.static("Views/src/pages/SignUp/"));
+router.use("/products", express.static("Views/src/pages/Product/"));
+router.use("/mypage", express.static("Views/src/pages/Mypage/"));
 
 module.exports = router;
