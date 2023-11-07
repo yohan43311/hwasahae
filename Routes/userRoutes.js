@@ -2,6 +2,7 @@ const express = require("express");
 const {
   registerUser,
   loginUser,
+  logoutUser,
   getUserInfo,
   updateUserInfo,
   removeUserInfo,
@@ -17,6 +18,7 @@ const router = express.Router();
 
 router.post("/register", userRegisterValidator(), validate, registerUser);
 router.post("/login", userLoginValidator(), validate, loginUser);
+router.post("/logout", logoutUser);
 router.get("/users/my", authJWT, getUserInfo);
 router.patch("/users/my", authJWT, updateUserInfo);
 router.delete("/users/my", authJWT, removeUserInfo);

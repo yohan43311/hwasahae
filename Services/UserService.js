@@ -110,22 +110,30 @@ class UserService {
 
   //특정 유저 정보 수정
   async UpdateById(userInfo, data) {
-    // const user = await User.findOne({ email: data?.email });
+    const { email } = userInfo;
+    const { name, password, zipcode, address, detailAddress } = data;
 
-    // if (user) {
-    //   const error = new Error("이미 존재하는 이메일 정보입니다.");
-    //   error.status = 400;
-    //   throw error;
-    // }
+    //DB에서 유저정보 찾기
+    const user = await User.findOne({ email, deletedAt: null });
+    //입력한 비밀번호와 DB의 비밀번호 같은지 비교
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    //만약 유저정보가 없거나 비밀번호가 동일하지 않다면
+    if (!user || !isValidPassword) {
+      const error = new Error(
+        "유저가 존재하지 않거나 비밀번호가 맞지 않습니다."
+      );
+      error.status = 400;
+      throw error;
+    }
 
     const updatedUser = await User.findByIdAndUpdate(
       userInfo?.id,
       {
-        name: data?.name,
-        email: data?.email,
-        zipcode: data?.zipcode,
-        address: data?.address,
-        detailAddress: data?.detailAddress,
+        name,
+        zipcode,
+        address,
+        detailAddress,
       },
       { new: true } //db 업데이트한 정보 return 받기
     );
@@ -144,13 +152,19 @@ class UserService {
   }
 
   //특정 유저 정보 삭제
-  async DeleteById(userInfo) {
+  async DeleteById(userInfo, password) {
     //DB에서 유저정보 찾기
     const user = await User.findOne({ _id: userInfo?.id, deletedAt: null });
 
-    if (!user) {
-      //throw new BadRequestError("~~"); -> custom error 만들어보기(바로 파악 가능)
-      const error = new Error("존재하지 않는 유저정보입니다.");
+    //입력한 비밀번호와 DB의 비밀번호 같은지 비교
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    //throw new BadRequestError("~~"); -> custom error 만들어보기(바로 파악 가능)
+    //만약 유저정보가 없거나 비밀번호가 동일하지 않다면
+    if (!user || !isValidPassword) {
+      const error = new Error(
+        "유저가 존재하지 않거나 비밀번호가 맞지 않습니다."
+      );
       error.status = 400;
       throw error;
     }
