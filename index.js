@@ -12,6 +12,7 @@ const categoryRoute = require("./Routes/categoryRoutes");
 const userRoute = require("./Routes/userRoutes");
 const productRoute = require("./Routes/productRoutes");
 const orderRoute = require("./Routes/orderRoutes");
+const adminRoute = require("./Routes/adminRoutes");
 const logHandler = require("./utils/logHandler");
 const errorHandler = require("./utils/errorHandler");
 
@@ -24,12 +25,19 @@ app.use(form_data.array());
 app.use(cookieParser());
 app.use(cors()); //cors 미들웨어 등록
 
+app.use(
+  "/shopimages",
+  express.static("./Views/src/pages/Product/img/shopimages")
+);
+// 이미지 정적 파일을 제공하는 폴더로 지정
+
 //html, css, js 라우팅
 app.use(viewRouter);
 app.use("/", userRoute);
 app.use("/category", categoryRoute);
 app.use("/products", productRoute);
 app.use("/orders", orderRoute);
+app.use("/admin", adminRoute);
 
 app.get("/", (req, res) => {
   res.send(
