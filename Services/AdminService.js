@@ -65,7 +65,9 @@ class AdminService {
   // 상품 추가 메소드 (관리자)
   async createProduct(productDTO, file, role) {
     const { name, description, price, maker, category } = productDTO;
-    const image = file.path; // 업로드된 이미지의 경로
+
+    // const image = file.path; // 업로드된 이미지의 경로
+    const image = `http://localhost:3000/pages/product/img/shopimages/${file.filename}`; // 업로드된 이미지의 경로
 
     // 카테고리가 이미 존재하는지 확인
     let categoryDoc = await Category.findOne({ name: category });
