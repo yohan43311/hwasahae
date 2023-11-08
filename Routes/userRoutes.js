@@ -1,4 +1,6 @@
 const express = require("express");
+const multer = require("multer");
+const form_data = multer();
 const {
   registerUser,
   loginUser,
@@ -18,8 +20,20 @@ const {
 const authJWT = require("../utils/authJWT");
 const router = express.Router();
 
-router.post("/register", userRegisterValidator(), validate, registerUser);
-router.post("/login", userLoginValidator(), validate, loginUser);
+router.post(
+  "/register",
+  form_data.array(),
+  userRegisterValidator(),
+  validate,
+  registerUser
+);
+router.post(
+  "/login",
+  form_data.array(),
+  userLoginValidator(),
+  validate,
+  loginUser
+);
 router.post("/sendEmail", userEmailValidator(), validate, getAuthNo);
 router.post("/logout", logoutUser);
 router.get("/users/my", authJWT, getUserInfo);
