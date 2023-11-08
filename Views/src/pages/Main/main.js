@@ -16,34 +16,8 @@ var swiper = new Swiper(".main_banner", {
     },
   });
 
-// const mdItemMap = mdItem.map(item=>`
-//     <td>
-//     <div class="tb-center">
-//         <div class="box">
-//             <div class="thumb salebox">
-//                 <a href="/shop/shopdetail.html?branduid=100&amp;xcode=055&amp;mcode=004&amp;scode=012&amp;special=11&amp;GfDT=aWl3UQ%3D%3D"><img class="MS_prod_img_m" src="/shopimages/skincure/0550040000892.jpg?1679876830" alt="상품 섬네일"></a>
-//                 <div class="info_icon">
-//                     <span><a href="javascript:viewdetail('055004000089', '1', '');"><img src="${item.images}" alt="미리보기"></a></span>                                                                            </div>
-//                 <input type="hidden" name="custom_price" value="66000">
-//                 <input type="hidden" name="product_price" value="37000">
-//                 <div id="sale_bg" style="display: block;"><span class="sale_text">44%</span></div>
-//             </div>
-//             <ul class="info">
-//                 <li class="dsc">${item.name}</li>
-//                 <li class="subname">유기농 미백 보습 에센스!<br>
-//                 </li><li class="price"><span class="consumer">66,000원</span>37,000원</li>
-//                                                                                         <li class="icon"><span class="MK-product-icons"></span></li>
-//             </ul>
-//         </div>
-//     </div>
-//     </td>
-//     `
-// ).join('');
-
-// const md_md_item = document.querySelector('.main_md_item')
-//     md_md_item.innerHTML = mdItemMap
-
-const cartList = []
+const storedCart = JSON.parse(window.localStorage.getItem('cart') || '[]'); // 가져오기
+const cartList = storedCart //장바구니 리스트
 
 fetch("http://localhost:3000/products")
   .then((response) => response.json())
@@ -57,7 +31,7 @@ fetch("http://localhost:3000/products")
                     <div class="thumb salebox">
                         <a href="/item?id=${item._id}"><img class="MS_prod_img_m" src="${item.images[0]}" alt="상품 섬네일"></a>
                         <div class="info_icon">
-                            <span class="cartDateBtnMd" data-value="${item._id}"><img src="http://skincure.co.kr/design/skincure/0759ansome/icon_prd04.gif" alt="미리보기"></span>                                                                            </div>
+                            <span class="cartDateBtnMd" data-value="${item._id}" data-another="${item.price}"><img src="http://skincure.co.kr/design/skincure/0759ansome/icon_prd04.gif" alt="미리보기"></span>                                                                            </div>
                         <input type="hidden" name="custom_price" value="66000">
                         <input type="hidden" name="product_price" value="37000">
                         <div id="sale_bg" style="display: block;"><span class="sale_text">44%</span></div>
@@ -65,7 +39,7 @@ fetch("http://localhost:3000/products")
                     <ul class="info">
                         <li class="dsc">${item.name}</li>
                         <li class="subname">유기농 미백 보습 에센스!<br>
-                        </li><li class="price"><span class="consumer">66,000원</span>37,000원</li>
+                        </li><li class="price"><span class="consumer">66,000원</span>${item.price}원</li>
                         <li class="icon"><span class="MK-product-icons"></span></li>
                     </ul>
                 </div>
@@ -79,12 +53,18 @@ fetch("http://localhost:3000/products")
         const cartBtns = document.querySelectorAll('.cartDateBtnMd');//버튼클래스
         cartBtns.forEach((cartBtn) => {
             const dataValue = cartBtn.dataset.value; //상품의 아이디값
+            const dataPrice = cartBtn.getAttribute('data-another')//상품의 가격 데이터
+
             cartBtn.addEventListener('click', (e) => {
-                if (cartList.includes(dataValue)) { //장바구니 스토리지 중복확인.
+                if (cartList.some(item => item.id === dataValue)) { //장바구니 스토리지 중복확인.
                     alert("이미 장바구니에 있습니다.");
                     return;
                 }else{
-                    cartList.push(dataValue); //상품 아이디를 배열에 넣음
+                    cartList.push({
+                        id:dataValue,
+                        price:dataPrice,
+                        count:1
+                    }); //상품 아이디를 배열에 넣음
                     window.localStorage.setItem('cart', JSON.stringify(cartList)) // 스토리지에 장바구니 아이템넣음.
                     alert("장바구니에 넣었습니다.")
                 }
@@ -106,9 +86,9 @@ fetch("http://localhost:3000/products")
     <div class="tb-center">
         <div class="box">
             <div class="thumb salebox">
-                <a href="/item?${item._id}"><img class="MS_prod_img_m" src="${item.images[0]}" alt="상품 섬네일"></a>
+                <a href="/item?id=${item._id}"><img class="MS_prod_img_m" src="${item.images[0]}" alt="상품 섬네일"></a>
                 <div class="info_icon">
-                    <span><a class="cartDateBtn" data-value="${item._id}"><img src="http://skincure.co.kr/design/skincure/0759ansome/icon_prd04.gif" alt="미리보기"></a></span>                                                                            </div>
+                    <span><a class="cartDateBtn" data-value="${item._id}" data-another="${item.price}"><img src="http://skincure.co.kr/design/skincure/0759ansome/icon_prd04.gif" alt="미리보기"></a></span>                                                                            </div>
                 <input type="hidden" name="custom_price" value="0">
                 <input type="hidden" name="product_price" value="24000">
                 <div id="sale_bg" style="display: none;"><span class="sale_text"></span></div>
@@ -131,12 +111,17 @@ allItem.innerHTML = itemListSet
     const cartBtns = document.querySelectorAll('.cartDateBtn');
     cartBtns.forEach((cartBtn) => {
         const dataValue = cartBtn.dataset.value;
+        const dataPrice = cartBtn.getAttribute('data-another')
         cartBtn.addEventListener('click', (e) => {
-            if (cartList.includes(dataValue)) {
+            if (cartList.some(item => item.id === dataValue)) {
                 alert("이미 장바구니에 있습니다.");
                 return;
             }else{
-                cartList.push(dataValue);
+                cartList.push({
+                    id:dataValue,
+                    price:dataPrice,
+                    count:1
+                }); //상품 아이디를 배열에 넣음
                 window.localStorage.setItem('cart', JSON.stringify(cartList))
                 alert("장바구니에 넣었습니다.")
             }
