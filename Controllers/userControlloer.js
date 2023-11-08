@@ -6,6 +6,7 @@ const UserServiceInstance = new UserService();
 
 //회원가입
 const registerUser = asyncHandler(async (req, res) => {
+  console.log("req : ", req.body);
   const user = await UserServiceInstance.Singup(req.body);
 
   res.status(200).json(user);

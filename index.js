@@ -2,8 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const multer = require("multer");
+const form_data = multer();
 const dotenv = require("dotenv"); //.env파일 관리 모듈
 dotenv.config({ path: ".env.local" }); //.env.local로 기본 경로 설정
+
 const viewRouter = require("./Routes/viewRoutes");
 const categoryRoute = require("./Routes/categoryRoutes");
 const userRoute = require("./Routes/userRoutes");
@@ -17,6 +20,7 @@ const app = express();
 
 // middleware functions
 app.use(express.json()); // JSON 형태의 요청 body를 파싱하기 위해 express.json() 미들웨어를 사용
+app.use(form_data.array());
 app.use(cookieParser());
 app.use(cors()); //cors 미들웨어 등록
 
