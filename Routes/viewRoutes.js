@@ -23,7 +23,7 @@ router.use(
   express.static("Views/src/pages/Payment/success_payment/success_payment.html")
 ); //결제완료
 router.use("/cart", express.static("Views/src/pages/Cart")); //장바구니
-router.use("/itemsPage", express.static("Views/src/pages/Product"));
+router.use("/product", express.static("Views/src/pages/Product"));
 router.use("/mypage", express.static("Views/src/pages/Mypage"));
 router.use("/admin", express.static("Views/src/pages/admin/forms"));
 module.exports = router;
