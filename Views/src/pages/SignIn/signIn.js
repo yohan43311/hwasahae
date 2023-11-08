@@ -24,7 +24,6 @@ const loginResponse = async (e) => {
   const login_URL = "http://localhost:3000/login";
 
   const formData = new FormData();
-  formData.append("name", name1?.value);
   formData.append("email", email?.value);
   formData.append("password", pwd?.value);
 
@@ -40,8 +39,8 @@ const loginResponse = async (e) => {
     .then((res) => {
       if (!res?.result) {
         //userInfo(email, name, address)
-        localStorage.setItem("name", formData.name1.value);
-        localStorage.setItem("name", formData.email.value);
+        localStorage.setItem("userInfo", JSON.stringify(res));
+        // localStorage.setItem("email", res?.email);
         alert("로그인이 되셨습니다!");
         location.href = "/";
       } else {
