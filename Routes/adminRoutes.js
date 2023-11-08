@@ -17,7 +17,7 @@ const multer = require("multer");
 const path = require("path");
 
 // 카테고리
-router.post("/category", authJWT, createCategoryAdmin); // 카테고리 추가 (관리자)
+router.post("/category", createCategoryAdmin); // 카테고리 추가 (관리자)
 router.patch("/:categoryId/category", authJWT, updateCategoryAdmin); // 카테고리 수정 (관리자)
 router.delete("/:categoryId/category", authJWT, deleteCategoryAdmin); // 카테고리 삭제 (관리자)
 

@@ -69,11 +69,11 @@ const deleteOrderAdmin = asyncHandler(async (req, res) => {
 // product
 // 상품 추가 (관리자)
 const createProductAdmin = asyncHandler(async (req, res) => {
-  const userRole = res.locals.userInfo.role;
+  //const userRole = res.locals.userInfo.role;
   const product = await ProductService.createProduct(
     req.body,
-    req.file,
-    userRole
+    req.file
+    //userRole
   );
   res.status(200).json(product);
 });
