@@ -5,13 +5,13 @@ class AdminService {
 
   // category
   // 카테고리 추가 메소드(관리자)
-  async createCategory(name) {
+  async createCategory(name, role) {
     const newCategory = new Category({ name });
     const result = await newCategory.save();
     return result;
   }
   // 카테고리 수정 메소드 (관리자)
-  async updateCategory(categoryId, newName) {
+  async updateCategory(categoryId, newName, role) {
     const updatedCategory = await Category.findByIdAndUpdate(
       categoryId,
       { name: newName },
@@ -25,7 +25,7 @@ class AdminService {
     return updatedCategory;
   }
   // 카테고리 삭제 메소드 (관리자)
-  async deleteCategory(categoryId) {
+  async deleteCategory(categoryId, role) {
     const deletedCategory = await Category.findByIdAndRemove(categoryId);
 
     if (!deletedCategory) {
@@ -37,12 +37,12 @@ class AdminService {
 
   // order
   // 주문 조회 메소드 (관리자)
-  async listOrderAdmin() {
+  async listOrderAdmin(role) {
     const orders = await Order.find({});
     return orders;
   }
   // 주문 수정 메소드 (관리자)
-  async updateOrderAdmin(orderId, newStatus) {
+  async updateOrderAdmin(orderId, newStatus, role) {
     const order = await Order.findById(orderId);
     if (!order) {
       throw new Error("주문을 찾을 수 없습니다.");
@@ -53,7 +53,7 @@ class AdminService {
     return order;
   }
   // 주문 취소 메소드 (관리자)
-  async deleteOrderAdmin(orderId) {
+  async deleteOrderAdmin(orderId, role) {
     const result = await Order.deleteOne({ _id: orderId });
     if (result.deletedCount === 0) {
       throw new Error("주문을 찾을 수 없습니다.");
@@ -63,7 +63,7 @@ class AdminService {
 
   // product
   // 상품 추가 메소드 (관리자)
-  async createProduct(productDTO, file) {
+  async createProduct(productDTO, file, role) {
     const { name, description, price, maker, category } = productDTO;
     const image = file.path; // 업로드된 이미지의 경로
 
@@ -93,7 +93,7 @@ class AdminService {
   }
 
   // 상품 정보 수정 메소드 (관리자)
-  async modifyProduct(productId, updateData) {
+  async modifyProduct(productId, updateData, role) {
     const updatedProduct = await Product.findOneAndUpdate(
       { _id: productId },
       updateData,
@@ -106,7 +106,7 @@ class AdminService {
   }
 
   // 상품 정보 삭제 메소드 (관리자)
-  async deleteProduct(productId) {
+  async deleteProduct(productId, role) {
     const productExists = await Product.findById(productId);
     if (!productExists) {
       throw new Error("삭제할 상품을 찾을 수 없습니다.");
