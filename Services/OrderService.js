@@ -2,32 +2,6 @@ const { Order } = require("../Models");
 
 class OrderService {
   constructor() {}
-
-  // 주문 조회 메소드 (관리자)
-  async listOrderAdmin() {
-    const orders = await Order.find({});
-    return orders;
-  }
-  // 주문 수정 메소드 (관리자)
-  async updateOrderAdmin(orderId, newStatus) {
-    const order = await Order.findById(orderId);
-    if (!order) {
-      throw new Error("주문을 찾을 수 없습니다.");
-    }
-
-    order.status = newStatus;
-    await order.save();
-    return order;
-  }
-  // 주문 취소 메소드 (관리자)
-  async deleteOrderAdmin(orderId) {
-    const result = await Order.deleteOne({ _id: orderId });
-    if (result.deletedCount === 0) {
-      throw new Error("주문을 찾을 수 없습니다.");
-    }
-    return result;
-  }
-
   // 주문 추가 메소드 (유저)
   async createOrder(orderDTO) {
     const { userId, receiver, orderedItems, deliveryFee, status } = orderDTO;

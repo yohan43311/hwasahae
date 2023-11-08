@@ -2,33 +2,7 @@ const ProductService = require("../Services/ProductService");
 const asyncHandler = require("../utils/asyncHandler");
 
 const ProductServiceInstance = new ProductService();
-// 상품 추가 (관리자)
-const createProduct = asyncHandler(async (req, res) => {
-  const product = await ProductServiceInstance.createProduct(
-    req.body,
-    req.file
-  );
-  res.status(200).json(product);
-});
-// 상품 정보 수정 (관리자)
-const modifyProducts = asyncHandler(async (req, res) => {
-  const { productId } = req.params;
-  const updateData = req.body; // 수정할 정보를 담은 객체
-  const updatedProduct = await ProductServiceInstance.modifyProduct(
-    productId,
-    updateData
-  );
-  res.status(200).json(updatedProduct);
-});
-// 상품 삭제 (관리자)
-const deleteProducts = asyncHandler(async (req, res) => {
-  const { productId } = req.params;
-  const deletedProduct = await ProductServiceInstance.deleteProduct(productId);
-  res.json({
-    message: "상품이 성공적으로 삭제되었습니다.",
-    product: deletedProduct,
-  });
-});
+
 // 모든 상품 목록 조회 (유저)
 const listProducts = asyncHandler(async (req, res) => {
   const products = await ProductServiceInstance.listProducts();
@@ -43,11 +17,8 @@ const detailProducts = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  createProduct,
   listProducts,
   detailProducts,
-  modifyProducts,
-  deleteProducts,
 };
 
 // 오 session -> 취업 유리

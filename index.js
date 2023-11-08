@@ -9,6 +9,7 @@ const categoryRoute = require("./Routes/categoryRoutes");
 const userRoute = require("./Routes/userRoutes");
 const productRoute = require("./Routes/productRoutes");
 const orderRoute = require("./Routes/orderRoutes");
+const adminRoute = require("./Routes/adminRoutes");
 const logHandler = require("./utils/logHandler");
 const errorHandler = require("./utils/errorHandler");
 
@@ -32,6 +33,7 @@ app.use("/", userRoute);
 app.use("/category", categoryRoute);
 app.use("/products", productRoute);
 app.use("/orders", orderRoute);
+app.use("/admin", adminRoute);
 
 app.get("/", (req, res) => {
   res.send(

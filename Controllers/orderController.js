@@ -3,28 +3,6 @@ const asyncHandler = require("../utils/asyncHandler");
 
 const orderService = new OrderService();
 
-// 주문 조회 (관리자)
-const listOrderAdmin = asyncHandler(async (req, res) => {
-  const orders = await orderService.listOrderAdmin();
-  res.status(200).json(orders);
-});
-// 주문 수정 (관리자)
-const updateOrderAdmin = asyncHandler(async (req, res) => {
-  const { orderId } = req.params;
-  const { status } = req.body;
-  const updatedOrder = await orderService.updateOrderAdmin(orderId, status);
-  res.status(200).json({
-    message: "주문 상태가 업데이트 되었습니다.",
-    order: updatedOrder,
-  });
-});
-// 주문 삭제 (관리자)
-const deleteOrderAdmin = asyncHandler(async (req, res) => {
-  const { orderId } = req.params;
-  await orderService.deleteOrderAdmin(orderId);
-  res.status(200).json({ message: "주문이 삭제되었습니다." });
-});
-
 // 주문 추가 (유저)
 const createOrder = asyncHandler(async (req, res) => {
   const populatedOrder = await orderService.createOrder(req.body);
@@ -58,7 +36,4 @@ module.exports = {
   listOrder,
   updateOrderStatus,
   deleteOrder,
-  updateOrderAdmin,
-  listOrderAdmin,
-  deleteOrderAdmin,
 };
