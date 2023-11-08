@@ -11,11 +11,6 @@ const validationMessage = document.querySelector("#pw-message");
 const rePwd = document.querySelector("#rePwd");
 const confirmPw_message = document.querySelector("#confirmPw-message");
 
-//birth
-const birthYearEl = document.querySelector("#birth-year");
-const birthMontEl = document.querySelector("#birth-month");
-const birthDayEl = document.querySelector("#birth-day");
-
 //회원가입 버튼
 const submit = document.querySelector("#submit");
 
@@ -85,61 +80,3 @@ function validateRePassword() {
   }
 }
 rePwd.addEventListener("input", validateRePassword);
-
-/**
- * 폰 번호
- */
-function oninputPhone(target) {
-  target.value = target.value
-    .replace(/[^0-9]/g, "")
-    .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{4})([0-9]{4})/g, "$1-$2-$3");
-}
-
-/**
- * Birth 출생연도
- */
-//year
-isYearOptionExisted = false;
-birthYearEl.addEventListener("focus", function () {
-  if (!isYearOptionExisted) {
-    isYearOptionExisted = true;
-    for (let i = 1940; i <= 2023; i++) {
-      const YearOption = document.createElement("option");
-      YearOption.setAttribute("value", i);
-      YearOption.innerText = i;
-
-      this.appendChild(YearOption);
-    }
-  }
-});
-
-//month
-isMonthOptionExisted = false;
-birthMontEl.addEventListener("focus", function () {
-  if (!isMonthOptionExisted) {
-    isMonthOptionExisted = true;
-    for (let i = 1; i <= 12; i++) {
-      const DayOption = document.createElement("option");
-      DayOption.setAttribute("value", i);
-      DayOption.innerText = i;
-
-      this.appendChild(DayOption);
-    }
-  }
-});
-
-//day
-isDayOptionExisted = false;
-birthDayEl.addEventListener("focus", function () {
-  if (!isDayOptionExisted) {
-    isDayOptionExisted = true;
-    for (let i = 1; i <= 31; i++) {
-      // option element 생성
-      const DayOption = document.createElement("option");
-      DayOption.setAttribute("value", i);
-      DayOption.innerText = i;
-      // birthYearEl의 자식 요소로 추가
-      this.appendChild(DayOption);
-    }
-  }
-});

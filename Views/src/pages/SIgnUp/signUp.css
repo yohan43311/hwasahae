@@ -162,6 +162,6 @@ input, select{
   margin-top: 10px;
 }
 
-a:visited{
-  color: rgb(0, 0, 0);
+.info{
+  margin-top: 15px;
 }

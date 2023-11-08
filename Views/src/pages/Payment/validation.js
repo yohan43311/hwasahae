@@ -1,6 +1,7 @@
 //email
 const email1 = document.querySelector("#email1");
 const email_message = document.querySelector("#email-message");
+const phone1 = document.getElementById("phone1");
 
 /**
  * 이메일

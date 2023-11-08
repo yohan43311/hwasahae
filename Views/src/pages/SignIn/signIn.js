@@ -1,70 +1,59 @@
-const login_Btn = document.querySelector("#login-btn");
-const joinUs_Btn = document.querySelector("#joinUs-btn");
-const IdPW_Btn = document.querySelector("#findIdPw-btn");
+/* 요소모음 */
+const email = document.querySelector("#email");
+const pwd = document.querySelector("#pwd");
 
-//로그인 폼
-const signIn = document.querySelector(".signIn");
-
-signIn.innerHTML = ` 
-<form method="" action="">
-    <div class="containerLogin">
-      <div class="signInForm">
-        <h3>회원 로그인</h3>
-        <input type="email" id="email" placeholder="이메일을 입력해주세요.">
-        <p class="msg" id="email-message"></p>
-        <input type="password" placeholder="비밀번호를 입력해주세요." id="pwd">
-        <p id="pw-message" class="msg"></p>
-        <button id="login-btn">로그인</button><br>
-        <input type="checkbox">보안접속
-      </div>
-      
-      <div class="signUpForm">
-        <h3>회원가입</h3>
-        <p class="explain">
-          아직 회원이 아니신가요?<br>
-          회원가입을 하시면 다양한 혜택을 편리하게 이용하실 수 있습니다.
-        </p>
-        <button id="joinUs-btn" onclick="signUpLink()"><a href="/register">회원가입</a></button><br>
-        <p class="explain">
-          아이디 혹은 비밀번호를 잊으셨나요?<br>
-          간단한 정보를 입력 후 잃어버린 정보를 찾으실 수 있습니다.
-        </p>
-        <button id="findIdPw-btn"><a href="/find">아이디/비번 찾기</a></button><br>
-      </div>
-    </div>
-    <div style="clear: both;"></div>
-  </form>
-
-  <div class="socialBtn">
-    <button>카카오 로그인</button>
-    <button>네이버 로그인</button>
-  </div>`;
-
-const registerResponse = async () => {
-  const API_URL = "http://localhost:3000/login";
-
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      email: "dodo@naver.com",
-      password: "Test1234!",
-    }),
-  };
-
-  try {
-    const res = await fetch(API_URL, requestOptions);
-    const data = await res.json();
-    console.log(data);
-  } catch (err) {
-    console.log("error");
-  }
+//로그인 버튼이 눌렸을 때 동작
+const loginEvent = () => {
+  const loginBtn = document.getElementById("login-btn");
+  loginBtn.addEventListener("click", loginResponse);
 };
 
-registerResponse();
+// document.addEventListener("DOMContentLoaded", function () {
+//   const accessToken = localStorage.getItem("accessToken");
+
+//   if (!accessToken) {
+//     alert("로그인 후 이용 가능합니다");
+//     window.location.href = "/login"; // 로그인 페이지로 리다이렉트
+//   }
+// });
+
+/* 로그인 api */
+const loginResponse = async (e) => {
+  e.preventDefault();
+  console.log("안녕5555555");
+  const login_URL = "http://localhost:3000/login";
+
+  const formData = new FormData();
+  formData.append("name", name1?.value);
+  formData.append("email", email?.value);
+  formData.append("password", pwd?.value);
+
+  const option = {
+    method: "POST",
+    body: formData,
+  };
+
+  await fetch(login_URL, {
+    ...option,
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (!res?.result) {
+        //userInfo(email, name, address)
+        localStorage.setItem("name", formData.name1.value);
+        localStorage.setItem("name", formData.email.value);
+        alert("로그인이 되셨습니다!");
+        location.href = "/";
+      } else {
+        if (res?.result === "fail") {
+          console.log("res", res);
+          return alert("이메일, 비번을 입력하지 않으셨습니다!");
+        }
+      }
+    });
+};
+
+loginEvent();
 
 //로그인 버튼을 눌렀을 때의 동작
 // document.getElementById("login-btn").addEventListener("click", (e) => {
