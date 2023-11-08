@@ -15,49 +15,6 @@ let total_price = () => {
   return total_num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-//장바구니 폼
-const cart = document.querySelector(".cart");
-cart.innerHTML = `
-<form action="" id="payment-form">
-  <div class="totalPayment box">
-    <span class="title">주문 리스트</span>
-    <table class="totalPayment-table">
-      <thead>
-        <tr>
-          <th>상품 이미지</th>
-          <th>상품명</th>
-          <th>수량</th>
-          <th>가격</th>
-          <th>삭제</th>
-        </tr>
-      </thead>
-      <tbody id="productTable">
-        <tr>
-          <td><img src="./img/product_1.jpg" alt="상품 이미지" style="width: 100px;
-          height: 100px;">${item_date.image}</td>
-          <td>${item_date.productName}</td>
-          <td>
-            <button class="minus">-</button>
-            <input class="item_many" type="text" value="${item_su}">
-            <button class="plus">+</button></td>
-            <td><span class="item_total">${total_price()}</span>원</td>
-          <td><button class="deleteBtn" onclick="deleteRow(this)">삭제</button></td>
-        </tr>
-        <tr>
-          <!-- 총결제 금액 -->
-          <td colspan="5">총 금액 : <span class="item_total">${total_price()}</span>원</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</form>
-  <div class="btnBox">
-    <button class="btn order"><a href="/payment">주문하기</a></button>
-    <button class="btn shopping"><a href="/">계속 쇼핑하기<a></button>
-    <button class="btn cartDelete">장바구니 비우기</button>
-  </div>
-  <div style="clear: both;"></div>`;
-
 //장바구니 - 제품수량 증가 및 감소
 const plus = document.querySelector(".plus");
 const minus = document.querySelector(".minus");
@@ -115,7 +72,7 @@ function deleteRow(button) {
 }
 
 //장바구니 비우기
-const cartDelete = document.querySelector(".cartDelete");
+const cartDelete = document.querySelector("#cartDelete");
 function cartDelRow() {
   const tbody = document.querySelector("table tbody");
   tbody.parentNode.removeChild(tbody);
@@ -124,5 +81,3 @@ cartDelete.addEventListener("click", (e) => {
   e.preventDefault();
   cartDelRow();
 });
-
-//주문하기
