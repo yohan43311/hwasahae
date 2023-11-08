@@ -15,7 +15,7 @@ var req_orders = {
 
 
 //주문조회
-fetch("http://localhost:3000/product/admin", req_orders)
+fetch("http://localhost:3000/admin/order", req_orders)
   .then(response => response.text())
   .then(result => {
     console.log('통신 성공! 이건 주문한 내역',result)
@@ -53,7 +53,7 @@ const createOrderList = (data)=>{
                         <th scope="row">${cur['_id']}</th>
                         <td>${cur['name']}</td>
                         <td>${cur['phone']}</td>
-                        <td>${cur['adress']}</td>
+                        <td>${cur['address']}</td>
                         <td><button type="button" class="btn btn-light rounded-pill"
                           onclick="location.href='order-modify.html' "
                           >수정</button></td>
