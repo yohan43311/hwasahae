@@ -10,20 +10,21 @@ const {
   modifyProductsAdmin,
   deleteProductsAdmin,
 } = require("../Controllers/adminController");
+const authJWT = require("../utils/authJWT");
 const router = express.Router();
 
 const multer = require("multer");
 const path = require("path");
 
 // 카테고리
-router.post("/category", createCategoryAdmin); // 카테고리 추가 (관리자)
-router.patch("/:categoryId/category", updateCategoryAdmin); // 카테고리 수정 (관리자)
-router.delete("/:categoryId/category", deleteCategoryAdmin); // 카테고리 삭제 (관리자)
+router.post("/category", authJWT, createCategoryAdmin); // 카테고리 추가 (관리자)
+router.patch("/:categoryId/category", authJWT, updateCategoryAdmin); // 카테고리 수정 (관리자)
+router.delete("/:categoryId/category", authJWT, deleteCategoryAdmin); // 카테고리 삭제 (관리자)
 
 // 주문
 router.get("/order", listOrderAdmin); // 주문 조회 (관리자)
-router.patch("/:orderId/order", updateOrderAdmin); // 주문 수정 (관리자)
-router.delete("/:orderId/order", deleteOrderAdmin); // 주문 삭제 (관리자)
+router.patch("/:orderId/order", authJWT, updateOrderAdmin); // 주문 수정 (관리자)
+router.delete("/:orderId/order", authJWT, deleteOrderAdmin); // 주문 삭제 (관리자)
 
 // 상품 이미지
 // 파일 저장 위치와 파일명 설정
@@ -48,8 +49,8 @@ const fileFilter = (req, file, cb) => {
 // 파일 업로드 미들웨어 설정
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 // 상품
-router.post("/product", upload.single("image"), createProductAdmin); // 상품 추가 (관리자)
-router.patch("/:productId/product", modifyProductsAdmin); // 상품 수정 (관리자)
-router.delete("/:productId/product", deleteProductsAdmin); // 상품 삭제 (관리자)
+router.post("/product", upload.single("image"), authJWT, createProductAdmin); // 상품 추가 (관리자)
+router.patch("/:productId/product", authJWT, modifyProductsAdmin); // 상품 수정 (관리자)
+router.delete("/:productId/product", authJWT, deleteProductsAdmin); // 상품 삭제 (관리자)
 
 module.exports = router;
