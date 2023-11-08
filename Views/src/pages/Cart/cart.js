@@ -1,10 +1,10 @@
-const item_date = {
-  id: 1,
-  image: "",
-  productName: "비타민 C 화이티닝 크림 60g",
-  price: 32000,
-  deliveryFee: 0,
-};
+// const item_date = {
+//   id: 1,
+//   image: "",
+//   productName: "비타민 C 화이티닝 크림 60g",
+//   price: 32000,
+//   deliveryFee: 0,
+// };
 
 //갯수
 let item_su = 1;
@@ -81,3 +81,5 @@ cartDelete.addEventListener("click", (e) => {
   e.preventDefault();
   cartDelRow();
 });
+
+fetch();

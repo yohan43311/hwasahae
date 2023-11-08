@@ -8,19 +8,9 @@ const loginEvent = () => {
   loginBtn.addEventListener("click", loginResponse);
 };
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const accessToken = localStorage.getItem("accessToken");
-
-//   if (!accessToken) {
-//     alert("로그인 후 이용 가능합니다");
-//     window.location.href = "/login"; // 로그인 페이지로 리다이렉트
-//   }
-// });
-
 /* 로그인 api */
 const loginResponse = async (e) => {
   e.preventDefault();
-  console.log("안녕5555555");
   const login_URL = "http://localhost:3000/login";
 
   const formData = new FormData();
@@ -38,9 +28,7 @@ const loginResponse = async (e) => {
     .then((res) => res.json())
     .then((res) => {
       if (!res?.result) {
-        //userInfo(email, name, address)
         localStorage.setItem("userInfo", JSON.stringify(res));
-        // localStorage.setItem("email", res?.email);
         alert("로그인이 되셨습니다!");
         location.href = "/";
       } else {
@@ -53,21 +41,3 @@ const loginResponse = async (e) => {
 };
 
 loginEvent();
-
-//로그인 버튼을 눌렀을 때의 동작
-// document.getElementById("login-btn").addEventListener("click", (e) => {
-//   e.preventDefault();
-
-//   const email = document.querySelector("#email").value;
-//   const pwd = document.querySelector("#pwd").value;
-
-//   if (!email && !pwd) {
-//     return alert("이메일, 비번을 입력하지 않으셨습니다!");
-//   }
-
-//   function signUpLink() {
-//     link = "/pages/SignUp/signUp.html";
-//     window.location.href = link;
-//   }
-//   //로그인 api 요청
-// });

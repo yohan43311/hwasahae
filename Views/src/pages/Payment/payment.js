@@ -1,12 +1,12 @@
 //상품 리스트
 //임시적으로 값을 넣은 것
-const item_date = {
-  id: 1,
-  image: "",
-  productName: "비타민 C 화이티닝 크림 60g",
-  price: 32000,
-  deliveryFee: 0,
-};
+// const item_date = {
+//   id: 1,
+//   image: "",
+//   productName: "비타민 C 화이티닝 크림 60g",
+//   price: 32000,
+//   deliveryFee: 0,
+// };
 
 //갯수
 let item_su = 1;

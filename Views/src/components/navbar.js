@@ -1,29 +1,55 @@
-    
-    const header = document.querySelector('.header');
+//로그인 버튼 => 로그아웃 버튼
+// const userData = localStorage.getItem("userInfo"); //localStorage에서 사용자 정보 가져오기
 
-    //카트 숫자넘버 그려지기전에 넣어둬야 작동한다.
-    let cart_num = 1
+window.onload = function () {
+  const userData = localStorage.getItem("userInfo");
+  const loginLogoutButton = document.querySelector(".main_login_btn");
 
-        // 네비 메뉴
-        const menu = [
-            { text: "상 품", link: "/product" },
-            { text: "주문 하기", link: "/cart" },
-            //{ text: "고객 센터", link: "/customer-service" }
-        ];
-        // 메뉴 아이템을 생성하는 함수
-        const menu_li = () => {
-            const menuItems = menu.map(item => `<li><a href="${item.link}" onclick="route()">${item.text}</a></li>`);
-            return menuItems.join(''); // 배열을 문자열로 결합하여 반환
-        };
+  if (loginLogoutButton) {
+    if (userData) {
+      loginLogoutButton.innerHTML = `<li class="main_login_btn logout"><a href="/login">로그아웃</a></li>`;
+    } else {
+      loginLogoutButton.innerHTML = `<li class="main_login_btn"><a href="/login">로그인</a></li>`;
+    }
 
+    const logout = document.querySelector(".logout");
 
+    if (logout) {
+      logout.addEventListener("click", () => {
+        window.localStorage.removeItem("userInfo");
+        alert("로그아웃 되었습니다!");
+        location.href = "/login";
+      });
+    }
+  }
+};
 
-    header.innerHTML = `
+const header = document.querySelector(".header");
+
+//카트 숫자넘버 그려지기전에 넣어둬야 작동한다.
+let cart_num = 1;
+
+// 네비 메뉴
+const menu = [
+  { text: "상 품", link: "/product" },
+  { text: "주문 하기", link: "/cart" },
+  //{ text: "고객 센터", link: "/customer-service" }
+];
+// 메뉴 아이템을 생성하는 함수
+const menu_li = () => {
+  const menuItems = menu.map(
+    (item) =>
+      `<li><a href="${item.link}" onclick="route()">${item.text}</a></li>`
+  );
+  return menuItems.join(""); // 배열을 문자열로 결합하여 반환
+};
+
+header.innerHTML = `
     <div class="header_section">
         <div>
             <ul>
-                <li class="main_login_btn"><a href="/login">로그인</a></li>
-                <li class="main_user_join"><a href="/register">회원가입</a></li>
+              <li class="main_login_btn logout"><a href="/login">로그인</a></li>
+              <li class="main_user_join"><a href="/register">회원가입</a></li>
             </ul>
         </div>
         <div class="main_top_logo"></div>
@@ -50,51 +76,59 @@
         </ul>
     </nav>
     `;
+// const logout = document.querySelector(".logout");
+// window.onload = function () {
+//   if (logout) {
+//     logout.addEventListener("click", () => {
+//       window.localStorage.removeItem("userInfo");
+//       alert("로그아웃 되었습니다!");
+//       location.href = "/login";
+//     });
+//   }
+// };
 
+//메인로고 넣기
+const main_log = document.querySelector(".main_top_logo");
+const mainImg = new Image();
+mainImg.src = "http://skincure.co.kr/design/skincure/0759ansome/top_logo.gif";
+main_log.appendChild(mainImg);
 
+main_log.addEventListener("click", () => {
+  window.location.href = "/index.html"; // 메인 페이지의 URL을 여기에 지정
+});
+//서치 돋보기 버튼
+const search_btn = document.querySelector(".search_btn");
+const search_btn_img = new Image();
+search_btn_img.src =
+  "http://skincure.co.kr/design/skincure/0759ansome/btn_search.png";
+search_btn.appendChild(search_btn_img);
 
-    //메인로고 넣기
-    const main_log = document.querySelector('.main_top_logo')
-    const mainImg = new Image();
-    mainImg.src = 'http://skincure.co.kr/design/skincure/0759ansome/top_logo.gif';
-    main_log.appendChild(mainImg)
+search_btn.addEventListener("click", () => {
+  window.location.href = "/index.html"; //추후 돋보기 룅크변경
+});
 
-    main_log.addEventListener('click', () => {
-        window.location.href = '/index.html'; // 메인 페이지의 URL을 여기에 지정
-    });
-    //서치 돋보기 버튼
-    const search_btn = document.querySelector('.search_btn');
-    const search_btn_img = new Image();
-    search_btn_img.src = 'http://skincure.co.kr/design/skincure/0759ansome/btn_search.png';
-    search_btn.appendChild(search_btn_img)
+//사람 아이콘
+const top_myp = document.querySelector(".top_myp");
+const mypImg = new Image();
+mypImg.src = "http://skincure.co.kr/design/skincure/0759ansome/btn_mypage2.gif";
+top_myp.appendChild(mypImg);
 
-    search_btn.addEventListener('click', () => {
-        window.location.href = '/index.html'; //추후 돋보기 룅크변경
-    });
+top_myp.addEventListener("click", () => {
+  window.location.href = "/mypage"; //추후 룅크변경
+});
 
-    //사람 아이콘
-    const top_myp = document.querySelector('.top_myp');
-    const mypImg = new Image();
-    mypImg.src = 'http://skincure.co.kr/design/skincure/0759ansome/btn_mypage2.gif'
-    top_myp.appendChild(mypImg)
+//카트 아이콘
+const top_cart = document.querySelector(".top_cart");
+const cartImg = new Image();
+cartImg.src = "http://skincure.co.kr/design/skincure/0759ansome/btn_cart2.gif";
+top_cart.appendChild(cartImg);
 
-    top_myp.addEventListener('click', () => {
-        window.location.href = '/mypage'; //추후 룅크변경
-    });
-
-    //카트 아이콘
-    const top_cart = document.querySelector('.top_cart');
-    const cartImg = new Image();
-    cartImg.src = 'http://skincure.co.kr/design/skincure/0759ansome/btn_cart2.gif'
-    top_cart.appendChild(cartImg)
-
-    top_cart.addEventListener('click', () => {
-        window.location.href = '/cart'; //추후 룅크변경
-    });
-
+top_cart.addEventListener("click", () => {
+  window.location.href = "/cart"; //추후 룅크변경
+});
 
 // 위에는 헤더바 아래는 푸터바
-const footer = document.querySelector('footer');
+const footer = document.querySelector("footer");
 footer.innerHTML = `
 <div class="ft_sec01">
     <div class="bt_inner">
@@ -156,4 +190,4 @@ footer.innerHTML = `
 		</div>
 	</span></div><!-- //ft_sec03 -->
     </div>
-    `
+    `;
