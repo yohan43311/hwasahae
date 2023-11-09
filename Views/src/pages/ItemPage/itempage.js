@@ -139,8 +139,7 @@ minus.addEventListener('click', () => {
     if(item_many.value == 1){
         item_many.value = 1
         return alert("최소수량 입니다")}
-
-
+        
     item_su = item_su-1
     item_many.value = item_su
     item_total.innerHTML = total_price()
@@ -164,7 +163,6 @@ detail_img.onerror = function() {
     alert("이미지 로드 오류")
 };
 
-    
   });
 
 
