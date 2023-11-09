@@ -10,6 +10,7 @@
   <!-- <script defer src="https://js.tosspayments.com/v1/payment-widget"></script>
     <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
   <!-- <script defer src="/src/pages/Payment/payment_widget.js"></script> -->
+  <script src="https://kit.fontawesome.com/29cf9aada0.js" crossorigin="anonymous"></script>
   <script defer type="module" src="/src/js/adressApi.js"></script>
   <script defer type="module" src="/src/pages/Payment/payment.js"></script>
   <script defer type="module" src="/src/pages/Payment/validation.js"></script>
@@ -29,7 +30,7 @@
     <form action="" id="payment-form">
       <div class="totalPayment box">
         <span class="title">주문 리스트</span>
-        <table class="totalPayment-table">
+        <table class="orderlist-table">
           <thead>
             <tr>
               <th>상품 이미지</th>
@@ -39,16 +40,16 @@
             </tr>
           </thead>
           <tbody id="productTable">
-            <tr>
-              <td><img src="./img/product_1.jpg" style="width: 100px;
-        height: 100px;" alt="상품 이미지"></td>
-              <td><span id="product_name">${item_date.productName}</span></td>
+            <tr class="product_lists">
+              <td></td>
+              <td><span id="product_name"></span></td>
               <td>
                 <button type="button" class="minus">-</button>
-                <input class="item_many" type="text" id="item_count" value="${item_su}">
-                <button type="button" class="plus">+</button>
+                <input class="item_many" type="text" id="item_count" value=2>
+                <button type="button" class="plus" onClick="document.querySelector('#item_count').value++;"
+                  </button>>+</button>
               </td>
-              <td><span class="item_total" id="item_price"></span>${total_price()} 원</td>
+              <td><span class="item_total" id="item_price"></span> 원</td>
             </tr>
           </tbody>
         </table>
@@ -114,18 +115,6 @@
               </div>
             </td>
           </tr>
-          <tr>
-            <td>
-              <label for="message">주문메세지</label>
-              <input type="text" class="input-text" id="message" placeholder="메세지를 입력해주세요">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="depositorName">무통장 입금자명</label>
-              <input type="text" class="input-text" id="depositorName" placeholder="입금자명">
-            </td>
-          </tr>
         </table>
       </div>
 
@@ -142,30 +131,25 @@
         <table class="totalPayment-table">
           <thead>
             <tr>
-              <th>상품 이미지</th>
-              <th>상품명</th>
-              <th>수량</th>
+              <th>상품금액</th>
+              <th></th>
               <th>배송비</th>
-              <th>가격</th>
+              <th></th>
+              <th>총 금액</th>
             </tr>
           </thead>
           <tbody id="productTable2">
-            <!-- <tr>
-              <td>
-                <img src="./img/product_1.jpg" style="width: 100px;
-          height: 100px;" alt="상품 이미지">
-              </td>
-              <td><span>${item_date.productName}</span></td>
-              <td><input class="item_many" type="text" value="${item_su}"></td>
-              <td><span id="deliveryFee">${item_date.deliveryFee}</span></td>
-              <td><span class="item_total">${total_price()}</span>원</td>
-            </tr> -->
             <tr>
-
+              <td><input class="item_many" type="text" value=""></td>
+              <td><span><i class="fa-solid fa-circle-plus"></i></span></td>
+              <td><span id="deliveryFee"></span></td>
+              <td><span><i class="fa-solid fa-equals"></i></span></td>
+              <td><span class="item_total"></span>원</td>
             </tr>
           </tbody>
           <!-- 총결제 금액 -->
-          <td colspan="5">총 금액 : <span class="item_total" id="total_price">${total_price()}</span>원</td>
+          <td colspan="5" style="background: #f2f2f2;
+          padding: 20px;">최종 결제금액 : <span class="item_total" id="total_price"></span>원</td>
         </table>
       </div>
     </form>

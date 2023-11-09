@@ -25,5 +25,5 @@ router.use(
 router.use("/cart", express.static("Views/src/pages/Cart")); //장바구니
 router.use("/product", express.static("Views/src/pages/Product"));
 router.use("/mypage", express.static("Views/src/pages/Mypage"));
-router.use("/admin", express.static("Views/src/pages/admin/forms"));
+router.use("/admin", express.static("Views/src/pages/admin"));
 module.exports = router;

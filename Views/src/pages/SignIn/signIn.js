@@ -41,3 +41,21 @@ const loginResponse = async (e) => {
 };
 
 loginEvent();
+
+/* 비회원 로그인 */
+// const storedCart = localStorage.getItem("cart"); //장바구니에 저장된 상품
+// const storedBuyItem = localStorage.getItem("buyItem"); //바로구매시에 저장된 상품
+
+document.getElementById("#nonMember").addEventListener("click", () => {
+  const cartProducts = JSON.parse(localStorage.getItem("cart"));
+  const buyProducts = JSON.parse(localStorage.getItem("buyItem"));
+  if (cartProducts.length > 0) {
+    alert("장바구니 페이지로 이동합니다");
+    location.href = "/cart";
+  } else if (buyProducts) {
+    alert("결제 페이지로 이동합니다");
+    location.href = "/payment/";
+  } else {
+    alert("담겨진 상품이 없습니다");
+  }
+});

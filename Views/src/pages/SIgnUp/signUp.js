@@ -43,10 +43,15 @@ const registerResponse = async (e) => {
     .then((res) => res.json())
     .then((res) => {
       if (!res?.result) {
-        location.href = "/registerOk";
+        if (role1?.value === "구매자") {
+          location.href = "/registerOk";
+        } else {
+          location.href = "/admin";
+        }
       } else {
         if (res?.result === "fail") {
           console.log("res", res);
+          alert(res.error);
           return alert("회원가입 실패");
         }
       }
@@ -54,3 +59,13 @@ const registerResponse = async (e) => {
 };
 
 submitEvent();
+
+// 페이지 로딩 시 실행될 함수
+window.onload = function () {
+  // 사용자가 입력한 값이 존재하면 페이지를 새로고침하여 값 초기화
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+      window.location.reload();
+    }
+  });
+};

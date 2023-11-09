@@ -1,29 +1,3 @@
-//로그인 버튼 => 로그아웃 버튼
-// const userData = localStorage.getItem("userInfo"); //localStorage에서 사용자 정보 가져오기
-
-window.onload = function () {
-  const userData = localStorage.getItem("userInfo");
-  const loginLogoutButton = document.querySelector(".main_login_btn");
-
-  if (loginLogoutButton) {
-    if (userData) {
-      loginLogoutButton.innerHTML = `<li class="main_login_btn logout"><a href="/login">로그아웃</a></li>`;
-    } else {
-      loginLogoutButton.innerHTML = `<li class="main_login_btn"><a href="/login">로그인</a></li>`;
-    }
-
-    const logout = document.querySelector(".logout");
-
-    if (logout) {
-      logout.addEventListener("click", () => {
-        window.localStorage.removeItem("userInfo");
-        alert("로그아웃 되었습니다!");
-        location.href = "/login";
-      });
-    }
-  }
-};
-
 const header = document.querySelector(".header");
 
 //카트 숫자넘버 그려지기전에 넣어둬야 작동한다.
@@ -87,6 +61,30 @@ header.innerHTML = `
 //   }
 // };
 
+//로그인 버튼 => 로그아웃 버튼
+const userData = localStorage.getItem("userInfo");
+const loginLogoutButton = document.querySelector(".main_login_btn");
+
+window.onload = function () {
+  if (loginLogoutButton) {
+    if (userData) {
+      loginLogoutButton.innerHTML = `<li class="main_login_btn logout"><a href="/login">로그아웃</a></li>`;
+    } else {
+      loginLogoutButton.innerHTML = `<li class="main_login_btn"><a href="/login">로그인</a></li>`;
+    }
+
+    const logout = document.querySelector(".logout");
+
+    if (logout) {
+      logout.addEventListener("click", () => {
+        window.localStorage.removeItem("userInfo");
+        alert("로그아웃 되었습니다!");
+        location.href = "/login";
+      });
+    }
+  }
+};
+
 //메인로고 넣기
 const main_log = document.querySelector(".main_top_logo");
 const mainImg = new Image();
@@ -113,9 +111,28 @@ const mypImg = new Image();
 mypImg.src = "http://skincure.co.kr/design/skincure/0759ansome/btn_mypage2.gif";
 top_myp.appendChild(mypImg);
 
-top_myp.addEventListener("click", () => {
-  window.location.href = "/mypage"; //추후 룅크변경
-});
+// top_myp.addEventListener("click", () => {
+//   window.location.href = "/mypage"; //추후 룅크변경
+// });
+
+//userData위에 getItem으로 가져옴 const userData = localStorage.getItem("userInfo");
+//관리자 여부에 따른 네브바 처리 => 관리자로 로그인 했을 경우 마이페이지 링크가 관리자 페이지로, 구매자가 로그인 했을 경우 구매자페이지로 이동
+if (userData) {
+  const userInfo = JSON.parse(userData);
+  const isRole = userInfo.role; //role이 구매자인지 관리자인지
+
+  if (isRole === "관리자") {
+    // 마이페이지 아이콘을 관리자 페이지로 연결
+    top_myp.addEventListener("click", () => {
+      window.location.href = "/admin"; //추후 룅크변경
+    });
+  } else {
+    // 구매자인 경우 마이페이지로 연결
+    top_myp.addEventListener("click", () => {
+      window.location.href = "/mypage"; //추후 룅크변경
+    });
+  }
+}
 
 //카트 아이콘
 const top_cart = document.querySelector(".top_cart");
