@@ -47,11 +47,11 @@ const products = [
   // 다른 상품들 추가
 ];
 
-//반복해서 상품을 추가
-products.forEach((productData) => {
-  const productElement = createProductTemplate(productData.imageSrc, productData.title, productData.price);
-  productContainer.innerHTML += productElement;
-});
+// //반복해서 상품을 추가
+// products.forEach((productData) => {
+//   const productElement = createProductTemplate(productData.imageSrc, productData.title, productData.price);
+//   productContainer.innerHTML += productElement;
+// });
 
 //-=================================================
 
