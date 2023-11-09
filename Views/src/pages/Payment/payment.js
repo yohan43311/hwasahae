@@ -96,25 +96,25 @@ const deliveryFee = document.querySelector("#deliveryFee");
  * 전화번호는 직접 작성해줘야함 -> input값에 필수인 것을 입력하지 않았을 경우
  * alert알려주고 필수 입력을 다 했을 경우는 결제하기 버튼을 눌렀을 때 결제가 넘어가게 하기
  */
-window.onload = function () {
-  // 로컬스토리지에서 사용자 정보 가져오기
-  const storedUserInfo = localStorage.getItem("userInfo");
+// window.onload = function () {
+//   // 로컬스토리지에서 사용자 정보 가져오기
+//   const storedUserInfo = localStorage.getItem("userInfo");
 
-  if (storedUserInfo) {
-    // 저장된 사용자 정보가 있다면 결제 페이지의 입력 필드에 자동으로 채우기
-    const userInfo = JSON.parse(storedUserInfo);
+//   if (storedUserInfo) {
+//     // 저장된 사용자 정보가 있다면 결제 페이지의 입력 필드에 자동으로 채우기
+//     const userInfo = JSON.parse(storedUserInfo);
 
-    //주문자 정보 가져오기
-    name1.value = userInfo.name;
-    email1.value = userInfo.email;
+//     //주문자 정보 가져오기
+//     name1.value = userInfo.name;
+//     email1.value = userInfo.email;
 
-    //배송 정보
-    name2.value = userInfo.name;
-    roadAddress.value = userInfo.roadAddress;
-    jibunAddress.value = userInfo.jibunAddress;
-    detailAddress.value = userInfo.detailAddress;
-  }
-};
+//     //배송 정보
+//     name2.value = userInfo.name;
+//     roadAddress.value = userInfo.roadAddress;
+//     jibunAddress.value = userInfo.jibunAddress;
+//     detailAddress.value = userInfo.detailAddress;
+//   }
+// };
 
 const info_checkBox = document.getElementById("info_checkBox");
 
@@ -123,11 +123,9 @@ function getCheckboxValue() {
   if (info_checkBox.checked) {
     name2.value = name1.value;
     phone2.value = phone1.value;
-    depositorName.value = name1.value;
   } else {
     name2.value = "";
     phone2.value = "";
-    depositorName.value = "";
   }
 }
 
@@ -208,17 +206,17 @@ async function paymentResponse(e) {
 paymentResponse();
 
 //결제 버튼
-const paymentBtn = document.querySelector("#paymentBtn");
-paymentBtn.addEventListener("click", () => {
-  const productList = localStorage.getItem("cart");
+// const paymentBtn = document.querySelector("#paymentBtn");
+// paymentBtn.addEventListener("click", () => {
+//   const productList = localStorage.getItem("cart");
 
-  if (productList) {
-    alert("결제가 성공되었습니다!");
-    location.href = "/paid";
-  } else {
-    alert("결제가 실패되었습니다!");
-  }
-});
+//   if (productList) {
+//     alert("결제가 성공되었습니다!");
+//     location.href = "/paid";
+//   } else {
+//     alert("결제가 실패되었습니다!");
+//   }
+// });
 
 //로컬스토리지에서 사용자 정보 가져오기
 
