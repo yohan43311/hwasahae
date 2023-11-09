@@ -155,13 +155,6 @@
       </a>
     </li><!-- End 주문관리 Page Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="userlist.html">
-        <i class="bi bi-person"></i>
-        <span>회원 관리</span>
-      </a>
-    </li><!-- End 회원관리 Page Nav -->
-
   </ul>
 
 </aside><!-- End Sidebar-->
@@ -169,31 +162,31 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>색조 목록</h1>
+      <h1>카테고리 목록</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Product list</li>
+          <li class="breadcrumb-item">Category list</li>
         </ol>
       </nav>
-      <button type="button" class="btn btn-primary" onclick="location.href='forms-layouts.html' "></a>상품 추가</button>
+      
+      <div class="col-sm-3" style="margin: 4px;">
+        <input type="text" class="form-control"> </a>
+        <button type="button" class="btn btn-primary" id="category_add"></a>카테고리 추가</button>
+      </div>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row align-items-top">
 
-
         <div class="col-lg-3">
 
           <!-- Card with an image on top -->
           <div class="card">
-            <img src="assets/img/img-color.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">화장품 이름</h5>
-              <p class="card-text">판매가격</p>
-              <p class="card-text">적립금</p>
-              <p class="card-text">용량 및 중량</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">수 정</a></p>
+              <h5 class="card-title">카테고리 이름</h5>
+              <button type="button" class="btn btn-success" id="category_modi"></a>수정</button>
+              <button type="button" class="btn btn-danger" id="category_del"></a>삭제</button>
             </div>
           </div><!-- End Card with an image on top -->
         </div>
@@ -202,46 +195,19 @@
 
           <!-- Card with an image on top -->
           <div class="card">
-            <img src="assets/img/img-color.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">화장품 이름</h5>
-              <p class="card-text">판매가격</p>
-              <p class="card-text">적립금</p>
-              <p class="card-text">용량 및 중량</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">수 정</a></p>
+              <h5 class="card-title">카테고리 이름</h5>
+              <button type="button" class="btn btn-success" id="category_modi"></a>수정</button>
+              <button type="button" class="btn btn-danger" id="category_del"></a>삭제</button>
             </div>
           </div><!-- End Card with an image on top -->
         </div>
 
         <div class="col-lg-3">
-
-          <!-- Card with an image on top -->
-          <div class="card">
-            <img src="assets/img/img-color.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">화장품 이름</h5>
-              <p class="card-text">판매가격</p>
-              <p class="card-text">적립금</p>
-              <p class="card-text">용량 및 중량</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">수 정</a></p>
-            </div>
-          </div><!-- End Card with an image on top -->
+          <div id="category-table"></div>
         </div>
 
-        <div class="col-lg-3">
 
-          <!-- Card with an image on top -->
-          <div class="card">
-            <img src="assets/img/img-color.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">화장품 이름</h5>
-              <p class="card-text">판매가격</p>
-              <p class="card-text">적립금</p>
-              <p class="card-text">용량 및 중량</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">수 정</a></p>
-            </div>
-          </div><!-- End Card with an image on top -->
-        </div>
 
 
 
@@ -278,6 +244,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script defer src="./category-list.js"></script>
 
 </body>
 
