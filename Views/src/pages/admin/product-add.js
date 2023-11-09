@@ -1,80 +1,93 @@
-function sendToServer(){ //기본정보 작성 안되어 있을 시 튕겨내기
-    if($('.cmode1').val() == ''){
-        alert('상품 분류를 선택해주세요');
-        return false;
-    }
-    if($('input[name=item_name]').val() == ''){
-        alert('상품명을 입력해주세요');
-        return false;
-    }
-    if($('input[name=price]').val() == ''){
-        alert('판매가격을 입력해주세요');
-        return false;
-    }
-    if($('input[type=file]').val() == ''){
-        alert('파일 이미지를 업로드해주세요');
-        return false;
-    }
-}
+const categoryOptions = document.querySelector(".form-select");
 
-$(function(){
-    // 1차 옵션 변경시 2차옵션 드롭
-    const cmode1 = $('.cmode1');
-    cmode1.change(function(){
-        $('.cmode2').empty();
-        switch(cmode1.val()){
-            case 'outer': 
-                options = '<option value="jacket">자켓/점퍼</option>'+
-                '<option value="cardigan">가디건</option>'+
-                '<option value="coat">코트</option>'+
-                '<option value="vest">조끼</option>'+
-                '<option value="suit">수트</option>';
-                break;
-            case 'top':
-                options = '<option value="longsleeve">긴팔</option>'+
-                '<option value="shortsleeve">반팔</option>'+
-                '<option value="knit">니트</option>'+
-                '<option value="sleeveless">나시</option>'+
-                '<option value="threequartersleeve">7부</option>';
-                break;
-            case 'shirts':
-                options = '<option value="basic">베이직</option>'+
-                '<option value="checkpattern">체크/패턴</option>'+
-                '<option value="stripe">스트라이프</option>';
-                break;
-            case 'bottom':
-                options = '<option value="cotton">면바지</option>'+
-                '<option value="denim">데님</option>'+
-                '<option value="slacks">슬랙스</option>'+
-                '<option value="shorts">반바지</option>';
-                break;
-            case 'acc':
-                options = '<option value="cap">CAP</option>'+
-                '<option value="socks">SOCKS</option>'+
-                '<option value="scarf">SCARF&MUFFLER</option>'+
-                '<option value="tie">TIE&HANDKERCHIEF</option>'+
-                '<option value="jewelry">JEWELRY</option>'+
-                '<option value="bag">BAG</option>'+
-                '<option value="belt">BELT</option>';
-                break;
-            default:
-                options = '<option>2차 분류</option>';
-        }
-        $('.cmode2').append(options);
-    })
+window.onload = function () {
+  console.log("상품 추가 페이지");
 
-    //파일업로드시 썸네일
-    $('#upload_image').change(function(e){
-    const images = e.target.files
-    $('.img-box').empty();
-    for(let i=0 ; i<images.length; i++){
-        const Reader = new FileReader();
-        Reader.readAsDataURL(images[i]);
-        Reader.onload = function(){
-            const img = '<img src="'+ Reader.result +'" alt="사진">';
-            $('.img-box').append(img);
-        }
-    }
-        
+  var req_orders = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  //카테고리 조회
+  fetch("http://localhost:3000/category", req_orders)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log("통신 성공!", result);
+      categoryOptions.innerHTML = createCategoryList(result);
     })
-})
+    .catch((error) => {
+      console.log("error가 발생했어요!", error);
+      alert(`에러메시지 : ${error.message}`);
+    });
+
+  const createCategoryList = (data) => {
+    return data.reduce(
+      (prev, cur) =>
+        prev +
+        `
+        <option selected>${cur["name"]}</option>
+    `,
+      ""
+    );
+  };
+
+  //상품추가
+  const addProduct = async (e) => {
+    e.preventDefault();
+    const input = document.querySelectorAll("input[required]");
+    // 유효성 검증
+    for (let i = 0; i < input.length; i++) {
+      if (input[i].value === "") return alert("필수 입력사항을 채워주세요.");
+    }
+    const form = document.querySelector("#addForm");
+
+    const product_add_URL = "http://localhost:3000/admin/product";
+
+    const formData = new FormData(form);
+
+    const option = {
+      method: "POST",
+      body: formData,
+    };
+
+    await fetch(product_add_URL, {
+      ...option,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res?.result === "fail") {
+          alert(`에러메시지 : ${res.error}`);
+        }
+      })
+      .catch((err) => {
+        console.log(" err: ", err);
+        alert(`에러메시지 : ${err.error}`);
+      });
+  };
+
+  const addEvent = () => {
+    const productAddButton = document.querySelector("#add");
+    productAddButton.addEventListener("click", addProduct);
+  };
+
+  addEvent();
+  //   function sendToServer() {
+  //     //기본정보 작성 안되어 있을 시 튕겨내기
+  //     if ($(".cmode1").val() == "") {
+  //       alert("상품 분류를 선택해주세요");
+  //       return false;
+  //     }
+  //     if ($("input[name=item_name]").val() == "") {
+  //       alert("상품명을 입력해주세요");
+  //       return false;
+  //     }
+  //     if ($("input[name=price]").val() == "") {
+  //       alert("판매가격을 입력해주세요");
+  //       return false;
+  //     }
+  //     if ($("input[type=file]").val() == "") {
+  //       alert("파일 이미지를 업로드해주세요");
+  //       return false;
+  //     }
+  //   }
+};

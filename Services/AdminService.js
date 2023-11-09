@@ -47,6 +47,15 @@ class AdminService {
     if (!order) {
       throw new Error("주문을 찾을 수 없습니다.");
     }
+    // 주문 상태가 '배송중'이거나 '배송 완료'인 경우, 상태 변경 불가
+    if (
+      (order.status === "배송중" || order.status === "배송 완료") &&
+      newStatus !== order.status
+    ) {
+      throw new Error(
+        "배송중이거나 배송 완료된 주문의 상태를 변경할 수 없습니다."
+      );
+    }
 
     order.status = newStatus;
     await order.save();
@@ -63,10 +72,10 @@ class AdminService {
 
   // product
   // 상품 추가 메소드 (관리자)
-  async createProduct(productDTO, file, role) {
+  async createProduct(productDTO, file) {
     const { name, description, price, maker, category } = productDTO;
-    const image = file.path; // 업로드된 이미지의 경로
 
+    const imagePath = file ? `/img/shopimages/${file.filename}` : null;
     // 카테고리가 이미 존재하는지 확인
     let categoryDoc = await Category.findOne({ name: category });
 
@@ -80,7 +89,7 @@ class AdminService {
     // 새 상품 문서 생성
     const newProduct = new Product({
       name,
-      images: [image], // 이미지 경로를 배열로 저장
+      images: imagePath ? [imagePath] : [], // 웹 URL 이미지 경로 배열
       description,
       price,
       maker,

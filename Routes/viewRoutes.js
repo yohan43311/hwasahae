@@ -5,6 +5,7 @@ const router = express.Router();
 //load css, js, asset
 router.use("/", express.static("Views"));
 router.use("/", express.static("Views/src"));
+router.use("/", express.static("Views/src/pages/admin/"));
 
 //route setting
 router.use("/", express.static("Views/src/pages/Main"));
@@ -25,5 +26,9 @@ router.use(
 router.use("/cart", express.static("Views/src/pages/Cart")); //장바구니
 router.use("/product", express.static("Views/src/pages/Product"));
 router.use("/mypage", express.static("Views/src/pages/Mypage"));
-router.use("/admin", express.static("Views/src/pages/admin/forms"));
+router.use("/adminPage", express.static("Views/src/pages/admin"));
+router.use(
+  "/adminPage/product/add",
+  express.static("Views/src/pages/admin/product-add.html")
+);
 module.exports = router;

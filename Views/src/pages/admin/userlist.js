@@ -26,13 +26,7 @@ fetch("http://localhost:3000/users", requestOptions)
                       <td>${cur['name']}</td>
                       <td>${cur['email']}</td>
                       <td>${cur['zipcode']}</td>
-<<<<<<< HEAD
-                      <td>${cur['adress']}</td>
-=======
-                      <td><button type="button" class="btn btn-light rounded-pill"
-                        onclick="location.href='user-modify.html' "
-                        >수정</button></td>
->>>>>>> develop
+                      <td>${cur['address']}</td>
                     </tr>
     `,'')
   }
@@ -44,19 +38,13 @@ const test_user_data = [
     name : '실패 천비전',
     email : 'ess@naver.com',
     zipcode : '12121',
-<<<<<<< HEAD
-    adress : '서울시 강남구'
-=======
->>>>>>> develop
+    address : '서울시 강남구',
   },
   {
     index : 3,
     name : '실패 호호홍',
     email : 'mdid@naver.com',
     zipcode : '44444',
-<<<<<<< HEAD
-    adress : '서울시 관악구'
-=======
->>>>>>> develop
+    address : '서울시 관악구',
   }
 ]

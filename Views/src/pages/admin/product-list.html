@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>상품 관리 - 기초 화장품</title>
+  <title>상품 관리</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -123,49 +123,44 @@
 
   </header><!-- End Header -->
 
- <!-- ======= Sidebar ======= -->
- <aside id="sidebar" class="sidebar">
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
 
   <ul class="sidebar-nav" id="sidebar-nav">
     <!-- End Icons Nav -->
 
     <li class="nav-heading">Pages</li>
     <li class="nav-item">
-      <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-menu-button-wide"></i><span>상품 관리</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="components-cards-1.html">
-            <i class="bi bi-circle"></i><span>기초 화장품</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-cards-2.html">
-            <i class="bi bi-circle"></i><span>색조</span>
-          </a>
-        </li>
-        <li>
-          <a href="components-cards-3.html">
-            <i class="bi bi-circle"></i><span>립</span>
-          </a>
-        </li>    
-      </ul>
-    </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="productlist.html">
+          <i class="bi bi-menu-button-wide"></i>
+          <span>상품 관리</span>
+        </a>
+      </li><!-- End 주문관리 Page Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="category-list.html">
+          <i class="bi bi-card-list"></i>
+          <span>카테고리 관리</span>
+        </a>
+      </li><!-- End 주문관리 Page Nav -->
+      
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="order-manage.html">
-        <i class="bi bi-question-circle"></i>
+        <i class="bi bi-layout-text-window-reverse"></i>
         <span>주문 관리</span>
       </a>
-    </li><!-- End F.A.Q Page Nav -->
+    </li><!-- End 주문관리 Page Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="user-manage.html">
+      <a class="nav-link collapsed" href="userlist.html">
         <i class="bi bi-person"></i>
         <span>회원 관리</span>
       </a>
-    </li><!-- End Profile Page Nav -->
+    </li><!-- End 회원관리 Page Nav -->
 
   </ul>
 
@@ -181,76 +176,11 @@
           <li class="breadcrumb-item">Product list</li>
         </ol>
       </nav>
-      <button type="button" class="btn btn-primary" onclick="location.href='forms-layouts.html' "></a>상품 추가</button>
+      <button type="button" class="btn btn-primary" onclick="location.href='/adminPage/product/add' "></a>상품 추가</button>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row align-items-top">
-
-
-        <div class="col-lg-3">
-
-          <!-- Card with an image on top -->
-          <div class="card">
-            <img src="assets/img/img-skin.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">화장품 이름</h5>
-              <p class="card-text">판매가격</p>
-              <p class="card-text">적립금</p>
-              <p class="card-text">용량 및 중량</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">수 정</a></p>
-            </div>
-          </div><!-- End Card with an image on top -->
-        </div>
-
-        <div class="col-lg-3">
-
-          <!-- Card with an image on top -->
-          <div class="card">
-            <img src="assets/img/img-skin.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">화장품 이름</h5>
-              <p class="card-text">판매가격</p>
-              <p class="card-text">적립금</p>
-              <p class="card-text">용량 및 중량</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">수 정</a></p>
-            </div>
-          </div><!-- End Card with an image on top -->
-        </div>
-
-        <div class="col-lg-3">
-
-          <!-- Card with an image on top -->
-          <div class="card">
-            <img src="assets/img/img-skin.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">화장품 이름</h5>
-              <p class="card-text">판매가격</p>
-              <p class="card-text">적립금</p>
-              <p class="card-text">용량 및 중량</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">수 정</a></p>
-              
-            </div>
-          </div><!-- End Card with an image on top -->
-        </div>
-
-        <div class="col-lg-3">
-
-          <!-- Card with an image on top -->
-          <div class="card">
-            <img src="assets/img/img-skin.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">화장품 이름</h5>
-              <p class="card-text">판매가격</p>
-              <p class="card-text">적립금</p>
-              <p class="card-text">용량 및 중량</p>
-              <p class="card-text"><a href="#" class="btn btn-primary">수 정</a></p>
-            </div>
-          </div><!-- End Card with an image on top -->
-        </div>
-
-
-
       </div>
     </section>
 
@@ -284,6 +214,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="./product-list.js"></script>
 
 </body>
 

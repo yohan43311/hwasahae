@@ -28,23 +28,23 @@ fetch("http://localhost:3000/admin/order", req_orders)
   });
 
 
-var req_category = {
-  method: 'GET',
-  redirect: 'follow'
-};
-//카테고리
-fetch("http://localhost:3000/category/", req_category)
-  .then(response => response.text())
-  .then(result => {
-    console.log('통신 성공! 이건 카테고리 목록',result)
+// var req_category = {
+//   method: 'GET',
+//   redirect: 'follow'
+// };
+// //카테고리
+// fetch("http://localhost:3000/category/", req_category)
+//   .then(response => response.text())
+//   .then(result => {
+//     console.log('통신 성공! 이건 카테고리 목록',result)
     
-  })
-  .catch(error => {
-    console.log('error가 발생했어요!', error)
-    category_sidebar.innerHTML = createSidebar(test_category_data)
-  });
+//   })
+//   .catch(error => {
+//     console.log('error가 발생했어요!', error)
+//     category_sidebar.innerHTML = createSidebar(test_category_data)
+//   });
 
-}
+// }
 
 
 const createOrderList = (data)=>{
@@ -61,15 +61,15 @@ const createOrderList = (data)=>{
   `,'')
  }
 
-const createSidebar = (data)=>{
- return data.reduce((prev,cur)=> prev+ `
- <li>
- <a href="${cur['route']}">
-   <i class="bi bi-circle"></i><span>${cur['name']}</span>
- </a>
- </li>
- `,'')
-}
+// const createSidebar = (data)=>{
+//  return data.reduce((prev,cur)=> prev+ `
+//  <li>
+//  <a href="${cur['route']}">
+//    <i class="bi bi-circle"></i><span>${cur['name']}</span>
+//  </a>
+//  </li>
+//  `,'')
+// }
 
 const test_category_data = [
   {
@@ -111,4 +111,5 @@ const test_order_data = [
 
 // kdt-sw-7-team04.elicecoding.com
 
-// curl --location 'http://localhost:3000/products/'
+
+// curl --location 'http://localhost:3000/products/
