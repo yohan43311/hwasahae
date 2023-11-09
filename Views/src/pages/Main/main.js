@@ -27,27 +27,27 @@ fetch("http://localhost:3000/products")
     const mdItemMap = mdItem
       .map(
         (item, index) => `
-            <td>
-            <div class="tb-center">
-                <div class="box">
-                    <div class="thumb salebox">
-                        <a href="/item?id=${item._id}"><img class="MS_prod_img_m" src="${item.images[0]}" alt="상품 섬네일"></a>
-                        <div class="info_icon">
-                            <span class="cartDateBtnMd" data-value="${item._id}" data-another="${item.price}"><img src="http://skincure.co.kr/design/skincure/0759ansome/icon_prd04.gif" alt="미리보기"></span>                                                                            </div>
-                        <input type="hidden" name="custom_price" value="66000">
-                        <input type="hidden" name="product_price" value="37000">
-                        <div id="sale_bg" style="display: block;"><span class="sale_text">44%</span></div>
-                    </div>
-                    <ul class="info">
-                        <li class="dsc">${item.name}</li>
-                        <li class="subname">유기농 미백 보습 에센스!<br>
-                        </li><li class="price"><span class="consumer">66,000원</span>${item.price}원</li>
-                        <li class="icon"><span class="MK-product-icons"></span></li>
-                    </ul>
-                </div>
-            </div>
-            </td>
-        `
+          <td>
+          <div class="tb-center">
+              <div class="box">
+                  <div class="thumb salebox">
+                      <a href="/item?id=${item._id}"><img class="MS_prod_img_m" src="${item.images[0]}" alt="상품 섬네일"></a>
+                      <div class="info_icon">
+                          <span class="cartDateBtnMd" data-value="${item._id}" data-another="${item.price}"><img src="http://skincure.co.kr/design/skincure/0759ansome/icon_prd04.gif" alt="미리보기"></span>                                                                            </div>
+                      <input type="hidden" name="custom_price" value="66000">
+                      <input type="hidden" name="product_price" value="37000">
+                      <div id="sale_bg" style="display: block;"><span class="sale_text">44%</span></div>
+                  </div>
+                  <ul class="info">
+                      <li class="dsc">${item.name}</li>
+                      <li class="subname">유기농 미백 보습 에센스!<br>
+                      </li><li class="price"><span class="consumer">66,000원</span>${item.price}원</li>
+                      <li class="icon"><span class="MK-product-icons"></span></li>
+                  </ul>
+              </div>
+          </div>
+          </td>
+      `
       )
       .join("");
 
@@ -84,31 +84,31 @@ fetch("http://localhost:3000/products")
     const itemListSet = itemList
       .map(
         (item, index) => `
-    <div class="prd-list">
-    <table summary="상품이미지, 상품 설명, 가격">
-    <tbody>
-    <tr>
-    <td>
-    <div class="tb-center">
-        <div class="box">
-            <div class="thumb salebox">
-                <a href="/item?id=${item._id}"><img class="MS_prod_img_m" src="${item.images[0]}" alt="상품 섬네일"></a>
-                <div class="info_icon">
-                    <span><a class="cartDateBtn" data-value="${item._id}" data-another="${item.price}"><img src="http://skincure.co.kr/design/skincure/0759ansome/icon_prd04.gif" alt="미리보기"></a></span>                                                                            </div>
-                <input type="hidden" name="custom_price" value="0">
-                <input type="hidden" name="product_price" value="24000">
-                <div id="sale_bg" style="display: none;"><span class="sale_text"></span></div>
-            </div>
-            <ul class="info">
-                <li class="dsc">${item.name}<br></li>
-                <li class="price">${item.price}원</li>
-                <li class="icon"><span class="MK-product-icons"></span></li>
-            </ul>
-        </div>
-    </div>
-    </tbody>
-    </table>
-    </div>
+  <div class="prd-list">
+  <table summary="상품이미지, 상품 설명, 가격">
+  <tbody>
+  <tr>
+  <td>
+  <div class="tb-center">
+      <div class="box">
+          <div class="thumb salebox">
+              <a href="/item?id=${item._id}"><img class="MS_prod_img_m" src="${item.images[0]}" alt="상품 섬네일"></a>
+              <div class="info_icon">
+                  <span><a class="cartDateBtn" data-value="${item._id}" data-another="${item.price}"><img src="http://skincure.co.kr/design/skincure/0759ansome/icon_prd04.gif" alt="미리보기"></a></span>                                                                            </div>
+              <input type="hidden" name="custom_price" value="0">
+              <input type="hidden" name="product_price" value="24000">
+              <div id="sale_bg" style="display: none;"><span class="sale_text"></span></div>
+          </div>
+          <ul class="info">
+              <li class="dsc">${item.name}<br></li>
+              <li class="price">${item.price}원</li>
+              <li class="icon"><span class="MK-product-icons"></span></li>
+          </ul>
+      </div>
+  </div>
+  </tbody>
+  </table>
+  </div>
 `
       )
       .join("");
