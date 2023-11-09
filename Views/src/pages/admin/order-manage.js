@@ -21,7 +21,8 @@ fetch("http://localhost:3000/admin/order", requestOptions)
   })
   .catch(error => {
     console.log('error가 발생했어요!', error)
-    order_table.innerHTML = `  <td colspan='6' align="center">오류가 발생했어요 😨  </td>`
+    order_table.innerHTML = `  
+    <td colspan='6' align="center">오류가 발생했어요 😨  </td>`
     +`<tr>
     <td>test</td>
     <td>test</td>

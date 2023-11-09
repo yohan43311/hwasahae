@@ -170,15 +170,10 @@
         </ol>
       </nav>
       
-      <div class="col-sm-3">
-        <input type="text" class="form-control"> 
+      <div class="col-sm-3" style="margin: 4px;">
+        <input type="text" class="form-control"> </a>
+        <button type="button" class="btn btn-primary" id="category_add"></a>카테고리 추가</button>
       </div>
-      
-      <div>
-      <button type="button" class="btn btn-primary" id="category_add"></a>카테고리 추가</button>
-      <button type="button" class="btn btn-primary" id="category_modi"></a>카테고리 수정</button>
-      <button type="button" class="btn btn-primary" id="category_del"></a>카테고리 삭제</button>
-    </div>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -190,6 +185,8 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">카테고리 이름</h5>
+              <button type="button" class="btn btn-success" id="category_modi"></a>수정</button>
+              <button type="button" class="btn btn-danger" id="category_del"></a>삭제</button>
             </div>
           </div><!-- End Card with an image on top -->
         </div>
@@ -200,6 +197,8 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">카테고리 이름</h5>
+              <button type="button" class="btn btn-success" id="category_modi"></a>수정</button>
+              <button type="button" class="btn btn-danger" id="category_del"></a>삭제</button>
             </div>
           </div><!-- End Card with an image on top -->
         </div>
@@ -245,7 +244,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script defer sre="./category-list.js"></script>
+  <script defer src="./category-list.js"></script>
 
 </body>
 
