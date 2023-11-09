@@ -26,9 +26,17 @@ router.use(
 router.use("/cart", express.static("Views/src/pages/Cart")); //장바구니
 router.use("/product", express.static("Views/src/pages/Product"));
 router.use("/mypage", express.static("Views/src/pages/Mypage"));
+
+//관리자
 router.use("/adminPage", express.static("Views/src/pages/admin"));
+//상품추가
 router.use(
   "/adminPage/product/add",
   express.static("Views/src/pages/admin/product-add.html")
+);
+//상품상세
+router.use(
+  "/adminPage/product",
+  express.static("Views/src/pages/admin/product-detail.html")
 );
 module.exports = router;
