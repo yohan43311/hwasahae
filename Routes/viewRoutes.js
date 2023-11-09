@@ -39,4 +39,9 @@ router.use(
   "/admin/product",
   express.static("Views/src/pages/admin/product-detail.html")
 );
+//상품수정
+router.use(
+  "/admin/product/edit",
+  express.static("Views/src/pages/admin/product-edit.html")
+);
 module.exports = router;

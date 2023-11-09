@@ -30,7 +30,6 @@ class UserService {
         error.status = 400;
         throw error;
       }
-      console.log("info : ", info);
     });
     return authNo;
   }
@@ -83,11 +82,17 @@ class UserService {
 
     //DB에서 유저정보 찾기
     const user = await User.findOne({ email, deletedAt: null });
+    if (!user) {
+      const error = new Error("가입된 유저가 아닙니다.");
+      error.status = 400;
+      throw error;
+    }
+
     //입력한 비밀번호와 DB의 비밀번호 같은지 비교
-    const isValidPassword = await bcrypt.compare(password, user.password);
+    const isValidPassword = bcrypt.compare(password, user?.password);
 
     //만약 유저정보가 없거나 비밀번호가 동일하지 않다면
-    if (!user || !isValidPassword) {
+    if (!isValidPassword) {
       const error = new Error("이메일 또는 비밀번호가 일치하지 않습니다.");
       error.status = 400;
       throw error;
@@ -117,7 +122,8 @@ class UserService {
 
   //특정 유저 정보 조회
   async FindById(userInfo) {
-    const user = await User.findById(userInfo?.id);
+    const user = await User.findOne({ _id: userInfo?.id }).populate("order");
+    console.log("user : ", user);
 
     if (!user) {
       const error = new Error("유저 정보가 존재하지 않습니다.");

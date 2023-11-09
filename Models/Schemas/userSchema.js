@@ -36,9 +36,6 @@ const userSchema = new Schema(
 
     // 구매자 ref
     order: [{ type: Schema.Types.ObjectId, ref: "Order" }],
-
-    // 판매자 ref
-    product: [{ type: Schema.Types.ObjectId, ref: "Product" }],
   },
   {
     // 생성 날짜

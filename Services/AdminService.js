@@ -103,12 +103,15 @@ class AdminService {
   }
 
   // 상품 정보 수정 메소드 (관리자)
-  async modifyProduct(productId, updateData, role) {
+  async modifyProduct(productId, updateData, file, role) {
+    const imagePath = file ? `/img/shopimages/${file.filename}` : null;
+
     const updatedProduct = await Product.findOneAndUpdate(
       { _id: productId },
-      updateData,
+      { ...updateData, images: imagePath ? [imagePath] : [] },
       { new: true }
     );
+
     if (!updatedProduct) {
       throw new Error("상품을 찾을 수 없습니다.");
     }
