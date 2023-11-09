@@ -5,7 +5,7 @@ const router = express.Router();
 //load css, js, asset
 router.use("/", express.static("Views"));
 router.use("/", express.static("Views/src"));
-router.use("/", express.static("Views/src/pages/admin/"));
+router.use("/admin", express.static("Views/src/pages/admin/"));
 
 //route setting
 router.use("/", express.static("Views/src/pages/Main"));
