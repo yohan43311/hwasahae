@@ -8,23 +8,12 @@ const loginEvent = () => {
   loginBtn.addEventListener("click", loginResponse);
 };
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const accessToken = localStorage.getItem("accessToken");
-
-//   if (!accessToken) {
-//     alert("로그인 후 이용 가능합니다");
-//     window.location.href = "/login"; // 로그인 페이지로 리다이렉트
-//   }
-// });
-
 /* 로그인 api */
 const loginResponse = async (e) => {
   e.preventDefault();
-  console.log("안녕5555555");
   const login_URL = "http://localhost:3000/login";
 
   const formData = new FormData();
-  formData.append("name", name1?.value);
   formData.append("email", email?.value);
   formData.append("password", pwd?.value);
 
@@ -39,9 +28,7 @@ const loginResponse = async (e) => {
     .then((res) => res.json())
     .then((res) => {
       if (!res?.result) {
-        //userInfo(email, name, address)
-        localStorage.setItem("name", formData.name1.value);
-        localStorage.setItem("name", formData.email.value);
+        localStorage.setItem("userInfo", JSON.stringify(res));
         alert("로그인이 되셨습니다!");
         location.href = "/";
       } else {
@@ -55,20 +42,20 @@ const loginResponse = async (e) => {
 
 loginEvent();
 
-//로그인 버튼을 눌렀을 때의 동작
-// document.getElementById("login-btn").addEventListener("click", (e) => {
-//   e.preventDefault();
+/* 비회원 로그인 */
+// const storedCart = localStorage.getItem("cart"); //장바구니에 저장된 상품
+// const storedBuyItem = localStorage.getItem("buyItem"); //바로구매시에 저장된 상품
 
-//   const email = document.querySelector("#email").value;
-//   const pwd = document.querySelector("#pwd").value;
-
-//   if (!email && !pwd) {
-//     return alert("이메일, 비번을 입력하지 않으셨습니다!");
-//   }
-
-//   function signUpLink() {
-//     link = "/pages/SignUp/signUp.html";
-//     window.location.href = link;
-//   }
-//   //로그인 api 요청
-// });
+document.getElementById("#nonMember").addEventListener("click", () => {
+  const cartProducts = JSON.parse(localStorage.getItem("cart"));
+  const buyProducts = JSON.parse(localStorage.getItem("buyItem"));
+  if (cartProducts.length > 0) {
+    alert("장바구니 페이지로 이동합니다");
+    location.href = "/cart";
+  } else if (buyProducts) {
+    alert("결제 페이지로 이동합니다");
+    location.href = "/payment/";
+  } else {
+    alert("담겨진 상품이 없습니다");
+  }
+});
