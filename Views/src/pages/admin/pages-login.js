@@ -9,7 +9,7 @@ loginButton.addEventListener('click', () => {
 
   if (username === 'admin' && password === 'password') {
     // 로그인 성공 시 관리자 페이지로 이동
-    window.location.href = '/index';
+    window.location.href = '/index.html';
   } else {
     // 로그인 실패 시 에러 메시지 표시
     errorDisplay.textContent = '올바른 사용자 이름과 비밀번호를 입력해주세요.';

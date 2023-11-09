@@ -1,5 +1,9 @@
 
-   //상품 이미지 추가.
+const urlParams = new URL(location.href).searchParams;
+const itemId = urlParams.get('id');
+console.log(itemId)
+
+//상품 이미지 추가.
    const img_box = document.querySelector('.img_box')
    const imgBox = new Image();
    imgBox.src = 'http://skincure.co.kr/shopimages/skincure/0550040001062.jpg?1679875372'
