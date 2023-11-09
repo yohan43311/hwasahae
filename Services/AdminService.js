@@ -37,7 +37,7 @@ class AdminService {
 
   // order
   // 주문 조회 메소드 (관리자)
-  async listOrderAdmin(role) {
+  async listOrderAdmin() {
     const orders = await Order.find({});
     return orders;
   }
