@@ -1,14 +1,8 @@
 const getItems = JSON.parse(localStorage.getItem('cart')) || []
 console.log(getItems)
-// id의 끝자리 값을 기준으로 아이템 정렬
-const sortedItems = getItems.sort((a, b) => {
-  const lastDigitA = a.id % 10;
-  const lastDigitB = b.id % 10;
-  return lastDigitA - lastDigitB;
-});
 
 
-const itemMap = sortedItems.forEach((item,index)=>{
+const itemMap =getItems.forEach((item,index)=>{
   fetch(`http://localhost:3000/products/${item.id}`).then((response) => response.json())
   .then((data)=>{
     console.log(data)
@@ -21,15 +15,6 @@ const itemMap = sortedItems.forEach((item,index)=>{
       const total_num = data.price * item_su;
       return total_num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
-
-
-    // if(getItems.count !== 1){
-    //   data.__v = getItems.count
-
-    // }else{
-    //   data.__v = 1
-    // }
-    
 
     const MapItem = `
     <tr data-index="${index}">
@@ -91,11 +76,8 @@ const handleDeleteClick = (index) => {
 // 플러스 버튼
 const handlePlusClick = (index) => {
   getItems[index].count = (getItems[index].count || 1) + 1;
-  fetch(`http://localhost:3000/products/${getItems[index].id}`) // 데이터가 필요한가? 필요없을지도?
-    .then((response) => response.json())
-    .then((data) => {
+  
       item_su = getItems[index].count;
-
       item_many[index].value = item_su;
       item_total[index].innerHTML = total_price();
       console.log(item_many[index].value)
@@ -108,7 +90,7 @@ const handlePlusClick = (index) => {
         localStorage.setItem('cart', JSON.stringify(cartItems));
       }
       // priceCommas();
-    });
+    
 }
 
 // 마이너스 버튼
@@ -120,9 +102,6 @@ const handleMinusClick = (index) => {
     getItems[index].count = 1;
   }
 
-  fetch(`http://localhost:3000/products/${getItems[index].id}`)
-    .then((response) => response.json())
-    .then((data) => {
       item_su = getItems[index].count;
 
       item_many[index].value = item_su;
@@ -136,18 +115,10 @@ const handleMinusClick = (index) => {
         // 로컬 스토리지 업데이트된 데이터 저장
         localStorage.setItem('cart', JSON.stringify(cartItems));
       }
-      // priceCommas();
-    });
+
+
 }
 
-// //가격표시
-// const priceCommas = () => {
-//   for (let i = 0; i < item_total.length; i++) {
-//     item_total[i].innerHTML = data.price
-//       .toString()
-//       .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//   }
-// }
 
 
 
