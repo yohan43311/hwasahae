@@ -34,7 +34,7 @@ const verifyRefreshtoken = async (token, refreshDecodedUser) => {
   try {
     if (user?.refreshToken === token) return { result: true, user };
   } catch (error) {
-    return { result: false };
+    return { result: false, user: null };
   }
 };
 

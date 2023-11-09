@@ -1,7 +1,5 @@
-const categoryOptions = document.querySelector(".form-select");
-
 window.onload = function () {
-  console.log("상품 추가 페이지");
+  console.log("상품 상세 페이지");
 
   var req_orders = {
     method: "GET",
@@ -9,7 +7,7 @@ window.onload = function () {
   };
 
   //카테고리 조회
-  fetch("http://localhost:3000/category", req_orders)
+  fetch(`http://localhost:3000/products/${productId}`, req_orders)
     .then((response) => response.json())
     .then((result) => {
       console.log("통신 성공!", result);
@@ -29,46 +27,6 @@ window.onload = function () {
     `,
       ""
     );
-  };
-
-  //상품추가
-  const addProduct = async (e) => {
-    e.preventDefault();
-    const input = document.querySelectorAll("input[required]");
-
-    // 유효성 검증
-    for (let i = 0; i < input.length; i++) {
-      if (input[i].value === "") return alert("필수 입력사항을 채워주세요.");
-    }
-    const form = document.querySelector("#addForm");
-
-    const product_add_URL = "http://localhost:3000/admin/product";
-
-    const formData = new FormData(form);
-
-    const description = tinymce.activeEditor.getContent();
-    formData.append("description", description);
-
-    const option = {
-      method: "POST",
-      body: formData,
-    };
-
-    await fetch(product_add_URL, {
-      ...option,
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        alert("상품이 성공적으로 등록되었습니다.");
-        location.href = "http://localhost:3000/adminPAge/product-list.html";
-        if (res?.result === "fail") {
-          alert(`에러메시지 : ${res.error}`);
-        }
-      })
-      .catch((err) => {
-        console.log(" err: ", err);
-        alert(`에러메시지 : ${err.error}`);
-      });
   };
 
   const addEvent = () => {

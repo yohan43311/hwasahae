@@ -25,8 +25,8 @@ window.onload = function () {
       (prev, cur) =>
         prev +
         `
-  <div class="col-lg-3">
-    <div class="card">
+  <div class="col-lg-3" style="cursor:pointer" >
+    <div class="card" id=${cur["category"]}>
       <img src="${cur["images"][0]}" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">${cur["name"]}</h5>
@@ -39,4 +39,13 @@ window.onload = function () {
       ""
     );
   };
+
+  //상품상세페이지로 이동
+  products_table.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target.parentElement.getAttribute("class") === "card") {
+      const productid = target.parentElement.getAttribute("id");
+      location.href = `product?id=${productid}`;
+    }
+  });
 };
