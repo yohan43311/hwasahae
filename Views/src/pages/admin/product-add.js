@@ -46,9 +46,6 @@ window.onload = function () {
 
     const formData = new FormData(form);
 
-    const description = tinymce.activeEditor.getContent();
-    formData.append("description", description);
-
     const option = {
       method: "POST",
       body: formData,
@@ -60,7 +57,7 @@ window.onload = function () {
       .then((res) => res.json())
       .then((res) => {
         alert("상품이 성공적으로 등록되었습니다.");
-        location.href = "http://localhost:3000/adminPAge/product-list.html";
+        location.href = `/admin/product?id=${res?._id}`;
         if (res?.result === "fail") {
           alert(`에러메시지 : ${res.error}`);
         }

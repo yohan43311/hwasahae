@@ -26,7 +26,7 @@ window.onload = function () {
         prev +
         `
   <div class="col-lg-3" style="cursor:pointer" >
-    <div class="card" id=${cur["category"]}>
+    <div class="card" id=${cur["_id"]}>
       <img src="${cur["images"][0]}" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">${cur["name"]}</h5>

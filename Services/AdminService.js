@@ -93,7 +93,8 @@ class AdminService {
       description,
       price,
       maker,
-      category: categoryDoc._id, // 카테고리 문서의 ID를 참조합니다.
+      // category: categoryDoc._id, // 카테고리 문서의 ID를 참조합니다.
+      category, // 카테고리 이름 그대로 db에 저장
     });
 
     // 상품 저장
