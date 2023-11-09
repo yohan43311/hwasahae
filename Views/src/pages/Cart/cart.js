@@ -1,7 +1,14 @@
 const getItems = JSON.parse(localStorage.getItem('cart')) || []
 console.log(getItems)
+// id의 끝자리 값을 기준으로 아이템 정렬
+const sortedItems = getItems.sort((a, b) => {
+  const lastDigitA = a.id % 10;
+  const lastDigitB = b.id % 10;
+  return lastDigitA - lastDigitB;
+});
 
-const itemMap = getItems.forEach((item,index)=>{
+
+const itemMap = sortedItems.forEach((item,index)=>{
   fetch(`http://localhost:3000/products/${item.id}`).then((response) => response.json())
   .then((data)=>{
     console.log(data)
@@ -60,6 +67,26 @@ minusBtns.forEach((minusBtn, index) => {
     handleMinusClick(index);
   });
 });
+deleteBtns.forEach((deleteBtn,index)=>{
+  deleteBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    handleDeleteClick(index)
+  })
+})
+
+// 삭제 버튼
+const handleDeleteClick = (index) => {
+  // 해당 인덱스의 상품 삭제
+  getItems.splice(index, 1);
+
+  // 로컬 스토리지에서도 삭제
+  localStorage.setItem('cart', JSON.stringify(getItems));
+
+  // 해당 행 삭제
+  const tableRow = document.querySelector(`#productTable tr[data-index="${index}"]`);
+  tableRow.parentNode.removeChild(tableRow);
+  location.reload();
+}
 
 // 플러스 버튼
 const handlePlusClick = (index) => {
