@@ -22,7 +22,7 @@ router.patch("/:categoryId/category", authJWT, updateCategoryAdmin); // 카테�
 router.delete("/:categoryId/category", authJWT, deleteCategoryAdmin); // 카테고리 삭제 (관리자)
 
 // 주문
-router.get("/order", listOrderAdmin); // 주문 조회 (관리자)
+router.get("/order", authJWT, listOrderAdmin); // 주문 조회 (관리자)
 router.patch("/:orderId/order", authJWT, updateOrderAdmin); // 주문 수정 (관리자)
 router.delete("/:orderId/order", authJWT, deleteOrderAdmin); // 주문 삭제 (관리자)
 

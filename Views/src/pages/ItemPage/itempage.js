@@ -3,29 +3,32 @@ const urlParams = new URL(location.href).searchParams;
 const itemId = urlParams.get('id');
 console.log(itemId)
 
-//상품 이미지 추가.
-   const img_box = document.querySelector('.img_box')
-   const imgBox = new Image();
-   imgBox.src = 'http://skincure.co.kr/shopimages/skincure/0550040001062.jpg?1679875372'
-   img_box.appendChild(imgBox)
 
-//구매 관련 폼
-const info = document.querySelector('.info')
-
-const item_date = {title:"순한 클랜징 동백 오일",price:23000,discount:32000,reserves:1,volume:200};
-
-//갯수
-let item_su = 1
-
-//토탈금액 물픔금액 * 갯수
-let total_price = () =>{
-    const total_num = item_date.price * item_su
-    return total_num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-}
+fetch(`http://localhost:3000/products/${itemId}`)
+.then((response) => response.json()).then((data) =>{
+        //상품 이미지 추가.
+        const img_box = document.querySelector('.img_box')
+        const imgBox = new Image();
+        imgBox.src = `${data.images[0]}`
+        img_box.appendChild(imgBox)
 
 
- info.innerHTML = `
-    <h3 class="tit-prd">${item_date.title}</h3> 
+        //구매 관련 폼
+        const info = document.querySelector('.info')
+        const item_date = data;
+        console.log(item_date)
+
+        //상품 갯수
+        let item_su = 1
+
+        //토탈금액 물픔금액 * 갯수
+        let total_price = () =>{
+            const total_num = item_date.price * item_su
+            return total_num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
+
+    info.innerHTML = `
+    <h3 class="tit-prd">${item_date.name}</h3> 
     <ul class="itemInfo">
         <li>
             <span class="tb-left">판매가격</span>
@@ -37,16 +40,16 @@ let total_price = () =>{
         </li>
         <li>
             <span class="tb-left">적립금</span>
-            <div class="tb-left tb-left-in reserves"><span class="pricevalue">${item_date.reserves}</span>%</div>
+            <div class="tb-left tb-left-in reserves"><span class="pricevalue">1</span>%</div>
         </li>
         <li>
             <span class="tb-left">용량 및 중량</span>
-            <div class="tb-left tb-left-in reserves"><span class="pricevalue">${item_date.volume}</span>ml</div>
+            <div class="tb-left tb-left-in reserves"><span class="pricevalue">200</span>ml</div>
         </li>
     </ul>
     <div class="option_add_area">
         <ul>
-            <li>${item_date.title}</li>
+            <li>${item_date.description}</li>
             <li>
             <input type="text" class="item_many" id="MS_amount_basic_0" name="amount[]" value=${item_su} onfocusout="set_amount(this, 'basic');" size="4" style="text-align: right; float: left;" class="basic_option" maxlength="" data-gtm-form-interact-field-id="0">
             <span class="plus area_btn">+</span>
@@ -67,11 +70,58 @@ let total_price = () =>{
     </ul>
     </div>
     <div class="cboth prd-btns">
-    <a href="javascript:예정" class="buy move">BUY NOW</a>
-    <a id="cartBtn" href="javascript:예정;" class="basket move">CART</a>
-    <a id="wishBtn" href="javascript:예정;" class="wish move">WISH LIST</a>
+    <a id="buyBtn" href="/payment" class="buy move">BUY NOW</a>
+    <a id="cartBtn" href="/cart" class="basket move">CART</a>
     </div>
 `
+
+// 바로구매 / 장바구니 로컬스토리지 넣기.
+const buyBtn = document.querySelector('#buyBtn')
+const cartBtn = document.querySelector('#cartBtn')
+const storedCart = JSON.parse(window.localStorage.getItem('cart') || '[]'); // 가져오기
+const userInfo = window.localStorage.getItem('userInfo'); // 로그인 확인용.
+
+//바로결제
+buyBtn.addEventListener('click',(e)=>{
+    if(!userInfo){
+        e.preventDefault()
+        window.location.href ="/login"
+    }
+    const cartList = []
+    if (cartList.some(item => item.id === itemId)) {
+        return;
+    }else{
+        cartList.push({
+            id:itemId,
+            price:total_price(),
+            count:item_su
+        });
+        window.localStorage.setItem('buyItem', JSON.stringify(cartList))
+    }
+})
+
+//장바구니로
+cartBtn.addEventListener('click', () => {
+    const cartList = storedCart;
+    const itemIndex = cartList.findIndex(item => item.id === itemId);
+
+    if (itemIndex !== -1) {
+        // 이미 장바구니에 있는 경우 count를 갱신합니다.
+        cartList[itemIndex].count = item_su;
+        window.localStorage.setItem('cart', JSON.stringify(cartList));
+        alert("제품의 수량을 업데이트했습니다.");
+    } else {
+        // 장바구니에 없는 경우 새로운 아이템을 추가합니다.
+        cartList.push({
+            id: itemId,
+            price: total_price().replace(/,/g, ''),
+            count: item_su
+        });
+        alert("장바구니에 넣었습니다.");
+        window.localStorage.setItem('cart', JSON.stringify(cartList));
+    }
+});
+
 
 //제품수량 증가 및 감소
 const plus = document.querySelector('.plus')
@@ -89,8 +139,7 @@ minus.addEventListener('click', () => {
     if(item_many.value == 1){
         item_many.value = 1
         return alert("최소수량 입니다")}
-
-
+        
     item_su = item_su-1
     item_many.value = item_su
     item_total.innerHTML = total_price()
@@ -114,7 +163,6 @@ detail_img.onerror = function() {
     alert("이미지 로드 오류")
 };
 
+  });
 
 
-//데이터를 보내려면 어떻게 준비해야할까?
-// json.body 값으로 보냄

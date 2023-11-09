@@ -5,6 +5,7 @@ const router = express.Router();
 //load css, js, asset
 router.use("/", express.static("Views"));
 router.use("/", express.static("Views/src"));
+router.use("/admin", express.static("Views/src/pages/admin/"));
 
 //route setting
 router.use("/", express.static("Views/src/pages/Main"));
@@ -25,5 +26,17 @@ router.use(
 router.use("/cart", express.static("Views/src/pages/Cart")); //장바구니
 router.use("/product", express.static("Views/src/pages/Product"));
 router.use("/mypage", express.static("Views/src/pages/Mypage"));
+
+// 관리자
 router.use("/admin", express.static("Views/src/pages/admin"));
+//상품추가
+router.use(
+  "/admin/product/add",
+  express.static("Views/src/pages/admin/product-add.html")
+);
+//상품상세
+router.use(
+  "/admin/product",
+  express.static("Views/src/pages/admin/product-detail.html")
+);
 module.exports = router;
