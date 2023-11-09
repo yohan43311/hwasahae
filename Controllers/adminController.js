@@ -53,6 +53,7 @@ const updateOrderAdmin = asyncHandler(async (req, res) => {
     status,
     userRole
   );
+
   res.status(200).json({
     message: "주문 상태가 업데이트 되었습니다.",
     order: updatedOrder,
