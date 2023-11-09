@@ -39,9 +39,15 @@ const deleteCategoryAdmin = asyncHandler(async (req, res) => {
 // order
 // 주문 조회 (관리자)
 const listOrderAdmin = asyncHandler(async (req, res) => {
-  const userRole = res.locals.userInfo.role;
-  const orders = await orderService.listOrderAdmin(userRole);
-  res.status(200).json(orders);
+  //const userRole = res.locals.userInfo.role;
+  try {
+    const orders = await orderService.listOrderAdmin(userRole);
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(403).json({ message: error.message });
+  }
+  //const orders = await orderService.listOrderAdmin();
+  //res.status(200).json(orders);
 });
 // 주문 수정 (관리자)
 const updateOrderAdmin = asyncHandler(async (req, res) => {
