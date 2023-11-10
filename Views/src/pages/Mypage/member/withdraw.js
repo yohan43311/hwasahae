@@ -1,41 +1,52 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const deleteForm = document.getElementById('deleteForm');
-    const resultDiv = document.getElementById('result');
-  
-    deleteForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-  
+  // 삭제 폼과 결과를 나타내는 div 요소 가져오기
+  // const deleteForm = document.getElementById('deleteForm');
+  const resultDiv = document.getElementById('result');
+  const button = document.querySelector('#button'); // 확인 버튼 가져오기
+
+  // 확인 버튼 클릭 시
+  button.addEventListener('click', function(event) {
+      event.preventDefault(); // 기본 동작 방지 (폼 제출 방지)
+
+      // 입력된 비밀번호 가져오기
       const password = document.getElementById('password').value;
-  
+
+      // API에 보낼 요청 본문 작성
       const requestBody = {
-        password: password
+          password: password
       };
-  
-      fetch('http://kdt-sw-7-team04.elicecoding.com:3000/users/my', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
+
+      // 서버로 DELETE 요청 보내기
+      fetch('http://localhost:3000/users/my', {
+          method: 'DELETE', // DELETE 메서드 사용
+          headers: {
+              'Content-Type': 'application/json', // JSON 형식의 데이터 전송
+          },
+          body: JSON.stringify(requestBody), // 요청 본문 설정
       })
-        .then((response) => {
+      .then((response) => {
           if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+              // 오류 발생 시 에러 처리
+              throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          return response.json();
-        })
-        .then((data) => {
+          return response.json(); // 응답 JSON으로 변환
+      })
+      .then((data) => {
+          // 삭제 성공 시
+          console.log(data);
           if (data && data.deletedAt) {
-            // 회원 탈퇴 성공 시
-            resultDiv.innerHTML = `<p>User successfully deleted at: ${data.deletedAt}</p>`;
+              alert("탈퇴가 완료되셨습니다.");
+              //홈페이지로 이동
+              window.location.href = 'http://localhost:3000/';
+
           } else {
-            // 서버 응답이 예상과 다를 경우
-            resultDiv.innerHTML = `<p>Unexpected server response</p>`;
+              // 예상치 못한 서버 응답 시
+              alert("비밀번호가 일치하지 않습니다!");
           }
-        })
-        .catch((error) => {
-          // 실패 시
-          resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
-        });
-    });
+      })
+      .catch((error) => {
+          // 오류 발생 시
+          resultDiv.innerHTML = `<p>에러: ${error.message}</p>`;
+      });
   });
+});
