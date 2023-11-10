@@ -14,6 +14,9 @@ th{
 
 main{
   margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button{
@@ -59,19 +62,20 @@ button{
   margin: 0 auto;
 }
 
-.btn{
+.a_btn,.btn{
   width: 200px;
   height: 70px;
-  padding:10px; 
   background: #F0F0F0;
   font-weight: bolder; 
   border-radius:12px; 
   font-size: 17px; 
   border:none; 
-  margin:0px 5px 80px 0;
+  margin:0px 5px 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.btn:hover{
+.a_btn:hover,.btn:hover{
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.441);
   background-color: rgba(128, 128, 128, 0.399);
 }
