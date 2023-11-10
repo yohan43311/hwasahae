@@ -57,6 +57,40 @@ const formatPhoneNumber = (phoneNumber) => {
   return phoneNumber;
 };
 
+const postDeleteData = () => {
+  var requestOptions = {
+    method: "DELETE",
+    redirect: "follow",
+  };
+
+  fetch(
+    "http://localhost:3000/admin/6549203c9c4dcd231ee139bc/order",
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+
+  window.onload();
+};
+
+// const createOrderList = (data)=>{
+//   return data.reduce((prev,cur)=> prev+ `
+//   <tr>
+//                         <td>${cur.createdAt}</td>
+//                         <td>${cur.userId}</td>
+//                         <td>${cur["receiver"].phone}</td>
+//                         <td>${cur.totalPrice}</td>
+//                         <td>${cur["receiver"].address}</td>
+//                         <td>${cur.status}</td>
+//                         <td><button type="button" class="btn btn-primary rounded-pill"
+//                           onclick="location.href='order-modify.html?orderNo=${cur.totalPrice}&orderUserId=${cur.userId}'"
+//                           >수정</button></td>
+//                           <button type="delete" class="btn btn-danger" id="delete_button" onclick="postDeleteData()">삭제</button>
+//                       </tr>
+//   `,'')
+//  }// location.href='order-modify.html'
+
 // 금액 형식 변환 함수
 const formatCurrency = (amount) => {
   return amount.toLocaleString("ko-KR");
