@@ -17,7 +17,7 @@ class AdminService {
       { name: newName },
       { new: true } // 이 옵션은 업데이트된 문서를 반환하도록 설정합니다.
     );
-
+    console.log("updatedCategory : ", updatedCategory);
     if (!updatedCategory) {
       throw new Error("해당 카테고리를 찾을 수 없습니다.");
     }

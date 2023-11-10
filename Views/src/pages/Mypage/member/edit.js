@@ -2,7 +2,7 @@
 fetch("http://localhost:3000/users/my", { method: "GET" })
   .then((response) => response.json())
   .then((data) => {
-    console.log("data: ", data)
+    console.log("data: ", data);
     const myInfoMap = `
       <!-- 이름 -->
       <div class="w-100">
@@ -54,33 +54,31 @@ fetch("http://localhost:3000/users/my", { method: "GET" })
       </div>
     `;
 
-    const productContainer = document.querySelector('.title');
+    const productContainer = document.querySelector(".title");
     productContainer.innerHTML = myInfoMap;
-
-
   });
 
 // 수정된 함수로 API 요청 수행
 const submitForm = (event) => {
   event.preventDefault();
   // console.log("aaa");
-  const form = document.querySelector('#userform');
+  const form = document.querySelector("#userform");
 
-  fetch('http://localhost:3000/users/my', {
-    method: 'PATCH',
+  fetch("http://localhost:3000/users/my", {
+    method: "PATCH",
     // body: JSON.stringify(requestBody),
-    body: new FormData(form)
+    body: new FormData(form),
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log('회원 정보 수정 성공:', data);
+      console.log("회원 정보 수정 성공:", data);
       // 성공 시 추가적인 로직을 여기에 작성하세요.
-      alert('회원 정보가 성공적으로 수정되었습니다.');
+      alert("회원 정보가 성공적으로 수정되었습니다.");
     })
     .catch((error) => {
-      console.error('회원 정보 수정 실패:', error);
+      console.error("회원 정보 수정 실패:", error);
       // 실패 시 추가적인 로직을 여기에 작성하세요.
-      alert('회원 정보 수정에 실패했습니다. 다시 시도해주세요.');
+      alert("회원 정보 수정에 실패했습니다. 다시 시도해주세요.");
     });
 };
 
