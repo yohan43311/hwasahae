@@ -1,6 +1,6 @@
 
 const categoryNav = document.querySelector('.list')
-let abcd = []
+let linkName = []
 // 카테고리 데이터로 불러와서 만들기.
 async function fetchData() {
   try {
@@ -20,10 +20,10 @@ async function fetchData() {
         e.preventDefault();
         const dataNameValue = linkBtn.getAttribute('data-name');
         alert(dataNameValue);
-        abcd = []
-        abcd.push(dataNameValue);
-        console.log(abcd)
-        listHtml(abcd)
+        linkName = []
+        linkName.push(dataNameValue);
+
+        listHtml(linkName)
       });
     });
   } catch (error) {
@@ -36,7 +36,13 @@ fetchData();
 // fetch(`http://localhost:3000/category/products/${koreanText}`).then((response) => response.json()).then((data)=>console.log(data))
 
 const listHtml = (link) =>{
-  console.log(link)
+  const encodedLink = encodeURIComponent(link);
+  console.log(encodedLink);
+
+  fetch(`http://localhost:3000/category/products/${encodedLink}`)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error('에러:', error));
   const products = [
     { imageSrc: './img/shopimages/1.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
     { imageSrc: './img/shopimages/2.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
