@@ -93,7 +93,8 @@ buyBtn.addEventListener('click',(e)=>{
     }else{
         cartList.push({
             id:itemId,
-            price:total_price(),
+            price:item_date.price,
+            total_price: total_price(),
             count:item_su
         });
         window.localStorage.setItem('buyItem', JSON.stringify(cartList))

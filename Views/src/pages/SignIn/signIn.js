@@ -35,6 +35,7 @@ const loginResponse = async (e) => {
 
   await fetch(login_URL, {
     ...option,
+
   })
     .then((res) => res.json())
     .then((res) => {
