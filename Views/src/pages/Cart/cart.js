@@ -11,11 +11,6 @@ const fetchPromises = getItems.map(async item => {
 });
 console.log(fetchPromises)
 
-const itemMap = sortedItems.forEach((item, index) => {
-  fetch(`http://localhost:3000/products/${item.id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
 
 // fetch 요청으로 위에서 만든 리절트쪽에 있는 데이터를 프로미스 올로 사용.
 Promise.all(fetchPromises).then(productDataArray => {
@@ -169,11 +164,3 @@ Promise.all(fetchPromises).then(productDataArray => {
     })
 
 })
-
-
-
-
-
-
-
-
