@@ -2,6 +2,7 @@
     width: 1260px;
     min-height: 740px;
     margin: 0 auto;
+    text-align: center;
 }
 
 #mypage .mypage-tit {
@@ -134,3 +135,16 @@ table {
     font-weight: 300;
   }
     
+/*회원탈퇴페이지 css*/
+  p{
+    font-size: 14px;
+    color: #7f7f7f;
+    padding-bottom: 50px;
+  }
+
+  input {
+    border: 1px solid #ccc; /* 테두리 스타일 및 두께 */
+    border-radius: 4px; /* 테두리 모서리 둥글게 */
+    padding: 8px; /* 입력 필드와 테두리 사이 간격 */
+  }
+  
