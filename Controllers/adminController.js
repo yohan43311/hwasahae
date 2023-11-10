@@ -92,6 +92,7 @@ const modifyProductsAdmin = asyncHandler(async (req, res) => {
   const updatedProduct = await ProductService.modifyProduct(
     productId,
     updateData,
+    req.file,
     userRole
   );
   res.status(200).json(updatedProduct);

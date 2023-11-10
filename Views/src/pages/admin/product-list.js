@@ -26,12 +26,14 @@ window.onload = function () {
         prev +
         `
   <div class="col-lg-3" style="cursor:pointer" >
-    <div class="card" id=${cur["category"]}>
-      <img src="${cur["images"][0]}" class="card-img-top" alt="...">
+    <div class="card" id=${cur["_id"]}>
+      <img src="${
+        cur["images"][0]
+      } " class="card-img-top" alt="..." style="aspect-ratio:16/12">
       <div class="card-body">
         <h5 class="card-title">${cur["name"]}</h5>
-        <p class="card-text">${cur["price"]}</p>
-        <p class="card-text"><a href="#" class="btn btn-primary">수 정</a></p>
+        <p class="card-text">${cur["price"]?.toLocaleString()}원</p>
+         <p class="card-text"><a href="#" class="btn btn-primary">상세보기</a></p>
       </div>
     </div>
   </div>
@@ -43,9 +45,10 @@ window.onload = function () {
   //상품상세페이지로 이동
   products_table.addEventListener("click", (event) => {
     const target = event.target;
-    if (target.parentElement.getAttribute("class") === "card") {
-      const productid = target.parentElement.getAttribute("id");
-      location.href = `product?id=${productid}`;
+    const parent = target.closest(".card");
+    if (parent.getAttribute("class") === "card") {
+      const productid = parent.getAttribute("id");
+      location.href = `/admin/product?id=${productid}`;
     }
   });
 };

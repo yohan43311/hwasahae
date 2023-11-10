@@ -48,4 +48,9 @@ router.use(
   express.static("Views/src/pages/Mypage/member/withdraw.html")
 ); //마이페이지-회원정보수정
 
+//상품수정
+router.use(
+  "/admin/product/edit",
+  express.static("Views/src/pages/admin/product-edit.html")
+);
 module.exports = router;

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>상품 등록</title>
+  <title>상품 수정</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -169,11 +169,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>상품 등록</h1>
+      <h1>상품 상세</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Product add</li>
+          <li class="breadcrumb-item">Product detail</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -183,23 +183,22 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">상품 등록</h5>
+              <h5 class="card-title">상품 수정</h5>
 
               <iframe name='ifrm' width='0' height='0' frameborder='0'></iframe>
               <!-- Horizontal Form -->
-              <form action="/admin/product" method="POST" encType="multipart/form-data" id="addForm" target="ifrm">
+              <form action="/admin/product/edit" method="POST" encType="multipart/form-data" id="detailForm" target="ifrm">
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label" id="name">상품명</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputText" name="name" required>
+                    <input type="text" class="form-control" id="inputText" name="name" >
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label" id="category">카테고리</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example" name="category" required>
-      
+                    <select class="form-select" aria-label="Default select example" name="category"  >
                     </select>
                   </div>
                 </div>
@@ -207,24 +206,30 @@
                 <div class="input-group mb-3">
                   <span class="input-group-text">판매가격</span>
                   <input type="number" id="price"
-                  class="form-control" aria-label="Amount (to the nearest dollar)" name="price" required>
+                  class="form-control" name="price" >
                   <span class="input-group-text">원</span>
                 </div>
 
                 <div class="row mb-3">
                   <label for="maker" class="col-sm-2 col-form-label">브랜드</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="text" id="maker" name="maker" required>
+                    <input class="form-control" type="text" id="maker" name="maker" >
                   </div>
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">Photo File Upload</label>
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Photo</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="image" name="image" multiple required>
+                    <input class="form-control" type="file" id="image" name="image" required >
+                    <!-- <div class="col-lg-3">
+                      <div class="card" >
+                        <img src="#" class="card-img-top" alt="...">
+                      </div>
+                    </div> -->
                   </div>
                 </div>
 
+                
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">제품 설명</label>
                   <div class="col-sm-10">
@@ -232,14 +237,14 @@
                   </div>
                 </div>
 
+
                 <!-- TinyMCE Editor -->
                 <!-- <textarea class="tinymce-editor" name="description">
                 </textarea> -->
                 <!-- End TinyMCE Editor -->
                 
                 <div class="text-center">
-                  <button  class="btn btn-primary" id="add">등록</button>
-                  <button type="reset" class="btn btn-secondary">초기화</button>
+                  <button  class="btn btn-primary" id="edit">수정 완료</button>
                 </div>
               </form><!-- End Horizontal Form -->
 
@@ -277,7 +282,7 @@
 
   <!-- Template Main JS File -->
   <script src="/admin/assets/js/main.js"></script>
-  <script src="/pages/admin/product-add.js"></script>
+  <script src="/pages/admin/product-edit.js"></script>
 
 </body>
 

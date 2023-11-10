@@ -50,7 +50,12 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 // 상품
 router.post("/product", upload.single("image"), authJWT, createProductAdmin); // 상품 추가 (관리자)
-router.patch("/:productId/product", authJWT, modifyProductsAdmin); // 상품 수정 (관리자)
+router.patch(
+  "/:productId/product",
+  upload.single("image"),
+  authJWT,
+  modifyProductsAdmin
+); // 상품 수정 (관리자)
 router.delete("/:productId/product", authJWT, deleteProductsAdmin); // 상품 삭제 (관리자)
 
 module.exports = router;

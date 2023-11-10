@@ -1,9 +1,9 @@
-const { Order } = require("../Models");
+const { Order, User } = require("../Models");
 
 class OrderService {
   constructor() {}
   // 주문 추가 메소드 (유저)
-  async createOrder(orderDTO) {
+  async createOrder(orderDTO, userInfo) {
     const { userId, receiver, orderedItems, deliveryFee, status } = orderDTO;
     //const user = res.locals.userInfo;
     // totalPrice 계산: 각 상품의 가격과 수량을 곱한 후 총합에 배송비를 더합니다.

@@ -95,7 +95,8 @@ class AdminService {
       description,
       price,
       maker,
-      category: categoryDoc._id, // 카테고리 문서의 ID를 참조합니다.
+      // category: categoryDoc._id, // 카테고리 문서의 ID를 참조합니다.
+      category, // 카테고리 이름 그대로 db에 저장
     });
 
     // 상품 저장
@@ -104,12 +105,15 @@ class AdminService {
   }
 
   // 상품 정보 수정 메소드 (관리자)
-  async modifyProduct(productId, updateData, role) {
+  async modifyProduct(productId, updateData, file, role) {
+    const imagePath = file ? `/img/shopimages/${file.filename}` : null;
+
     const updatedProduct = await Product.findOneAndUpdate(
       { _id: productId },
-      updateData,
+      { ...updateData, images: imagePath ? [imagePath] : [] },
       { new: true }
     );
+
     if (!updatedProduct) {
       throw new Error("상품을 찾을 수 없습니다.");
     }

@@ -187,7 +187,7 @@
 
               <iframe name='ifrm' width='0' height='0' frameborder='0'></iframe>
               <!-- Horizontal Form -->
-              <form action="/admin/product" method="POST" encType="multipart/form-data" id="addForm" target="ifrm">
+              <form action="/admin/product" method="POST" encType="multipart/form-data" id="detailForm" target="ifrm">
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label" id="name">상품명</label>
                   <div class="col-sm-10">
@@ -199,7 +199,6 @@
                   <label class="col-sm-2 col-form-label" id="category">카테고리</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" name="category" disabled >
-      
                     </select>
                   </div>
                 </div>
@@ -207,7 +206,7 @@
                 <div class="input-group mb-3">
                   <span class="input-group-text">판매가격</span>
                   <input type="number" id="price"
-                  class="form-control" aria-label="Amount (to the nearest dollar)" name="price" disabled>
+                  class="form-control" name="price" disabled>
                   <span class="input-group-text">원</span>
                 </div>
 
@@ -219,18 +218,34 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">Photo File Upload</label>
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Photo</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="image" name="image" multiple disabled>
+                    <!-- <input class="form-control" type="file" id="image" name="image" multiple disabled> -->
+                    <div class="col-lg-3">
+                      <div class="card" >
+                        <img src="#" class="card-img-top" alt="...">
+                      </div>
+                    </div>
                   </div>
                 </div>
 
+                
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">제품 설명</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="10" id="description" name="description" disabled></textarea>
+                  </div>
+                </div>
+
+
                 <!-- TinyMCE Editor -->
-                <textarea class="tinymce-editor" name="description">
-                </textarea><!-- End TinyMCE Editor -->
+                <!-- <textarea class="tinymce-editor" name="description">
+                </textarea> -->
+                <!-- End TinyMCE Editor -->
                 
                 <div class="text-center">
                   <button  class="btn btn-primary" id="edit">수정</button>
+                  <button  class="btn btn-danger" id="delete">삭제</button>
                 </div>
               </form><!-- End Horizontal Form -->
 
