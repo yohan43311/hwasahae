@@ -37,21 +37,10 @@ fetchData();
 
 const listHtml = (link) =>{
   const encodedLink = encodeURIComponent(link);
-  console.log(encodedLink);
-
   fetch(`http://localhost:3000/category/products/${encodedLink}`)
     .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error('에러:', error));
-  const products = [
-    { imageSrc: './img/shopimages/1.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
-    { imageSrc: './img/shopimages/2.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
-    { imageSrc: './img/shopimages/3.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
-    { imageSrc: './img/shopimages/4.jpg', title: '동백 브라이트닝 광채쿠션', price: '24,000원' },
-    { imageSrc: './img/shopimages/5.jpg', title: '동백 브라이트닝 광채쿠션', price: '42,000원' },
-    // 다른 상품들 추가
-  ];
-
+    .then((item) => {
+      
 //상품 템플릿화
 function createProductTemplate(imageSrc, title, price) {
   const productTemplate = `
@@ -79,11 +68,13 @@ const productContainer = document.querySelector('.product-container');
 
 
 // 반복해서 상품을 추가
-products.forEach((productData) => {
-  const productElement = createProductTemplate(productData.imageSrc, productData.title, productData.price);
+item.forEach((item) => {
+  const productElement = createProductTemplate(item.images[0], item.name, item.price);
   productContainer.innerHTML += productElement;
 });
 
+      
+    })
 }
 listHtml()
 
