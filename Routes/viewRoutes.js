@@ -53,4 +53,10 @@ router.use(
   "/admin/product/edit",
   express.static("Views/src/pages/admin/product-edit.html")
 );
+
+//주문수정
+router.use("/admin/order/edit",
+  express.static("Views/sre/pages/admin/order-modify.html")
+  );
+  
 module.exports = router;

@@ -1,93 +1,120 @@
-window.onload = function () {
-  const receivedData = location.href.split("?")[1];
-  console.log("주문 수정 페이지", typeof receivedData, receivedData);
-  let params = receivedData.split("&");
-  console.log("파람^^ ", params);
-  const requestParameter = params.reduce((prev, cur) => {
-    const v = cur.split("=");
-    console.log("브이 ", v, v[0], v[1]);
-    prev[v[0]] = v[1];
-    return prev;
-  }, {});
-  console.log(
-    "주문 관리 페이지로 부터 받아온 수정할 데이터 (백엔드로 넘겨줘야할 데이터) : ",
-    typeof requestParameter,
-    requestParameter
-  );
 
-  // 1. fetch 해서 수정 할 주문 정보 가져오기!
 
-  // input 태그 안에 value로 매핑
-};
 
 window.onload = function () {
-  const receivedData = location.href.split("?")[1];
-  console.log("주문 수정 페이지", typeof receivedData, receivedData);
-  let params = receivedData.split("&");
-  console.log("파람^^ ", params);
-  const requestParameter = params.reduce((prev, cur) => {
-    const v = cur.split("=");
-    console.log("브이 ", v, v[0], v[1]);
-    prev[v[0]] = v[1];
-    return prev;
-  }, {});
-  console.log(
-    "주문 관리 페이지로 부터 받아온 수정할 데이터 (백엔드로 넘겨줘야할 데이터) : ",
-    typeof requestParameter,
-    requestParameter
-  );
+  console.log("주문 수정 페이지");
 
-  // 1. fetch 해서 수정 할 주문 정보 가져오기!
+  const form = document.querySelector("#orderForm");
+  const urlSearch = new URLSearchParams(location.search);
+  const orderId = urlSearch.get("orderNo");
+
   var requestOptions = {
-    method: "GET",
-    redirect: "follow",
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  //상품 조회
+  fetch(`http://localhost:3000/admin/${orderId}/order`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log("통신 성공!", result);
+
+
+      form.date.value = result.date;
+      form.name.value = result.name;
+      form.phone.value = result.phone;
+      form.price.value = result.price;
+      form.address.value = result.address;
+      form.status.value = result.address;
+      
+
+    })
+    .catch((error) => {
+      console.log("error가 발생했어요!", error);
+      alert(`에러메시지 : ${error.message}`);
+    });
+
+  //상품 수정
+  const editOrder = async (e) => {
+    e.preventDefault();
+    const input = document.querySelectorAll("input[required]");
+
+    // 유효성 검증
+    for (let i = 0; i < input.length; i++) {
+      if (input[i].value === "") return alert("필수 입력사항을 채워주세요.");
+    }
+
+    const form = document.querySelector("#detailForm");
+    const formData = new FormData(form);
+
+    const order_add_URL = `http://localhost:3000/admin/${orderId}`;
+
+    const option = {
+      method: "PATCH",
+      body: formData,
+    };
+
+    await fetch(order_add_URL, {
+      ...option,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        alert("상품이 성공적으로 수정되었습니다.");
+        location.href = `/admin/order?id=${res?._id}`;
+        if (res?.result === "fail") {
+          alert(`에러메시지 : ${res.error}`);
+        }
+      })
+      .catch((err) => {
+        console.log(" err: ", err);
+        alert(`에러메시지 : ${err.error}`);
+      });
   };
 
-  //주문 정보를 하나씩하는 주문을 추가해주세요 수정할 데이터로 활용하게
-  fetch("http://localhost:3000/orders/", requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
-
-  // fetch
-  //
-
-  // input 태그 안에 value로 매핑
-  const orderDate = document.getElementById("orderDate");
-  orderDate.value = "";
-};
-
-const moditybutton = document.querySelector(".modify_button");
-const deletebutton = document.querySelector(".delete_button");
-
-// 매핑된 정보를 수정 완료하기 기능
-// 현재 input 태그안에 있는 value를 백엔드로 보내는 fetch 작성
-const postModifiedData = () => {
-  var requestOptions = {
-    method: "PATCH",
-    redirect: "follow",
+  const editEvent = () => {
+    const orderEditButton = document.querySelector("#modify");
+    orderEditButton.addEventListener("click", editOrder);
   };
 
-  fetch(
-    "http://localhost:3000/products/6544b441b25cf1e3d2e406f8",
-    requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
-};
+  editEvent();
 
-const postDeleteData = () => {
-  var requestOptions = {
-    method: "DELETE",
-    redirect: "follow",
+
+
+
+  //주문 삭제
+  const OrderProduct = async (e) => {
+    e.preventDefault();
+
+    const confirm = window.confirm("정말로 주문을 삭제하시겠습니까?");
+
+    if (!confirm) return;
+
+    const order_delete_URL = `http://localhost:3000/admin/${orderId}/order`;
+
+    const option = {
+      method: "DELETE",
+    };
+
+    await fetch(order_delete_URL, option)
+      .then((res) => res.json())
+      .then((res) => {
+        alert("상품이 성공적으로 삭제되었습니다.");
+        location.href = `/admin//order-manage.html`;
+        if (res?.result === "fail") {
+          alert(`에러메시지 : ${res.error}`);
+        }
+      })
+      .catch((err) => {
+        console.log(" err: ", err);
+        alert(`에러메시지 : ${err.error}`);
+      });
   };
 
-  fetch(
-    "http://localhost:3000/admin/6549203c9c4dcd231ee139bc/order",
-    requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
+  const deleteEvent = () => {
+    const orderDeleteButton = document.querySelector("#delete");
+    orderDeleteButton.addEventListener("click", OrderProduct);
+  };
+
+  deleteEvent();
+
 };

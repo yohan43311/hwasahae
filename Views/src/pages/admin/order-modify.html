@@ -26,6 +26,9 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
@@ -185,44 +188,37 @@
               <!-- 주문 번호, 주문정보, 주문자, 배송상태 -->
 
               <!-- Vertical Form -->
-              <form class="row g-3">
+              
+              <form action="/admin/order/edit" class="row g-3" method="POST" encType="multipart/form-data" id="detailForm" target="ifrm">
                 <div class="col-10">
                   <label for="inputNanme4" class="form-label">주문 일시</label>
-                  <input type="text" class="form-control" id="orderDate">
+                  <input type="text" class="form-control" id="date">
                 </div>
                 <div class="col-10">
                   <label for="inputEmail4" class="form-label">주문자 성함</label>
-                  <input type="text" class="form-control" id="orderName">
+                  <input type="text" class="form-control" id="name">
                 </div>
                 <div class="col-10">
                   <label for="inputPassword4" class="form-label">연락처</label>
-                  <input type="text" class="form-control" id="orderPhone">
+                  <input type="text" class="form-control" id="phone">
                 </div>
                 <div class="col-10">
                   <label for="inputPassword4" class="form-label">총 주문금액</label>
-                  <input type="text" class="form-control" id="orderPrice">
+                  <input type="text" class="form-control" id="price">
                 </div>
                 <div class="col-10">
                   <label for="inputPassword4" class="form-label">주소</label>
-                  <input type="text" class="form-control" id="orderAddress">
+                  <input type="text" class="form-control" id="address">
                 </div>
-                <div class="col-md-4">
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="OrderStatus" aria-label="State">
-                      <option selected>상품 준비중</option>
-                      <option value="1">배송 준비중</option>
-                      <option value="2">배송 중</option>
-                      <option value="3">배송 완료</option>
-                    </select>
-                    <label for="floatingSelect">주문 상태</label>
-                  </div>
+                <div class="col-10">
+                  <label for="inputPassword4" class="form-label">배송상태</label>
+                  <input type="text" class="form-control" id="status">
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary" id="modity_button"
-                  onclick="postModifiedData()"
+                  <button type="submit" class="btn btn-primary" id="modify"
                   >수정 완료</button>
                   <button type="reset" class="btn btn-secondary" id="reset">되돌리기</button>
-                  <button type="delete" class="btn btn-danger" id="delete_button" onclick="postDeleteData()">삭제</button>
+                  <button type="delete" class="btn btn-danger" id="delete">삭제</button>
                 </div>
               </form><!-- Vertical Form -->
 
