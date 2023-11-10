@@ -39,4 +39,13 @@ router.use(
   "/admin/product",
   express.static("Views/src/pages/admin/product-detail.html")
 );
+router.use(
+  "/users/my",
+  express.static("Views/src/pages/Mypage/member/edit.html")
+); //마이페이지-회원정보수정
+router.use(
+  "/users/my",
+  express.static("Views/src/pages/Mypage/member/withdraw.html")
+); //마이페이지-회원정보수정
+
 module.exports = router;
