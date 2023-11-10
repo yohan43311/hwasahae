@@ -3,14 +3,10 @@ fetch("http://localhost:3000/users/my", { method: "GET" })
     .then((response) => response.json())
     .then((data) => {
         console.log("data: ", data)
-        const myInfoMap = `
-            <p class="member">
-                ${data.name}님
-            </p>
-            `;
+        const myInfoMap = `${data.name}님`;
 
-        const productContainer = document.querySelector('.user-info');
-        productContainer.innerHTML = myInfoMap;
+        const productContainer = document.querySelector('.member');
+        productContainer.innerText = myInfoMap;
     });
 
 //주문 API 가져오는 코드
@@ -26,7 +22,7 @@ fetch("http://localhost:3000/orders/", { method: "GET" })
             height: 100px;">
         </td>
         <td>
-            <span class="product_name">${item_date.productName}</span>
+            <span class="product_name">${data.productName}</span>
         </td>
         <td>
             <input class="item_many" type="text" value="${item_su}">

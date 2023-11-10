@@ -41,12 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
           } else {
               // 예상치 못한 서버 응답 시
-              alert("비밀번호가 일치하지 않습니다!");
+            //   alert("비밀번호가 일치하지 않습니다!");
           }
       })
       .catch((error) => {
           // 오류 발생 시
-          resultDiv.innerHTML = `<p>에러: ${error.message}</p>`;
+        //   resultDiv.innerHTML = `<p>에러: ${error.message}</p>`;
+          alert("비밀번호가 일치하지 않습니다!");
       });
   });
 });

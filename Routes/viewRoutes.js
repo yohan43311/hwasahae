@@ -39,14 +39,24 @@ router.use(
   "/admin/product",
   express.static("Views/src/pages/admin/product-detail.html")
 );
+
+//마이페이지-회원정보수정
 router.use(
   "/users/mypage",
   express.static("Views/src/pages/Mypage/member/edit.html")
-); //마이페이지-회원정보수정
+); 
+
+//마이페이지-회원탈퇴
 router.use(
   "/users/mypage",
   express.static("Views/src/pages/Mypage/member/withdraw.html")
-); //마이페이지-회원탈퇴
+); 
+
+//마이페이지-주문상세
+router.use(
+  "/users/mypage/order",
+  express.static("Views\src\pages\Mypage\order\order.html")
+);
 
 //상품수정
 router.use(
