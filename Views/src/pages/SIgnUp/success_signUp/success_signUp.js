@@ -1,2 +1,2 @@
-const home = document.getElementById("#home");
-home.addEventListener("click", function () {});
+// const home = document.getElementById("#home");
+// home.addEventListener("click", function () {});

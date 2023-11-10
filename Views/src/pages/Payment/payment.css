@@ -14,6 +14,10 @@ th{
 
 main{
   margin-top: 70px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .box{
@@ -86,19 +90,16 @@ button{
 
 
 /* 전체적인 결제폼 */
-#payment-form{
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/* #payment-form{
+
+} */
 
 /* 전체 상품 가격 */
 #totalPrice {
   font-weight: bold;
   font-size: 18px;
   margin-top: 10px;
-  background: #f2f2f2;
+  /* background: #f2f2f2; */
   padding: 20px;
 }
 
@@ -141,7 +142,7 @@ button{
 
 .cancelBtn, .paymentBtn{
   float: left;
-  width: 30%;
+  width: 300px;
 }
 
 .minus, .plus{

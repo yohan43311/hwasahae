@@ -10,11 +10,13 @@
   <!-- <script defer src="https://js.tosspayments.com/v1/payment-widget"></script>
     <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
   <!-- <script defer src="/src/pages/Payment/payment_widget.js"></script> -->
+  <script defer src="/js/adressApi.js"></script>
   <script src="https://kit.fontawesome.com/29cf9aada0.js" crossorigin="anonymous"></script>
-  <script defer type="module" src="/src/js/adressApi.js"></script>
-  <script defer type="module" src="/src/pages/Payment/payment.js"></script>
-  <script defer type="module" src="/src/pages/Payment/validation.js"></script>
+
+  <script type="module" src="/src/pages/Payment/validation.js"></script>
+  <!-- <script defer type="module" src="/src/pages/Payment/payment.js"></script> -->
   <script defer src="/src/components/navbar.js"></script>
+
   <!-- css -->
   <link rel="stylesheet" href="/src/css/reset.css" />
   <link rel="stylesheet" href="/src/pages/Payment/payment.css" />
@@ -27,33 +29,21 @@
   <!-- payment -->
   <main class="payment">
     <!-- 주문리스트 목록 -->
-    <form action="" id="payment-form">
-      <div class="totalPayment box">
-        <span class="title">주문 리스트</span>
-        <table class="orderlist-table">
-          <thead>
-            <tr>
-              <th>상품 이미지</th>
-              <th>상품명</th>
-              <th>수량</th>
-              <th>가격</th>
-            </tr>
-          </thead>
-          <tbody id="productTable">
-            <tr class="product_lists">
-              <td></td>
-              <td><span id="product_name"></span></td>
-              <td>
-                <button type="button" class="minus">-</button>
-                <input class="item_many" type="text" id="item_count" value=2>
-                <button type="button" class="plus" onClick="document.querySelector('#item_count').value++;"
-                  </button>>+</button>
-              </td>
-              <td><span class="item_total" id="item_price"></span> 원</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="totalPayment box">
+      <span class="title">주문 리스트</span>
+      <table class="totalPayment-table">
+        <thead>
+          <tr>
+            <th>상품 이미지</th>
+            <th>상품명</th>
+            <th>수량</th>
+            <th>가격</th>
+          </tr>
+        </thead>
+        <tbody id="productTable">
+        </tbody>
+      </table>
+    </div>
 
       <!-- 주문자 정보 -->
       <div class="customerInfo box">
@@ -98,7 +88,7 @@
           <tr>
             <td>
               <label for="phone2">연락처</label>
-              <input type="tel" oninput="oninputPhone(this)" maxlength="11" id="phone1" placeholder="전화번호를 입력해주세요.">
+              <input type="tel" oninput="oninputPhone(this)" maxlength="11" id="phone2" placeholder="전화번호를 입력해주세요.">
             </td>
           </tr>
           <tr>
@@ -108,10 +98,10 @@
                 <input type="text" class="input-text" id="sample4_postcode" placeholder="우편번호">
                 <input type="button" id="addressBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
                 <input type="text" class="input-text" id="sample4_roadAddress" placeholder="도로명주소">
-                <input type="text" class="input-text" id="sample4_jibunAddress" placeholder="지번주소">
-                <span id="guide" style="color:#999;display:none"></span>
                 <input type="text" class="input-text" id="sample4_detailAddress" placeholder="상세주소">
-                <input type="text" class="input-text" id="sample4_extraAddress" placeholder="참고항목">
+                <input style="visibility: hidden;" type="text" class="input-text" id="sample4_jibunAddress" placeholder="지번주소">
+                <span id="guide" style="color:#999;display:none"></span>
+
               </div>
             </td>
           </tr>
@@ -144,15 +134,12 @@
               <td><span><i class="fa-solid fa-circle-plus"></i></span></td>
               <td><span id="deliveryFee"></span></td>
               <td><span><i class="fa-solid fa-equals"></i></span></td>
-              <td><span class="item_total"></span>원</td>
+                <!-- 총결제 금액 -->
+                <td colspan="5"><span class="item_total" id="totalPrice"></span></td>
             </tr>
           </tbody>
-          <!-- 총결제 금액 -->
-          <td colspan="5" style="background: #f2f2f2;
-          padding: 20px;">최종 결제금액 : <span class="item_total" id="total_price"></span>원</td>
         </table>
       </div>
-    </form>
     <!-- 취소&결제 버튼 -->
     <div class="btnBox">
       <button class="btn cancelBtn"><a style="color: black;" href="/cart">주문취소</a></button>

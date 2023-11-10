@@ -50,16 +50,6 @@ header.innerHTML = `
         </ul>
     </nav>
     `;
-// const logout = document.querySelector(".logout");
-// window.onload = function () {
-//   if (logout) {
-//     logout.addEventListener("click", () => {
-//       window.localStorage.removeItem("userInfo");
-//       alert("로그아웃 되었습니다!");
-//       location.href = "/login";
-//     });
-//   }
-// };
 
 //로그인 버튼 => 로그아웃 버튼
 const userData = localStorage.getItem("userInfo");
@@ -70,20 +60,33 @@ window.onload = function () {
     if (userData) {
       loginLogoutButton.innerHTML = `<li class="main_login_btn logout"><a href="/login">로그아웃</a></li>`;
     } else {
-      loginLogoutButton.innerHTML = `<li class="main_login_btn"><a href="/login">로그인</a></li>`;
-    }
-
-    const logout = document.querySelector(".logout");
-
-    if (logout) {
-      logout.addEventListener("click", () => {
-        window.localStorage.removeItem("userInfo");
-        alert("로그아웃 되었습니다!");
-        location.href = "/login";
-      });
+      loginLogoutButton.innerHTML = `<li class="main_login_btn logout"><a href="/login">로그인</a></li>`;
     }
   }
 };
+
+const logoutEvent = () => {
+  loginLogoutButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const logout_URL = "http://localhost:3000/logout";
+
+    fetch(logout_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      console.log(res);
+      alert("로그아웃 되었습니다");
+      localStorage.removeItem("userInfo");
+      location.href = "/login";
+    });
+  });
+};
+
+if (localStorage.getItem("userInfo")) {
+  logoutEvent();
+}
 
 //메인로고 넣기
 const main_log = document.querySelector(".main_top_logo");
