@@ -38,7 +38,9 @@ class AdminService {
   // order
   // 주문 조회 메소드 (관리자)
   async listOrderAdmin() {
-    const orders = await Order.find({});
+    const orders = await Order.find({})
+      .populate("userId", "name") // userId로부터 name 필드만 가져옴
+      .exec();
     return orders;
   }
   // 주문 수정 메소드 (관리자)
