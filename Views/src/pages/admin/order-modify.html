@@ -189,30 +189,30 @@
 
               <!-- Vertical Form -->
               
-              <form action="/admin/order/edit" class="row g-3" method="POST" encType="multipart/form-data" id="detailForm" target="ifrm">
+              <form action="/admin/order" class="row g-3" method="POST" encType="multipart/form-data" id="orderForm" target="ifrm">
                 <div class="col-10">
-                  <label for="inputNanme4" class="form-label">주문 일시</label>
-                  <input type="text" class="form-control" id="date">
+                  <label for="inputNanme4" class="form-label" id="formattedDate">주문 일시</label>
+                  <input type="text" class="form-control" id="formattedDate" name="formattedDate" >
                 </div>
                 <div class="col-10">
-                  <label for="inputEmail4" class="form-label">주문자 성함</label>
-                  <input type="text" class="form-control" id="name">
+                  <label for="inputEmail4" class="form-label" id="name">주문자 성함</label>
+                  <input type="text" class="form-control" id="userName" name="userName" >
                 </div>
                 <div class="col-10">
-                  <label for="inputPassword4" class="form-label">연락처</label>
-                  <input type="text" class="form-control" id="phone">
+                  <label for="inputPassword4" class="form-label" id="phone">연락처</label>
+                  <input type="text" class="form-control" id="formattedPhone" name="formattedPhone" >
                 </div>
                 <div class="col-10">
-                  <label for="inputPassword4" class="form-label">총 주문금액</label>
-                  <input type="text" class="form-control" id="price">
+                  <label for="inputPassword4" class="form-label" id="price">총 주문금액</label>
+                  <input type="text" class="form-control" id="price" name="price" >
                 </div>
                 <div class="col-10">
-                  <label for="inputPassword4" class="form-label">주소</label>
-                  <input type="text" class="form-control" id="address">
+                  <label for="inputPassword4" class="form-label" id="address">주소</label>
+                  <input type="text" class="form-control" id="address" name="address" >
                 </div>
                 <div class="col-10">
-                  <label for="inputPassword4" class="form-label">배송상태</label>
-                  <input type="text" class="form-control" id="status">
+                  <label for="inputPassword4" class="form-label" id="status">배송상태</label>
+                  <input type="text" class="form-control" id="status" name="status">
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary" id="modify"
