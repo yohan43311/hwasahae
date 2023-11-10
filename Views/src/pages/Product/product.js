@@ -4,21 +4,25 @@ let linkName = []
 // 카테고리 데이터로 불러와서 만들기.
 async function fetchData() {
   try {
-    const response = await fetch('http://localhost:3000/category');
+    const response = await fetch("http://localhost:3000/category");
     const data = await response.json();
     console.log(data);
 
-    const category_item_nav = data.map((item, index) => `
+    const category_item_nav = data
+      .map(
+        (item, index) => `
       <li><a href="" class="linkName" data-name="${item.name}">${item.name}</a></li>
-    `).join('');
+    `
+      )
+      .join("");
     categoryNav.innerHTML = category_item_nav;
 
-    const linkBtns = document.querySelectorAll('.linkName');
+    const linkBtns = document.querySelectorAll(".linkName");
 
-    linkBtns.forEach(linkBtn => {
-      linkBtn.addEventListener('click', (e) => {
+    linkBtns.forEach((linkBtn) => {
+      linkBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        const dataNameValue = linkBtn.getAttribute('data-name');
+        const dataNameValue = linkBtn.getAttribute("data-name");
         alert(dataNameValue);
         linkName = []
         linkName.push(dataNameValue);
@@ -27,7 +31,7 @@ async function fetchData() {
       });
     });
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
   }
 }
 fetchData();
@@ -79,20 +83,11 @@ item.forEach((item) => {
 listHtml()
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const liElements = document.querySelectorAll("#productClass .cate-wrap .class-list ul li");
-  
-    liElements.forEach(function(li) {
-      li.addEventListener("mouseover", function() {
-        // 마우스 호버 시 배경색과 테두리 색 변경
-        li.classList.add("active");
-      });
-  
-      li.addEventListener("mouseout", function() {
-        // 마우스가 빠져나가면 배경색과 테두리 색을 제거하여 원래대로 돌립니다.
-        li.classList.remove("active");
-      });
+    li.addEventListener("mouseout", function () {
+      // 마우스가 빠져나가면 배경색과 테두리 색을 제거하여 원래대로 돌립니다.
+      li.classList.remove("active");
     });
   });
+});
 
-
+//-=================================================

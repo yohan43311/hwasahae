@@ -17,6 +17,8 @@ const createCategoryAdmin = asyncHandler(async (req, res) => {
 const updateCategoryAdmin = asyncHandler(async (req, res) => {
   const { categoryId } = req.params;
   const { newName } = req.body;
+  console.log("categoryId : ", categoryId);
+  console.log("req.body : ", req.body);
   const userRole = res.locals.userInfo.role;
   const updatedCategory = await categoryService.updateCategory(
     categoryId,
@@ -37,12 +39,18 @@ const deleteCategoryAdmin = asyncHandler(async (req, res) => {
 });
 
 // order
-// 주문 조회 (관리자)
+// 전체 주문 조회 (관리자)
 const listOrderAdmin = asyncHandler(async (req, res) => {
-  const userRole = res.locals.userInfo.role;
-  const orders = await orderService.listOrderAdmin(userRole);
+  const orders = await orderService.listOrderAdmin();
   res.status(200).json(orders);
 });
+// 특정 주문 조회 (관리자)
+const getOrderAdmin = asyncHandler(async (req, res) => {
+  const { orderId } = req.params; // URL에서 orderId를 추출합니다.
+  const order = await orderService.getOrderAdmin(orderId);
+  res.status(200).json(order); // 주문 정보를 응답으로 반환합니다.
+});
+
 // 주문 수정 (관리자)
 const updateOrderAdmin = asyncHandler(async (req, res) => {
   const { orderId } = req.params;
@@ -53,6 +61,7 @@ const updateOrderAdmin = asyncHandler(async (req, res) => {
     status,
     userRole
   );
+
   res.status(200).json({
     message: "주문 상태가 업데이트 되었습니다.",
     order: updatedOrder,
@@ -85,6 +94,7 @@ const modifyProductsAdmin = asyncHandler(async (req, res) => {
   const updatedProduct = await ProductService.modifyProduct(
     productId,
     updateData,
+    req.file,
     userRole
   );
   res.status(200).json(updatedProduct);
@@ -107,6 +117,7 @@ module.exports = {
   createCategoryAdmin,
   updateCategoryAdmin,
   deleteCategoryAdmin,
+  getOrderAdmin,
   updateOrderAdmin,
   listOrderAdmin,
   deleteOrderAdmin,

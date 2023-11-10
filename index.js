@@ -2,10 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const multer = require("multer");
-const form_data = multer();
 const dotenv = require("dotenv"); //.env파일 관리 모듈
 dotenv.config({ path: ".env.local" }); //.env.local로 기본 경로 설정
+
+const path = require("path");
 
 const viewRouter = require("./Routes/viewRoutes");
 const categoryRoute = require("./Routes/categoryRoutes");
@@ -21,15 +21,18 @@ const app = express();
 
 // middleware functions
 app.use(express.json()); // JSON 형태의 요청 body를 파싱하기 위해 express.json() 미들웨어를 사용
-app.use(form_data.array());
 app.use(cookieParser());
 app.use(cors()); //cors 미들웨어 등록
 
-app.use(
-  "/shopimages",
-  express.static("./Views/src/pages/Product/img/shopimages")
-);
 // 이미지 정적 파일을 제공하는 폴더로 지정
+// app.use(
+//   "/shopimages",
+//   express.static("./Views/src/pages/Product/img/shopimages")
+// );
+app.use(
+  "/img/shopimages",
+  express.static(path.join(__dirname, "Views/src/pages/Product/img/shopimages"))
+);
 
 //html, css, js 라우팅
 app.use(viewRouter);

@@ -198,3 +198,8 @@ nav li a:hover{
 .ft_sec03 .bt_inner{display: flex;flex-direction: column;}
 
 a {color:#fff; text-decoration: none; outline: none}
+
+/* 로그인 버튼을 호버했을 때 글씨 색이 보이지 않아, 호버했을 경우에 글씨색이 검정색으로 나올 수 있도록 수정 => 2023.11.09_김나영 */
+.header_section > div:first-child > ul > li:first-child:hover a {
+    color: #000; /* a 태그에 대한 스타일 변경 */
+}

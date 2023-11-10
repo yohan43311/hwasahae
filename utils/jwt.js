@@ -33,8 +33,9 @@ const verifyRefreshtoken = async (token, refreshDecodedUser) => {
   const user = await User.findById(refreshDecodedUser?.id);
   try {
     if (user?.refreshToken === token) return { result: true, user };
+    else return { result: false, user: null };
   } catch (error) {
-    return { result: false };
+    return { result: false, user: null };
   }
 };
 

@@ -3,6 +3,7 @@ const {
   createCategoryAdmin,
   updateCategoryAdmin,
   deleteCategoryAdmin,
+  getOrderAdmin,
   updateOrderAdmin,
   listOrderAdmin,
   deleteOrderAdmin,
@@ -22,7 +23,8 @@ router.patch("/:categoryId/category", authJWT, updateCategoryAdmin); // 카테�
 router.delete("/:categoryId/category", authJWT, deleteCategoryAdmin); // 카테고리 삭제 (관리자)
 
 // 주문
-router.get("/order", listOrderAdmin); // 주문 조회 (관리자)
+router.get("/order", authJWT, listOrderAdmin); // 주문 조회 (관리자)
+router.get("/:orderId/order", authJWT, getOrderAdmin); // 특정 주문 조회 (관리자)
 router.patch("/:orderId/order", authJWT, updateOrderAdmin); // 주문 수정 (관리자)
 router.delete("/:orderId/order", authJWT, deleteOrderAdmin); // 주문 삭제 (관리자)
 
@@ -50,7 +52,12 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 // 상품
 router.post("/product", upload.single("image"), authJWT, createProductAdmin); // 상품 추가 (관리자)
-router.patch("/:productId/product", authJWT, modifyProductsAdmin); // 상품 수정 (관리자)
+router.patch(
+  "/:productId/product",
+  upload.single("image"),
+  authJWT,
+  modifyProductsAdmin
+); // 상품 수정 (관리자)
 router.delete("/:productId/product", authJWT, deleteProductsAdmin); // 상품 삭제 (관리자)
 
 module.exports = router;

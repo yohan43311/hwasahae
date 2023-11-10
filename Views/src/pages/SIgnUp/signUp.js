@@ -1,13 +1,14 @@
 /* 요소모음 */
 // console.log("들어오나?");
 const name1 = document.querySelector("#name");
-const email1 = document.querySelector("#email");
-const pwd1 = document.querySelector("#pwd");
+const email = document.querySelector("#email");
+const pwd = document.querySelector("#pwd");
 const rePwd1 = document.querySelector("#rePwd");
-const roadAddress1 = document.querySelector("#sample4_roadAddress");
-const jibunAddress1 = document.querySelector("#sample4_jibunAddress");
-const detailAddress1 = document.querySelector("#sample4_detailAddress");
-const role1 = document.querySelector("#role");
+const roadAddress = document.querySelector("#sample4_roadAddress");
+//도로명주소
+const zipcode = document.querySelector("#sample4_postcode"); //우편번호
+const detailAddress = document.querySelector("#sample4_detailAddress"); //상세주소
+const role = document.querySelector("#role");
 // const postcode1 = document.querySelector("#sample4_postcode1");
 // const extraAddress1 = document.querySelector("#sample4_extraAddress1");
 
@@ -25,12 +26,12 @@ const registerResponse = async (e) => {
 
   const formData = new FormData();
   formData.append("name", name1?.value);
-  formData.append("email", email1?.value);
-  formData.append("password", pwd1?.value);
-  formData.append("zipcode", jibunAddress1?.value);
-  formData.append("address", roadAddress1?.value);
-  formData.append("detailAddress", detailAddress1?.value);
-  formData.append("role", role1?.value);
+  formData.append("email", email?.value);
+  formData.append("password", pwd?.value);
+  formData.append("zipcode", zipcode?.value);
+  formData.append("address", roadAddress?.value);
+  formData.append("detailAddress", detailAddress?.value);
+  formData.append("role", role?.value);
 
   const option = {
     method: "POST",
@@ -43,10 +44,15 @@ const registerResponse = async (e) => {
     .then((res) => res.json())
     .then((res) => {
       if (!res?.result) {
-        location.href = "/registerOk";
+        if (role?.value === "구매자") {
+          location.href = "/registerOk";
+        } else {
+          location.href = "/admin";
+        }
       } else {
         if (res?.result === "fail") {
           console.log("res", res);
+          alert(res.error);
           return alert("회원가입 실패");
         }
       }
@@ -54,3 +60,13 @@ const registerResponse = async (e) => {
 };
 
 submitEvent();
+
+// 페이지 로딩 시 실행될 함수
+window.onload = function () {
+  // 사용자가 입력한 값이 존재하면 페이지를 새로고침하여 값 초기화
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+      window.location.reload();
+    }
+  });
+};
