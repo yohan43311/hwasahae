@@ -3,6 +3,7 @@ const {
   createCategoryAdmin,
   updateCategoryAdmin,
   deleteCategoryAdmin,
+  getOrderAdmin,
   updateOrderAdmin,
   listOrderAdmin,
   deleteOrderAdmin,
@@ -23,6 +24,7 @@ router.delete("/:categoryId/category", authJWT, deleteCategoryAdmin); // 카테�
 
 // 주문
 router.get("/order", authJWT, listOrderAdmin); // 주문 조회 (관리자)
+router.get("/:orderId/order", authJWT, getOrderAdmin); // 특정 주문 조회 (관리자)
 router.patch("/:orderId/order", authJWT, updateOrderAdmin); // 주문 수정 (관리자)
 router.delete("/:orderId/order", authJWT, deleteOrderAdmin); // 주문 삭제 (관리자)
 

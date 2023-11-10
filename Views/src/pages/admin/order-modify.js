@@ -1,6 +1,3 @@
-
-
-
 window.onload = function () {
   console.log("주문 수정 페이지");
 
@@ -9,16 +6,15 @@ window.onload = function () {
   const orderId = urlSearch.get("orderNo");
 
   var requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
+    method: "GET",
+    redirect: "follow",
   };
-  
+
   //상품 조회
   fetch(`http://localhost:3000/admin/${orderId}/order`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("통신 성공!", result);
-
 
       form.date.value = result.date;
       form.name.value = result.name;
@@ -26,8 +22,6 @@ window.onload = function () {
       form.price.value = result.price;
       form.address.value = result.address;
       form.status.value = result.address;
-      
-
     })
     .catch((error) => {
       console.log("error가 발생했어요!", error);
@@ -78,9 +72,6 @@ window.onload = function () {
 
   editEvent();
 
-
-
-
   //주문 삭제
   const OrderProduct = async (e) => {
     e.preventDefault();
@@ -116,5 +107,4 @@ window.onload = function () {
   };
 
   deleteEvent();
-
 };
