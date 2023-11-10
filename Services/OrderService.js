@@ -5,6 +5,7 @@ class OrderService {
   // 주문 추가 메소드 (유저)
   async createOrder(orderDTO) {
     const { userId, receiver, orderedItems, deliveryFee, status } = orderDTO;
+    //const user = res.locals.userInfo;
     // totalPrice 계산: 각 상품의 가격과 수량을 곱한 후 총합에 배송비를 더합니다.
     let totalPrice =
       orderedItems.reduce((sum, item) => sum + item.price * item.quantity, 0) +
@@ -20,11 +21,12 @@ class OrderService {
     });
 
     const savedOrder = await newOrder.save();
+
     // Populate를 사용하여 상품 정보를 채웁니다.
-    const populatedOrder = await Order.findById(savedOrder._id)
-      .populate("orderedItems.product")
-      .populate("userId") // User 모델의 정보를 가져오기 위해 populate 추가
-      .exec();
+    const populatedOrder = await Order.findById(savedOrder._id).populate(
+      "orderedItems.product"
+    );
+    //.populate("userId"); // 여기에서 populate 체이닝을 합니다.
 
     return populatedOrder;
   }
@@ -32,7 +34,7 @@ class OrderService {
   // 모든 주문 조회 메소드 (유저)
   async listOrder() {
     const orders = await Order.find({})
-      .populate("userId") // 주문한 사용자의 정보를 가져옵니다.
+      //.populate("userId") // 주문한 사용자의 정보를 가져옵니다.
       .populate("orderedItems.product"); // 주문에 포함된 각 상품의 상세 정보를 가져옵니다.
     return orders; // 조회된 상품들을 반환합니다.
   }
