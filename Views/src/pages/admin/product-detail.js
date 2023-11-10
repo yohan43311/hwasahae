@@ -29,9 +29,6 @@ window.onload = function () {
       categoryOption.innerHTML = result?.category;
       form.category.append(categoryOption);
 
-      //이미지
-      const img = document.querySelector(".card-img-top");
-      img.src = result?.images[0];
     })
     .catch((error) => {
       console.log("error가 발생했어요!", error);

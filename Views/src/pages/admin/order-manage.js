@@ -21,17 +21,7 @@ window.onload = function () {
       console.log("error가 발생했어요!", error);
       order_table.innerHTML =
         `  
-    <td colspan='6' align="center">오류가 발생했어요 😨  </td>` +
-        `<tr>
-    <td>test</td>
-    <td>test</td>
-    <td>test</td>
-    <td>test</td>
-    <td>test</td>
-    <td><button type="button" class="btn btn-primary rounded-pill"
-      onclick="clickModify(event)"
-      >수정</button></td>
-  </tr>`;
+    <td colspan='7' align="center">오류가 발생했어요 😨  </td>` ;
     });
 };
 // on load ~
@@ -57,22 +47,6 @@ const formatPhoneNumber = (phoneNumber) => {
   return phoneNumber;
 };
 
-const postDeleteData = () => {
-  var requestOptions = {
-    method: "DELETE",
-    redirect: "follow",
-  };
-
-  fetch(
-    "http://localhost:3000/admin/6549203c9c4dcd231ee139bc/order",
-    requestOptions
-  )
-    .then((response) => response.json())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
-
-  window.onload();
-};
 
 // const createOrderList = (data)=>{
 //   return data.reduce((prev,cur)=> prev+ `
@@ -105,14 +79,15 @@ const createOrderList = (data) => {
     return (
       prev +
       `
-      <tr>
+      <tr id=${cur["_id"]}>
           <td>${formattedDate}</td>
           <td>${userName}</td>
           <td>${formattedPhone}</td>
           <td>${formattedTotalPrice}</td>
           <td>${cur["receiver"].address}</td>
-          <td><button type="button" class="btn btn-primary rounded-pill"
-              onclick="location.href='order-modify.html?orderNo=${cur.totalPrice}&orderUserId=${cur.userId}'"
+          <td>${cur.status}</td>
+          <td><button type="button" class="btn btn-primary rounded-pill btn-sm"
+              onclick="location.href='order-modify.html?orderNo=${cur._id}'"
               >수정</button></td>
       </tr>
   `
