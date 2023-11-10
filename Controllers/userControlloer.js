@@ -6,7 +6,6 @@ const UserServiceInstance = new UserService();
 
 //회원가입
 const registerUser = asyncHandler(async (req, res) => {
-  console.log("req : ", req.body);
   const user = await UserServiceInstance.Singup(req.body);
 
   res.status(200).json(user);
@@ -14,7 +13,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
 //로그인
 const loginUser = asyncHandler(async (req, res) => {
-  const user = await UserServiceInstance.SignIn(req.body, res);
+  const user = await UserServiceInstance.SignIn(req.body);
 
   //서비스단에서 수정하기(피드백) - dto(data transfer object)
   res.cookie("accessToken", user?.accessToken, {

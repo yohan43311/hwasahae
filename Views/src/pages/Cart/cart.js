@@ -150,3 +150,5 @@ const itemMap = sortedItems.forEach((item, index) => {
       // }
     });
 });
+
+// module.exports = cart;
