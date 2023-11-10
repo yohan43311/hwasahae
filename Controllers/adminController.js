@@ -9,6 +9,7 @@ const ProductService = new AdminService();
 // 카테고리 추가 (관리자)
 const createCategoryAdmin = asyncHandler(async (req, res) => {
   const { name } = req.body;
+  console.log("name : ", req);
   const userRole = res.locals.userInfo.role;
   const result = await categoryService.createCategory(name, userRole);
   res.status(200).json(result);

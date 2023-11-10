@@ -37,10 +37,8 @@ window.onload = function () {
             <div class="card" id="${cur["_id"]}" value="${cur.name}">
               <div class="card-body">
                 <h5 class="card-title">${cur.name}</h5>
-                <button type="button" class="btn btn-success" id="category_modi"></a>수정</button>
-                <button type="button" class="btn btn-danger" id="category_del"
-                onclick="deleteCategory(event,${cur.name})"
-                ></a>삭제</button>
+                <button type="button" class="btn btn-success edit" id="category_modi">수정</button>
+                <button type="button" class="btn btn-danger delete" id="category_del">삭제</button>
               </div>
             </div>
          </div>
@@ -54,38 +52,56 @@ window.onload = function () {
   //카테고리상세페이지로 이동
   categoryTable.addEventListener("click", (event) => {
     const target = event.target;
-    const parent = target.closest(".card");
-    if (parent.getAttribute("class") === "card") {
-      const categoryName = parent.getAttribute("value");
-      const categoryId = parent.getAttribute("id");
+    const categoryId = event.target.closest(".card").id;
+    const categoryName = event.target.closest(".card").getAttribute("value");
+    if (target.classList.contains("edit")) {
       location.href = `category-modify.html?id=${categoryId}&categoryName=${categoryName}`;
+    }
+
+    if (target.classList.contains("delete")) {
+      deleteCategory(categoryId);
     }
   });
 
   //카테고리 추가
-  const addbtn = document.querySelector(".category_add");
+  const addbtn = document.querySelector("#category_add");
+
+  addbtn.addEventListener("click", function () {
+    const url = "/admin/category";
+    const categoryNewName = document.querySelector("#categoryNewName");
+    if (categoryNewName.value === "")
+      return alert("카테고리 이름을 입력해주세요.");
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: categoryNewName.value }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        alert("성공적으로 카테고리가 등록되었습니다.");
+        location.reload();
+      })
+      .catch((err) => alert(err.error));
+  });
 
   //카테고리 삭제
-  const delbtn = document.querySelector(".category_del");
-
-  const deleteCategory = (e, categoryName) => {
-    const userSignal = confirm("이 카테고리를 삭제하시겠습니까");
+  const deleteCategory = (id) => {
+    const userSignal = window.confirm("해당 카테고리를 정말 삭제하시겠습니까?");
     if (userSignal) {
-      // 여기서 삭제 fetch 날려주기
       var requestOptions = {
         method: "DELETE",
       };
 
-      fetch(
-        "http://localhost:3000/admin/654b262458c7e8b239d796ae/category",
-        requestOptions
-      )
+      fetch(`http://localhost:3000/admin/${id}/category`, requestOptions)
         .then((response) => response.json())
-        .then((result) => console.log(result))
-        .catch((error) => console.log("error", error));
-
-      alert(categoryName + "가 삭제되었습니다.");
-      setAddCategory();
+        .then((result) => {
+          alert("성공적으로 카테고리가 삭제되었습니다.");
+          location.reload();
+        })
+        .catch((err) => alert(err.error));
     }
   };
 };
