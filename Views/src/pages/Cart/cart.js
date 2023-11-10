@@ -164,11 +164,3 @@ Promise.all(fetchPromises).then(productDataArray => {
     })
 
 })
-
-
-
-
-
-
-
-
