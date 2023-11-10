@@ -17,6 +17,8 @@ const createCategoryAdmin = asyncHandler(async (req, res) => {
 const updateCategoryAdmin = asyncHandler(async (req, res) => {
   const { categoryId } = req.params;
   const { newName } = req.body;
+  console.log("categoryId : ", categoryId);
+  console.log("req.body : ", req.body);
   const userRole = res.locals.userInfo.role;
   const updatedCategory = await categoryService.updateCategory(
     categoryId,

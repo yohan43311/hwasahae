@@ -1,10 +1,13 @@
-// API 정보 가져와 화면에 뿌리는 코드
-fetch("http://kdt-sw-7-team04.elicecoding.com:3000/users/my")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data)
-    myInfo = data;
-    const myInfoMap = myInfo.map(item =>`
+window.onload = function () {
+  // API 정보 가져와 화면에 뿌리는 코드
+  fetch("http://localhost:3000/api/users/my", { method: "GET" })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("data : ", data);
+      myInfo = data;
+      const myInfoMap = myInfo
+        .map(
+          (item) => `
       <!-- 이름 -->
       <div class="w-100">
         <div>
@@ -39,28 +42,29 @@ fetch("http://kdt-sw-7-team04.elicecoding.com:3000/users/my")
           </div>
         </div>
       </div>
-    `).join('');
+    `
+        )
+        .join("");
 
-    const productContainer = document.querySelector('.title');
-    productContainer.innerHTML = myInfoMap;
-
-    // 수정 버튼이 눌렸을 때 동작
-    const submitBtn = document.getElementById("submit");
-    submitBtn.addEventListener("click", submitForm);
-  });
+      const productContainer = document.querySelector(".title");
+      productContainer.innerHTML = myInfoMap;
+    });
+};
 
 // 수정된 함수로 API 요청 수행
 const submitForm = () => {
-  const form = document.querySelector('form');
+  const form = document.querySelector("form");
 
-  form.addEventListener('submit', function (event) {
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const name = document.getElementById('name').textContent;
-    const password = document.getElementById('pwd').value;
-    const zipcode = document.getElementById('sample4_postcode').value;
-    const address = document.getElementById('sample4_roadAddress').value;
-    const detailAddress = document.getElementById('sample4_detailAddress').value;
+    const name = document.getElementById("name").textContent;
+    const password = document.getElementById("pwd").value;
+    const zipcode = document.getElementById("sample4_postcode").value;
+    const address = document.getElementById("sample4_roadAddress").value;
+    const detailAddress = document.getElementById(
+      "sample4_detailAddress"
+    ).value;
 
     const requestBody = {
       name: name,
@@ -70,23 +74,27 @@ const submitForm = () => {
       detailAddress: detailAddress,
     };
 
-    fetch('http://kdt-sw-7-team04.elicecoding.com:3000/users/my', {
-      method: 'PATCH',
+    fetch("http://kdt-sw-7-team04.elicecoding.com:3000/users/my", {
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('회원 정보 수정 성공:', data);
+        console.log("회원 정보 수정 성공:", data);
         // 성공 시 추가적인 로직을 여기에 작성하세요.
-        alert('회원 정보가 성공적으로 수정되었습니다.');
+        alert("회원 정보가 성공적으로 수정되었습니다.");
       })
       .catch((error) => {
-        console.error('회원 정보 수정 실패:', error);
+        console.error("회원 정보 수정 실패:", error);
         // 실패 시 추가적인 로직을 여기에 작성하세요.
-        alert('회원 정보 수정에 실패했습니다. 다시 시도해주세요.');
+        alert("회원 정보 수정에 실패했습니다. 다시 시도해주세요.");
       });
   });
 };
+
+// 수정 버튼이 눌렸을 때 동작
+const submitBtn = document.getElementById("submit");
+submitBtn.addEventListener("click", submitForm);
