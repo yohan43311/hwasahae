@@ -6,7 +6,7 @@ const orderService = new OrderService();
 // 주문 추가 (유저)
 const createOrder = asyncHandler(async (req, res) => {
   //인증된 사용자의 _id를 `userId`로 설정합니다.
-  const userId = res.locals.userInfo._id; // 금 id -> _id
+  const userId = res.locals.userInfo.id; // 금 id -> _id
   const orderData = {
     ...req.body,
     userId, // 인증된 사용자의 _id를 주문의 userId로 설정합니다.

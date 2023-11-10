@@ -36,13 +36,25 @@ class AdminService {
   }
 
   // order
-  // 주문 조회 메소드 (관리자)
+  // 주문 전체 조회 메소드 (관리자)
   async listOrderAdmin() {
     const orders = await Order.find({})
       .populate("userId", "name") // userId로부터 name 필드만 가져옴
       .exec();
     return orders;
   }
+  // 특정 주문 조회 메소드 (관리자)
+  async getOrderAdmin(orderId) {
+    const order = await Order.findById(orderId)
+      .populate("userId") // 유저 정보를 포함합니다.
+      .populate("orderedItems.product") // 상품 정보를 포함합니다.
+      .exec();
+    if (!order) {
+      throw new Error("해당하는 주문을 찾을 수 없습니다."); // 주문이 없을 경우 오류를 던집니다.
+    }
+    return order;
+  }
+
   // 주문 수정 메소드 (관리자)
   async updateOrderAdmin(orderId, newStatus, role) {
     const order = await Order.findById(orderId);
@@ -63,7 +75,7 @@ class AdminService {
     await order.save();
     return order;
   }
-  // 주문 취소 메소드 (관리자)
+  // 주문 삭제 메소드 (관리자)
   async deleteOrderAdmin(orderId, role) {
     const result = await Order.deleteOne({ _id: orderId });
     if (result.deletedCount === 0) {
