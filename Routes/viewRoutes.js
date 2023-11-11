@@ -13,7 +13,7 @@ router.use("/item", express.static("Views/src/pages/itemPage"));
 
 router.use("/login", express.static("Views/src/pages/SignIn")); //로그인
 router.use("/find", express.static("Views/src/pages/Find_idPw")); //아이디/비번 찾기
-router.use("/register", express.static("Views/src/pages/SignUp")); //회원가입
+router.use("/register", express.static("Views/src/pages/SIgnUp")); //회원가입
 router.use(
   "/registerOk",
   express.static("Views/src/pages/SIgnUp/success_signUp/success_signUp.html")
@@ -44,18 +44,18 @@ router.use(
 router.use(
   "/users/mypage",
   express.static("Views/src/pages/Mypage/member/edit.html")
-); 
+);
 
 //마이페이지-회원탈퇴
 router.use(
   "/users/mypage",
   express.static("Views/src/pages/Mypage/member/withdraw.html")
-); 
+);
 
 //마이페이지-주문상세
 router.use(
   "/users/mypage/order",
-  express.static("Views\src\pages\Mypage\order\order.html")
+  express.static("ViewssrcpagesMypageorderorder.html")
 );
 
 //상품수정
