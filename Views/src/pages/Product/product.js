@@ -5,7 +5,7 @@ let linkName = [];
 async function fetchData() {
   try {
     const storedCart = JSON.parse(window.localStorage.getItem("cart") || "[]"); // 가져오기
-    const response = await fetch("http://localhost:3000/category");
+    const response = await fetch("/category");
     const data = await response.json();
     console.log(data);
 
