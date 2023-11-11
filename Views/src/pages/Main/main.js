@@ -40,8 +40,10 @@ fetch("http://localhost:3000/products")
                   </div>
                   <ul class="info">
                       <li class="dsc">${item.name}</li>
-                      <li class="subname">유기농 미백 보습 에센스!<br>
-                      </li><li class="price"><span class="consumer">66,000원</span>${item.price}원</li>
+                      <li class="price">
+                      <span class="consumer">할인예정</span>
+                      ${item.price} 원
+                      </li>
                       <li class="icon"><span class="MK-product-icons"></span></li>
                   </ul>
               </div>

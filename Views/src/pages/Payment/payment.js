@@ -1,4 +1,14 @@
-//상품금액
+//장바구니의 주문리스트 그대로 가져오는 로직 start
+/*상품금액*/
+const priceProduct = document.querySelector("#priceProduct");
+
+// const total_Price = localStorage.getItem("totalPrice"); //cart - 로컬스토리지에 저장되어있는 totalPrice
+
+/*총 결제 금액 => total = 상품금액 + 배송비*/
+const total = document.querySelector("#total"); //총합 금액(상품 + 배송비)
+const total_price = document.querySelector("#total_price");
+
+// const cartTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
 
 //배송비
 let deliveryPrice = 3000;
@@ -7,15 +17,47 @@ deliveryFee.innerHTML = `${deliveryPrice
   .toString()
   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
 
-//총 금액
+//빈 배열 반환 getItems 변수
+let getItems = [];
+// "cart"가 존재하면 "cart"를 가져오고, 그렇지 않으면 "buyItem"을 가져옴
+if (localStorage.getItem("cart")) {
+  getItems = JSON.parse(localStorage.getItem("cart"));
+  const cart_totalPrice = localStorage.getItem("totalPrice"); //cart에 해당 로컬스토리지에서 total금액 가져오기
 
-// const PriceTotal = 10000; //총 금액
+  //cart 로컬스토리지 => 상품금액 가져오기
+  priceProduct.innerHTML = `${cart_totalPrice}원`; //cart의 상품 총 금액값
 
-//바로구매 - localStorage에 담겨진 상품 가져오기
-const buyItems = JSON.parse(localStorage.getItem("buyItem"));
+  //cart 총 금액
+  total.innerHTML = `${(
+    parseInt(cart_totalPrice.replace(/,/g, "")) + parseInt(deliveryPrice)
+  )
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
 
-//장바구니의 주문리스트 그대로 가져오는 로직 start
-const getItems = JSON.parse(localStorage.getItem("cart")) || [];
+  total_price.innerHTML = `${(
+    parseInt(cart_totalPrice.replace(/,/g, "")) + parseInt(deliveryPrice)
+  )
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
+} else if (localStorage.getItem("buyItem")) {
+  getItems = JSON.parse(localStorage.getItem("buyItem"));
+  priceProduct.innerHTML = `${getItems[0].total_price}원`;
+
+  //buyItem 로컬스토리지 => 총 금액
+  total.innerHTML = `${(
+    parseInt(getItems[0].total_price.replace(/,/g, "")) +
+    parseInt(deliveryPrice)
+  )
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
+  total_price.innerHTML = `${(
+    parseInt(getItems[0].total_price.replace(/,/g, "")) +
+    parseInt(deliveryPrice)
+  )
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
+}
+
 // id의 끝자리 값을 기준으로 아이템 정렬
 const sortedItems = getItems.sort((a, b) => {
   const lastDigitA = a.id % 10;
@@ -77,13 +119,13 @@ Promise.all(fetchPromises).then((productDataArray) => {
     const pageSleeted = document.querySelector("#productTable");
     pageSleeted.innerHTML += MapItem; //html
 
-    const totalElement = () => {
-      const totalBox = document.getElementById("totalPrice");
-      totalBox.innerHTML = `총 가격: ${totalPrice
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
-    }; // 총 가격을 표시할 위치에 id="totalPrice"인 요소를 추가
-    totalElement();
+    // const totalElement = () => {
+    //   const totalBox = document.getElementById("totalPrice");
+    //   totalBox.innerHTML = `총 가격: ${totalPrice
+    //     .toString()
+    //     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
+    // }; // 총 가격을 표시할 위치에 id="totalPrice"인 요소를 추가
+    // totalElement();
   });
 });
 
@@ -177,19 +219,6 @@ async function paymentResponse(e) {
     });
 }
 
-//결제 버튼
-// const paymentBtn = document.querySelector("#paymentBtn");
-// paymentBtn.addEventListener("click", () => {
-//   const productList = localStorage.getItem("cart");
-
-//   if (productList) {
-//     alert("결제가 성공되었습니다!");
-//     location.href = "/paid";
-//   } else {
-//     alert("결제가 실패되었습니다!");
-//   }
-// });
-
 //취소 및 결제 버튼
 const cancelBtn = document.querySelector(".cancelBtn");
 const paymentBtn = document.querySelector(".paymentBtn");
@@ -203,7 +232,7 @@ paymentBtn.addEventListener("click", function () {
     localStorage.removeItem("cart"); //결제가 성공했으므로 로컬스토리지 장바구니에 담긴 상품 비우기
     localStorage.removeItem("buyItem"); //결제가 성공했으므로 로컬스토리지에 바로구매 상품 비우기
     location.href = "/paid";
-    paymentResponse(); //결제 버튼 눌렀을 때 주문을 조회할 수 있도록
+    paymentResponse(); //결제 버튼 눌렀을 때 주문을 조회할 수 있도록 api
   } else {
     alert("결제가 성공되지 않으셨습니다");
   }

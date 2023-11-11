@@ -23,6 +23,7 @@ const productSchema = new Schema(
     deletedAt: { type: Date, required: false },
 
     category: { type: String, required: true },
+    // category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
   },
   {
     // 생성 날짜
