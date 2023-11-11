@@ -9,7 +9,7 @@ router.use("/admin", express.static("Views/src/pages/admin/"));
 
 //route setting
 router.use("/", express.static("Views/src/pages/Main"));
-router.use("/item", express.static("Views/src/pages/itemPage"));
+router.use("/item", express.static("Views/src/pages/ItemPage"));
 
 router.use("/login", express.static("Views/src/pages/SignIn")); //로그인
 router.use("/find", express.static("Views/src/pages/Find_idPw")); //아이디/비번 찾기
@@ -42,13 +42,13 @@ router.use(
 
 //마이페이지-회원정보수정
 router.use(
-  "/users/mypage",
+  "/users/mypage/edit",
   express.static("Views/src/pages/Mypage/member/edit.html")
 );
 
 //마이페이지-회원탈퇴
 router.use(
-  "/users/mypage",
+  "/users/mypage/edit",
   express.static("Views/src/pages/Mypage/member/withdraw.html")
 );
 
