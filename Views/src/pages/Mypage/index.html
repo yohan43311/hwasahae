@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>마이페이지</title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/pages/Mypage/mypage.css">
-    <link rel="stylesheet" type="text/css" href="/components/navbar.css">
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/pages/Mypage/mypage.css" />
+    <link rel="stylesheet" type="text/css" href="/components/navbar.css" />
     <script src="/pages/Mypage/mypage.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="header"></header>
     <!-- 모달 -->
     <!-- <div id="confirmationModal" class="modal">
@@ -40,46 +39,49 @@
                 </div>
             </div>
         </div>
-        <div class="order">
-            <h3>최근 주문 정보</h3>
-            <div class="tbl mt-3">
-                <table summary="주문일자, 상품명, 결제금액, 주문상세">
-                    <caption class="hidden">최근 주문 정보 목록</caption>
-                    <colgroup>
-                        <col width="150">
-                        <col width="800">
-                        <col width="150">
-                        <col width="150">
-                        <col width="150">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>
-                                <div class="tb-center">DATE</div>
-                            </th>
-                            <th>
-                                <div class="tb-center">PRODUCT</div>
-                            </th>
-                            <th>
-                                <div class="tb-center">Quantity</div>
-                            </th>
-                            <th>
-                                <div class="tb-center">COST</div>
-                            </th>
-                            <th>
-                                <div class="tb-center">DETAIL</div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <!-- 주문없을때
+      </div>
+      <div class="order">
+        <h3>최근 주문 정보</h3>
+        <div class="tbl mt-3">
+          <table summary="주문일자, 상품명, 결제금액, 주문상세">
+            <caption class="hidden">
+              최근 주문 정보 목록
+            </caption>
+            <colgroup>
+              <col width="150" />
+              <col width="800" />
+              <col width="150" />
+              <col width="150" />
+              <col width="150" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>
+                  <div class="tb-center">DATE</div>
+                </th>
+                <th>
+                  <div class="tb-center">PRODUCT</div>
+                </th>
+                <th>
+                  <div class="tb-center">Quantity</div>
+                </th>
+                <th>
+                  <div class="tb-center">COST</div>
+                </th>
+                <th>
+                  <div class="tb-center">DETAIL</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr> -->
+              <!-- 주문없을때
                             <td colspan="5">
                                 <div class="tb-center">주문 내역이 없습니다.</div>
                             </td> -->
 
-                            <!-- 주문있을때 -->
-                            <td>
+              <!-- 주문있을때 -->
+              <!-- <td>
                                 <img src="./img/product_1.jpg" alt="상품 이미지" style="width: 100px;
                                 height: 100px;">
                             </td>
@@ -100,10 +102,9 @@
                 </table>
             </div>
         </div>
+      </div>
     </div>
     <footer></footer>
     <script src="../../components/navbar.js"></script>
-
-</body>
-
+  </body>
 </html>

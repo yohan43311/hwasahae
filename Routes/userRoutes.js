@@ -36,7 +36,7 @@ router.post(
 );
 router.post("/sendEmail", userEmailValidator(), validate, getAuthNo);
 router.post("/logout", logoutUser);
-router.get("/users/my", form_data.array(), authJWT, getUserInfo);
+router.get("/users/my", authJWT, getUserInfo);
 router.patch("/users/my", authJWT, updateUserInfo);
 router.delete("/users/my", authJWT, removeUserInfo);
 router.get("/users", authJWT, getUsers);
