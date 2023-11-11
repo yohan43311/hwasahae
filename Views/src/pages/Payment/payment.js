@@ -82,7 +82,7 @@ const itemMap = sortedItems.forEach((item, index) => {
 
       const MapItem = `
     <tr data-index="${index}">
-      <td><img src="./img/product_1.jpg" alt="상품 이미지" style="width: 100px; height: 100px;"></td>
+      <td><img src="${data.images[0]}" alt="상품 이미지" style="width: 100px; height: 100px;"></td>
       <td><span class="product_name">${data.name}</span></td>
       <td>
         <input class="item_many" type="text" value="${item_su}" data-index="${index}">
