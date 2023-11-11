@@ -13,8 +13,9 @@ console.log(fetchPromises);
 // fetch 요청으로 위에서 만든 리절트쪽에 있는 데이터를 프로미스 올로 사용.
 Promise.all(fetchPromises).then((productDataArray) => {
   getItems.forEach((item, index) => {
+
     const data = productDataArray[index]; //각 배열순서에맞는 데이터를 담는다.
-    console.log(data);
+    console.log(data.images[0]);
 
     // 각 상품의 가격을 화면에 표시되는 가격으로 계산하여 더합니다 //처음화면 진입때 더하기함
     let item_su = item.count || 1; //카운트 값이 있으면 넣고 아니면 1을넣느다.
@@ -28,7 +29,7 @@ Promise.all(fetchPromises).then((productDataArray) => {
 
     const MapItem = `
         <tr data-index="${index}">
-          <td><img src="./img/product_1.jpg" alt="상품 이미지" style="width: 100px; height: 100px;"></td>
+          <td><img src="${data.images[0]}" alt="상품 이미지" style="width: 100px; height: 100px;"></td>
           <td><span class="product_name">${data.name}</span></td>
           <td>
             <button class="minus" data-index="${index}">-</button>

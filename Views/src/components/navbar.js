@@ -1,7 +1,7 @@
 const header = document.querySelector(".header");
-
+const getItemNav = JSON.parse(localStorage.getItem("cart")) || [];
 //카트 숫자넘버 그려지기전에 넣어둬야 작동한다.
-let cart_num = 1;
+let cart_num = getItemNav.length;
 
 // 네비 메뉴
 const menu = [
