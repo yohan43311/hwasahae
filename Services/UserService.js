@@ -122,8 +122,7 @@ class UserService {
 
   //특정 유저 정보 조회
   async FindById(userInfo) {
-    const user = await User.findOne({ _id: userInfo?.id }).populate("order");
-    console.log("user : ", user);
+    const user = await User.findOne({ _id: userInfo?.id });
 
     if (!user) {
       const error = new Error("유저 정보가 존재하지 않습니다.");
@@ -148,6 +147,12 @@ class UserService {
   async UpdateById(userInfo, data) {
     const { email } = userInfo;
     const { name, password, zipcode, address, detailAddress } = data;
+
+    if (!password) {
+      const error = new Error("비밀번호 없이 회원을 수정할 수 없습니다.");
+      error.status = 400;
+      throw error;
+    }
 
     //DB에서 유저정보 찾기
     const user = await User.findOne({ email, deletedAt: null });

@@ -47,6 +47,8 @@ const getUserInfo = asyncHandler(async (req, res) => {
 
 //특정 유저 정보 수정
 const updateUserInfo = asyncHandler(async (req, res) => {
+  console.log(" req.body : ", req);
+
   const user = await UserServiceInstance.UpdateById(
     res.locals.userInfo,
     req.body
