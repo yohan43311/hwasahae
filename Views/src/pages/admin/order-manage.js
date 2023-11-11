@@ -93,4 +93,8 @@ const createOrderList = (data) => {
   `
     );
   }, "");
+
+
+  
+
 }; // location.href='order-modify.html'
