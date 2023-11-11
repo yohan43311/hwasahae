@@ -107,7 +107,7 @@ class AdminService {
       description,
       price,
       maker,
-      category: categoryDoc._id, // 여기를 수정하여 카테고리 문서의 ID를 저장합니다.
+      category,
     });
 
     // 상품 저장
