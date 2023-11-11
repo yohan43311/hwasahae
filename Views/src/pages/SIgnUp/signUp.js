@@ -31,7 +31,7 @@ const registerResponse = async (e) => {
   formData.append("zipcode", zipcode?.value);
   formData.append("address", roadAddress?.value);
   formData.append("detailAddress", detailAddress?.value);
-  formData.append("role", role?.value);
+  formData.append("role", "구매자");
 
   const option = {
     method: "POST",
@@ -44,9 +44,7 @@ const registerResponse = async (e) => {
     .then((res) => res.json())
     .then((res) => {
       if (!res?.result) {
-        if (role?.value === "구매자") {
-          location.href = "/registerOk";
-        }
+        location.href = "/registerOk";
       } else {
         if (res?.result === "fail") {
           console.log("res", res);
