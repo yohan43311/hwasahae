@@ -28,6 +28,10 @@ window.onload = function () {
       categoryOption.value = result?.category;
       categoryOption.innerHTML = result?.category;
       form.category.append(categoryOption);
+
+      //이미지 설정
+      const imgBox = document.querySelector(".card-img-top");
+      imgBox.src = result?.images[0];
     })
     .catch((error) => {
       console.log("error가 발생했어요!", error);

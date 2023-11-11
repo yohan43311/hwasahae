@@ -35,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // 삭제 성공 시
         console.log(data);
         if (data && data.deletedAt) {
+          localStorage.removeItem("cart");
+          localStorage.removeItem("userInfo");
+          localStorage.removeItem("buyItem");
           alert("탈퇴가 완료되셨습니다.");
           //홈페이지로 이동
           window.location.href = "/";

@@ -198,6 +198,7 @@ class UserService {
 
   //특정 유저 정보 삭제
   async DeleteById(userInfo, password) {
+    const { email } = userInfo;
     //DB에서 유저정보 찾기
     const user = await User.findOne({ email, deletedAt: null });
     if (!user) {

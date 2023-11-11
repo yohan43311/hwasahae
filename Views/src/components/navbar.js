@@ -29,7 +29,7 @@ header.innerHTML = `
         <div class="main_top_logo"></div>
         <div class="header_right_area">
         <ul>
-            <li class="search_open">
+            <li class="search_open" style="display:none;">
                 <form action="/" method="post" name="/">
                     <fieldset>
                     <input name="search" placeholder="비타민 존맛탱"  onkeydown="함수명대체할것." value="" class="MS_search_word">

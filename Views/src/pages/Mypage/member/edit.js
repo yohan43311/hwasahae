@@ -7,14 +7,18 @@ fetch("/users/my", { method: "GET" })
       <div class="w-100">
         <div>
           <label for="name" class="detail_title">이름</label>
-          <input class="form-input" id="name" name="name" value="${data.name}"></input>
+          <input class="form-input" id="name" name="name" value="${
+            data.name
+          }"></input>
         </div>
       </div>
       <!-- 아이디 -->
       <div class="w-100">
         <div>
           <label for="name" class="detail_title">아이디</label>
-          <input class="form-input" id="id" value="${data.email}" disabled></input>
+          <input class="form-input" id="id" value="${
+            data.email
+          }" disabled></input>
         </div>
       </div>
       <!-- 비밀번호 -->
@@ -29,10 +33,16 @@ fetch("/users/my", { method: "GET" })
         <div>
           <label for="address" class="detail_title">주소</label>
           <div>
-            <input type="text" id="sample4_postcode" placeholder="" value="${data.zipcode}" name="zipcode">
+            <input type="text" id="sample4_postcode" placeholder="" value="${
+              data.zipcode || ""
+            }" name="zipcode">
             <input type="button" class="btn" id="addressBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
-            <input type="text" class="address-input" id="sample4_roadAddress" placeholder="" value="${data.address}" name="address">
-            <input type="text" class="address-input" id="sample4_detailAddress" placeholder="" value="${data.detailAddress}" name="detailAddress">
+            <input type="text" class="address-input" id="sample4_roadAddress" placeholder="" value="${
+              data.address || ""
+            }" name="address">
+            <input type="text" class="address-input" id="sample4_detailAddress" placeholder="" value="${
+              data.detailAddress || ""
+            }" name="detailAddress">
           </div>
         </div>
       </div>
