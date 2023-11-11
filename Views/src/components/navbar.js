@@ -91,7 +91,10 @@ if (localStorage.getItem("userInfo")) {
 //메인로고 넣기
 const main_log = document.querySelector(".main_top_logo");
 const mainImg = new Image();
-mainImg.src = "http://skincure.co.kr/design/skincure/0759ansome/top_logo.gif";
+//메인로고 2023.11.11 김나영이 바꿈
+// mainImg.src = "http://skincure.co.kr/design/skincure/0759ansome/top_logo.gif";
+mainImg.src =
+  "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FqEkX2%2Fbtsz61YM6Nk%2FY7IKbxFWndSfquX2m6ETH0%2Fimg.jpg";
 main_log.appendChild(mainImg);
 
 main_log.addEventListener("click", () => {

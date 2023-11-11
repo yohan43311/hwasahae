@@ -46,8 +46,6 @@ const registerResponse = async (e) => {
       if (!res?.result) {
         if (role?.value === "구매자") {
           location.href = "/registerOk";
-        } else {
-          location.href = "/admin";
         }
       } else {
         if (res?.result === "fail") {
