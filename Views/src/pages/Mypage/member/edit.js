@@ -1,5 +1,5 @@
 // API 정보 가져와 화면에 뿌리는 코드
-fetch("http://localhost:3000/users/my", { method: "GET" })
+fetch("/users/my", { method: "GET" })
   .then((response) => response.json())
   .then((data) => {
     const myInfoMap = `
@@ -47,7 +47,7 @@ const submitForm = (event) => {
   event.preventDefault();
   const form = document.querySelector("#userform");
 
-  fetch("http://localhost:3000/users/my", {
+  fetch("/users/my", {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

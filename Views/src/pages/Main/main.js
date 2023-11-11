@@ -19,7 +19,7 @@ var swiper = new Swiper(".main_banner", {
 const storedCart = JSON.parse(window.localStorage.getItem("cart") || "[]"); // 가져오기
 const cartList = storedCart; //장바구니 리스트
 
-fetch("http://localhost:3000/products")
+fetch("/products")
   .then((response) => response.json())
   .then((data) => {
     console.log(data);
@@ -79,7 +79,7 @@ fetch("http://localhost:3000/products")
     });
   });
 
-fetch("http://localhost:3000/products")
+fetch("/products")
   .then((response) => response.json())
   .then((data) => {
     itemList = data;

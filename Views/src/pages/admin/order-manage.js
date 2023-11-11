@@ -11,7 +11,7 @@ window.onload = function () {
   };
 
   //주문조회
-  fetch("http://localhost:3000/admin/order", requestOptions)
+  fetch("/admin/order", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("통신 성공! 이건 주문한 내역", result);
@@ -19,9 +19,8 @@ window.onload = function () {
     })
     .catch((error) => {
       console.log("error가 발생했어요!", error);
-      order_table.innerHTML =
-        `  
-    <td colspan='7' align="center">오류가 발생했어요 😨  </td>` ;
+      order_table.innerHTML = `  
+    <td colspan='7' align="center">오류가 발생했어요 😨  </td>`;
     });
 };
 // on load ~
@@ -46,7 +45,6 @@ const formatPhoneNumber = (phoneNumber) => {
   }
   return phoneNumber;
 };
-
 
 // const createOrderList = (data)=>{
 //   return data.reduce((prev,cur)=> prev+ `
@@ -93,8 +91,4 @@ const createOrderList = (data) => {
   `
     );
   }, "");
-
-
-  
-
 }; // location.href='order-modify.html'

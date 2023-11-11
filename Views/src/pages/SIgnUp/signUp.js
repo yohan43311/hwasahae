@@ -22,7 +22,7 @@ const submitEvent = () => {
 const registerResponse = async (e) => {
   e.preventDefault();
   // console.log("안녕5555555");
-  const register_URL = "http://localhost:3000/register";
+  const register_URL = "/register";
 
   const formData = new FormData();
   formData.append("name", name1?.value);

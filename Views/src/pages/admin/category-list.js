@@ -10,7 +10,7 @@ window.onload = function () {
       method: "GET",
     };
 
-    fetch("http://localhost:3000/category", requestOptions)
+    fetch("/category", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log("통신 성공! 이건 카테고리", result);
@@ -95,7 +95,7 @@ window.onload = function () {
         method: "DELETE",
       };
 
-      fetch(`http://localhost:3000/admin/${id}/category`, requestOptions)
+      fetch(`/admin/${id}/category`, requestOptions)
         .then((response) => response.json())
         .then((result) => {
           alert("성공적으로 카테고리가 삭제되었습니다.");

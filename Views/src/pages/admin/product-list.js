@@ -10,7 +10,7 @@ window.onload = function () {
   };
 
   //상품조회
-  fetch("http://localhost:3000/products", req_orders)
+  fetch("/products", req_orders)
     .then((response) => response.json())
     .then((result) => {
       console.log("통신 성공!", result);

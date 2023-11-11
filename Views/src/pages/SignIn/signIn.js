@@ -11,7 +11,7 @@ const loginEvent = () => {
 /* 로그인 api */
 const loginResponse = async (e) => {
   e.preventDefault();
-  const login_URL = "http://localhost:3000/login";
+  const login_URL = "/login";
 
   const formData = new FormData();
   formData.append("email", email?.value);
@@ -24,7 +24,6 @@ const loginResponse = async (e) => {
 
   await fetch(login_URL, {
     ...option,
-
   })
     .then((res) => res.json())
     .then((res) => {

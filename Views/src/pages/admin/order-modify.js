@@ -1,6 +1,3 @@
-
-
-
 window.onload = function () {
   console.log("주문 수정 페이지");
 
@@ -12,7 +9,6 @@ window.onload = function () {
     method: "GET",
     redirect: "follow",
   };
-
 
   // 날짜 변환 함수
   const formatDate = (isoString) => {
@@ -33,14 +29,12 @@ window.onload = function () {
   const formatCurrency = (amount) => {
     return amount.toLocaleString("ko-KR");
   };
-  
-  
-
 
   //상품 조회
-  fetch(`http://localhost:3000/admin/${orderId}/order`, requestOptions)
+  fetch(`/admin/${orderId}/order`, requestOptions)
     .then((response) => response.json())
-    .then((cur) => {  // 수정: result 대신 cur을 사용
+    .then((cur) => {
+      // 수정: result 대신 cur을 사용
       console.log("통신 성공!", cur);
 
       const formattedDate = formatDate(cur.createdAt); // 변환된 날짜
@@ -59,7 +53,6 @@ window.onload = function () {
       console.log("error가 발생했어요!", error);
       alert(`에러메시지 : ${error.message}`);
     });
-    
 
   //상품 수정
   const editOrder = async (e) => {
@@ -73,23 +66,22 @@ window.onload = function () {
 
     // 수정: form 변수가 중복되므로 formDataForm으로 변경
     const formDataForm = document.querySelector("#orderForm");
-    const formData = new FormData(formDataForm);  // 수정: form 대신 formDataForm을 사용
+    const formData = new FormData(formDataForm); // 수정: form 대신 formDataForm을 사용
 
-    const order_add_URL = `http://localhost:3000/admin/${orderId}/order`;
+    const order_add_URL = `/admin/${orderId}/order`;
 
     const option = {
       method: "PATCH",
       body: formData,
     };
-    
 
     await fetch(order_add_URL, {
-      option
+      option,
     })
       .then((res) => res.json())
       .then((res) => {
         alert("주문이 성공적으로 수정되었습니다.");
-        location.href = `/admin/order?id=${res?._id ?? ''}`;
+        location.href = `/admin/order?id=${res?._id ?? ""}`;
         if (res?.result === "fail") {
           alert(`에러메시지 : ${res.error}`);
         }
@@ -115,7 +107,7 @@ window.onload = function () {
 
     if (!confirm) return;
 
-    const order_delete_URL = `http://localhost:3000/admin/${orderId}/order`;
+    const order_delete_URL = `/admin/${orderId}/order`;
 
     const option = {
       method: "DELETE",

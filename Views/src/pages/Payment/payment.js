@@ -66,7 +66,7 @@ const sortedItems = getItems.sort((a, b) => {
 });
 
 const itemMap = sortedItems.forEach((item, index) => {
-  fetch(`http://localhost:3000/products/${item.id}`)
+  fetch(`/products/${item.id}`)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
@@ -101,7 +101,7 @@ let totalPrice = 0; //총가격 초기
 
 // 각 fetch 요청을 저장할 배열 만들기.
 const fetchPromises = getItems.map(async (item) => {
-  const response = await fetch(`http://localhost:3000/products/${item.id}`);
+  const response = await fetch(`/products/${item.id}`);
   return await response.json();
 });
 console.log(fetchPromises);
@@ -175,7 +175,7 @@ info_checkBox.addEventListener("change", () => {
 /* 결제 api */
 async function paymentResponse(e) {
   e.preventDefault();
-  const payment_URL = "http://localhost:3000/orders/";
+  const payment_URL = "/orders/";
   const req = {
     receiver: {
       name: name1,

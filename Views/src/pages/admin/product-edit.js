@@ -11,7 +11,7 @@ window.onload = function () {
   };
 
   //카테고리 조회
-  fetch("http://localhost:3000/category", req_orders)
+  fetch("/category", req_orders)
     .then((response) => response.json())
     .then((result) => {
       console.log("통신 성공!", result);
@@ -34,7 +34,7 @@ window.onload = function () {
   };
 
   //상품 정보 가져오기
-  fetch(`http://localhost:3000/products/${productId}`, { method: "GET" })
+  fetch(`/products/${productId}`, { method: "GET" })
     .then((response) => response.json())
     .then((result) => {
       console.log("통신 성공!", result);
@@ -69,7 +69,7 @@ window.onload = function () {
     const form = document.querySelector("#detailForm");
     const formData = new FormData(form);
 
-    const product_add_URL = `http://localhost:3000/admin/${productId}/product`;
+    const product_add_URL = `/admin/${productId}/product`;
 
     const option = {
       method: "PATCH",

@@ -68,7 +68,7 @@ window.onload = function () {
 const logoutEvent = () => {
   loginLogoutButton.addEventListener("click", async (e) => {
     e.preventDefault();
-    const logout_URL = "http://localhost:3000/logout";
+    const logout_URL = "/logout";
 
     fetch(logout_URL, {
       method: "POST",

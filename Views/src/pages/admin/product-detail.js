@@ -12,7 +12,7 @@ window.onload = function () {
   };
 
   //상품 조회
-  fetch(`http://localhost:3000/products/${productId}`, req_orders)
+  fetch(`/products/${productId}`, req_orders)
     .then((response) => response.json())
     .then((result) => {
       console.log("통신 성공!", result);
@@ -28,7 +28,6 @@ window.onload = function () {
       categoryOption.value = result?.category;
       categoryOption.innerHTML = result?.category;
       form.category.append(categoryOption);
-
     })
     .catch((error) => {
       console.log("error가 발생했어요!", error);
@@ -48,7 +47,7 @@ window.onload = function () {
 
     if (!confirm) return;
 
-    const product_delete_URL = `http://localhost:3000/admin/${productId}/product`;
+    const product_delete_URL = `/admin/${productId}/product`;
 
     const option = {
       method: "DELETE",

@@ -15,7 +15,7 @@ window.onload = function () {
       body: JSON.stringify({ newName: categorychild?.value }),
     };
 
-    fetch(`http://localhost:3000/admin/${categoryId}/category`, requestOptions)
+    fetch(`/admin/${categoryId}/category`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);

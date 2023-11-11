@@ -1,5 +1,5 @@
 // 회원 이름 API 정보 가져와 화면에 뿌리는 코드
-fetch("http://localhost:3000/users/my", { method: "GET" })
+fetch("/users/my", { method: "GET" })
   .then((response) => response.json())
   .then((data) => {
     console.log("data: ", data);

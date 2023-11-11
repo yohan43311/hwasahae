@@ -5,7 +5,7 @@ let totalPrice = 0; //총가격 초기
 
 // 각 fetch 요청을 저장할 배열 만들기.
 const fetchPromises = getItems.map(async (item) => {
-  const response = await fetch(`http://localhost:3000/products/${item.id}`);
+  const response = await fetch(`/products/${item.id}`);
   return await response.json();
 });
 console.log(fetchPromises);
