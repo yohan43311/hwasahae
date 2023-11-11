@@ -35,48 +35,52 @@ fetchData();
 // const koreanText = '스킨'; // 여기에 실제로 사용하려는 한글 텍스트를 넣어주세요
 // fetch(`http://localhost:3000/category/products/${koreanText}`).then((response) => response.json()).then((data)=>console.log(data))
 
-const listHtml = (link) =>{
+const listHtml = async (link) => {
+  console.log(link);
   const encodedLink = encodeURIComponent(link);
-  fetch(`http://localhost:3000/category/products/${encodedLink}`)
-    .then((response) => response.json())
-    .then((item) => {
-      
-//상품 템플릿화
-function createProductTemplate(imageSrc, title, price) {
-  const productTemplate = `
-    <div class="product">
-      <div class="product-image">
-        <a href="">
-          <img src="${imageSrc}" alt="상품 섬네일">
-        </a>
-      </div>
-      <div class="product-info">
-        <div class="product-title">${title}</div>
-        <div class="product-price">
-          <span>${price}</span>
-        </div>
-      </div>
-    </div>
-  `;
-  return productTemplate;
-}
+  let notLink;
 
-//동적상품추가
-const productContainer = document.querySelector('.product-container');
+  if (link) {
+    notLink = fetch(`http://localhost:3000/category/products/${encodedLink}`);
+  } else {
+    notLink = fetch(`http://localhost:3000/category/products/스킨`);
+  }
 
-//상품 데이터 배열
+  const response = await notLink;
+  const items = await response.json();
+  console.log(items);
+  // 상품 템플릿화
+  function createProductTemplate(imageSrc, title, price, id) {
+    const productTemplate = `
+          <div class="product">
+            <div class="product-image">
+              <a href="/item?id=${id}">
+                <img src="${imageSrc}" alt="상품 섬네일">
+              </a>
+            </div>
+            <div class="product-info">
+              <div class="product-title">${title}</div>
+              <div class="product-price">
+                <span>${price} 원</span>
+              </div>
+            </div>
+          </div>
+        `;
+    return productTemplate;
+  }
+  // 동적 상품 추가
+  const productContainer = document.querySelector('.product-container');
+  // 반복해서 상품을 추가
+  productContainer.innerHTML = '';
+  items.forEach((item) => {
+    const productElement = createProductTemplate(item.images[0], item.name, item.price, item._id);
+    productContainer.innerHTML += productElement;
+  });
+};
 
+// 예시 사용법:
+listHtml();
 
-// 반복해서 상품을 추가
-item.forEach((item) => {
-  const productElement = createProductTemplate(item.images[0], item.name, item.price);
-  productContainer.innerHTML += productElement;
-});
-
-      
-    })
-}
-listHtml()
 
 
 document.addEventListener("DOMContentLoaded", function() {
