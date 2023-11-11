@@ -17,7 +17,9 @@ class CategoryService {
       throw new Error(`${categoryName} 카테고리를 찾을 수 없습니다.`);
     }
     // 해당 카테고리에 속한 상품들을 조회합니다.
-    const products = await Product.find({ category: category._id }).exec();
+    const products = await Product.find({ category: category._id }).populate(
+      "category"
+    );
     return products;
   }
 }

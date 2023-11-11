@@ -22,7 +22,8 @@ const productSchema = new Schema(
     // 유저딴에서 삭제
     deletedAt: { type: Date, required: false },
 
-    category: { type: String, required: true },
+    //category: { type: String, required: true },
+    category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
   },
   {
     // 생성 날짜

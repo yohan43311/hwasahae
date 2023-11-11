@@ -9,7 +9,7 @@ fetch(`http://localhost:3000/products/${itemId}`)
         //상품 이미지 추가.
         const img_box = document.querySelector('.img_box')
         const imgBox = new Image();
-        imgBox.src = `${data.images[0]}`
+        imgBox.src = `${data.images}`
         img_box.appendChild(imgBox)
 
 
