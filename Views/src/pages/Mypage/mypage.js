@@ -50,7 +50,7 @@ const createOrderList = (data) => {
       `
       <tr id="${cur["_id"]}">
         <td>
-            <img src="${cur[]}" alt="상품 이미지" style="width: 100px;
+            <img src="#" alt="상품 이미지" style="width: 100px;
             height: 100px;">
         </td>
         <td>
@@ -61,7 +61,7 @@ const createOrderList = (data) => {
         </td>
         <td><span class="item_total">${total_price()}</span>원</td>
         <td><button class="Btn"><a href="/pages/Mypage/order/order.html"></a>자세히보기</button></td>
-   </tr>
+    </tr>
     `
     );
   }, "");
