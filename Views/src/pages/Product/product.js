@@ -82,7 +82,6 @@ const listHtml = async (link) => {
 listHtml();
 
 
-
 document.addEventListener("DOMContentLoaded", function() {
     const liElements = document.querySelectorAll("#productClass .cate-wrap .class-list ul li");
   
