@@ -68,7 +68,7 @@ header, footer{
     transition: .2s ease-in-out;
 }
 .header_section>div:nth-child(2){
-    margin-left: 40px;
+    margin-right: 225px;
     cursor: pointer;
 }
 /* 헤더 검색폼및 아이콘 */
